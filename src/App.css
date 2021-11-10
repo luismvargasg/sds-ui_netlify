@@ -1,0 +1,61 @@
+@import "~antd/dist/antd.css";
+
+.header__logo {
+  max-height: 70px;
+  padding: 10px 20px;
+}
+
+.loading-card__container {
+  text-align: center;
+}
+
+.ant-avatar > img {
+  object-fit: contain;
+}
+
+.ant-tabs-nav {
+  border-bottom: 2px solid white;
+}
+
+.fixed-widget {
+  z-index: 10;
+  position: fixed;
+  bottom: 25px;
+  left: 25px;
+  box-shadow: 0 3px 6px -4px #648db3a4, 0 6px 16px #648db3a4,
+    0 9px 28px 8px #0000000d;
+}
+
+.chart {
+  border: 1px solid rgb(238, 238, 238);
+  width: 100%;
+  height: 100%;
+}
+
+#footer {
+  max-width: 100%;
+  max-height: 100%;
+  background-color: #234165;
+  margin: 0 15px 15px 15px;
+  color: white;
+  padding: 15px;
+}
+
+.footer-container p {
+  height: 200px;
+  line-height: 200px;
+  background-color: #2a4668;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+#column__statistic {
+  margin: 20px 0 0 0;
+  color: #386cac;
+  text-align: center;
+}
+
+#column__statistic b {
+  font-size: 18px;
+}
