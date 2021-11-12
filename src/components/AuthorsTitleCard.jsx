@@ -75,9 +75,7 @@ const AuthorsTitleCard = ({ data, setCurrentURL }) => {
                 style={{ fontSize: 22, margin: 0 }}
                 underline
               >
-                <BankOutlined
-                  style={{ marginRight: "10px", color: "#1890ff" }}
-                />
+                <BankOutlined style={{ marginRight: "10px", color: "gray" }} />
                 <Link to={`/app/institutions?id=${data.affiliation.id}`}>
                   {data.affiliation.name}
                 </Link>
@@ -86,9 +84,7 @@ const AuthorsTitleCard = ({ data, setCurrentURL }) => {
                 style={{ fontSize: 22, marginBottom: "5px" }}
                 underline
               >
-                <TeamOutlined
-                  style={{ marginRight: "10px", color: "#1890ff" }}
-                />
+                <TeamOutlined style={{ marginRight: "10px", color: "gray" }} />
                 <Link to={`/app/groups?id=${data.group.id}`}>
                   {data.group.name}
                 </Link>

@@ -15,7 +15,9 @@ import { ReadOutlined, BankOutlined } from "@ant-design/icons";
 /* UI Library Sub-components */
 const { Meta } = Card;
 
-const CommonTitleCard = ({ data }) => {
+const CommonTitleCard = ({ data, type }) => {
+  const logoPath = data.logo || data.institution[0].logo;
+
   return (
     <Col span={24}>
       <Card actions={externalUrls(data.external_urls)}>
@@ -24,9 +26,7 @@ const CommonTitleCard = ({ data }) => {
             <Avatar
               size={{ xs: 60, sm: 60, md: 150, lg: 150, xl: 150, xxl: 150 }}
               src={
-                data.institution[0].logo ? (
-                  data.institution[0].logo
-                ) : (
+                logoPath || (
                   <ReadOutlined style={{ color: "gray", fontSize: "40px" }} />
                 )
               }
@@ -47,12 +47,17 @@ const CommonTitleCard = ({ data }) => {
                 style={{ fontSize: 22, margin: 0 }}
                 underline
               >
-                <BankOutlined
-                  style={{ marginRight: "10px", color: "#1890ff" }}
-                />
-                <Link to={`/app/institutions?id=${data.institution[0].id}`}>
-                  {data.institution[0].name}
-                </Link>
+                {type !== "institutions" && (
+                  <>
+                    <BankOutlined
+                      style={{ marginRight: "10px", color: "gray" }}
+                    />
+
+                    <Link to={`/app/institutions?id=${data.institution[0].id}`}>
+                      {data.institution[0].name}
+                    </Link>
+                  </>
+                )}
               </Typography.Paragraph>
             </>
           }

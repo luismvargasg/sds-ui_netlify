@@ -14,7 +14,7 @@ const ColumnChart = ({ data, title, total, height = 422 }) => {
     yField: "value",
     label: { position: "middle" },
     scrollbar: { type: "horizontal" },
-
+    columnWidthRatio: 0.9,
     columnBackground: { style: { fill: "rgba(0,0,0,0.1)" } },
     tooltip: {
       formatter: (datum) => {

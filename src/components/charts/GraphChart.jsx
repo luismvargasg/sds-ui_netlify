@@ -30,7 +30,6 @@ const GraphChart = ({ data, title, height = 622 }) => {
   data.nodes.map((item) => (item.size = item.style.keyshape.size));
   data.nodes.map((item) => (item.label = item.style.label.value));
   data.edges.map((item) => (item.size = item.style.keyshape.lineWidth));
-  console.log(data);
 
   /* const testData = data.map((item) => {}); */
 

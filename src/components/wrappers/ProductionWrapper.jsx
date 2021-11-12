@@ -39,7 +39,7 @@ const ProductionWrapper = ({ URL }) => {
       <Tabs defaultActiveKey="0" type="card" tabBarGutter={5}>
         {tabList.map((item, i) => (
           <TabPane tab={item} key={i}>
-            <DocumentByType type={item} URL={URL} tools={tools} />
+            <DocumentByType type={item} URL={URL} />
           </TabPane>
         ))}
       </Tabs>

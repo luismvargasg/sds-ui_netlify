@@ -41,11 +41,13 @@ const CoauthorsWrapper = ({ URL }) => {
         />
       </Col>
       <Col span={24}>
-        <GraphChart
-          data={state.data.data.coauthors_network}
-          title="Red de coautoría - Autores"
-          type="authors"
-        />
+        {state.data.data.coauthors_network && (
+          <GraphChart
+            data={state.data.data.coauthors_network}
+            title="Red de coautoría - Autores"
+            type="authors"
+          />
+        )}
       </Col>
     </Row>
   );

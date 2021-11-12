@@ -59,3 +59,8 @@
 #column__statistic b {
   font-size: 18px;
 }
+
+.white-text {
+  color: white;
+  display: inline;
+}

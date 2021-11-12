@@ -18,8 +18,7 @@ import { CalendarOutlined, ReadOutlined } from "@ant-design/icons";
 /* UI Library Sub-components */
 const { Link } = Typography;
 
-const DocumentList = ({ data, tools }) => {
-  console.log(data);
+const DocumentList = ({ data, tools, title = "Artículos" }) => {
   const onPageChange = ({ page, pageSize }) => {
     tools.setPagination({ page: page, max: pageSize });
     window.scrollTo(0, 745);
@@ -46,17 +45,21 @@ const DocumentList = ({ data, tools }) => {
       <Card
         headStyle={{ backgroundColor: "#003e65", color: "white" }}
         size="small"
-        extra={[
-          data.total_results ? data.total_results + " resultado(s)" : null,
-          <SortProduction tools={tools} key="1" />,
-        ]}
+        extra={
+          <div>
+            <p className="white-text">
+              {data.total} {data.total > 1 ? "resultados" : "resultado"}
+            </p>
+            <SortProduction tools={tools} key="1" />
+          </div>
+        }
         actions={
           data.total_results > 0 && [
             <DownloadCSVButton key="1" URL={tools.URL} />,
             <DownloadJSONButton key="2" URL={tools.URL} />,
           ]
         }
-        title={"Artículos"}
+        title={title}
       >
         <div id="productionListContainer">
           <List
@@ -65,7 +68,7 @@ const DocumentList = ({ data, tools }) => {
             pagination={{
               size: "small",
               position: "bottom",
-              total: data.total_results,
+              total: data.total,
               onChange: (page, pageSize) =>
                 onPageChange({
                   page,
