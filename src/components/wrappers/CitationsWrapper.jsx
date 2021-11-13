@@ -25,7 +25,7 @@ const CitationsWrapper = ({ URL }) => {
   }
   return (
     <Row gutter={[15, 15]}>
-      <Col xs={24} md={12}>
+      <Col span={24}>
         <ColumnChart
           data={state.data.data.yearly_citations}
           title="Citas"

@@ -42,7 +42,7 @@ const Groups = () => {
             <ProductionWrapper URL={URL} />
           </TabPane>
           <TabPane tab="Autores" key="authors">
-            <AuthorsTab data={state.data.data.authors} />
+            <AuthorsTab URL={URL} />
           </TabPane>
           <TabPane tab="Citaciones" key="citations" forceRender>
             <CitationsWrapper URL={URL} />

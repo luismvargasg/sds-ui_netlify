@@ -5,6 +5,7 @@ import { APIRequest } from "../../apis/api";
 import { useLocation } from "react-router";
 
 /* Components */
+import AuthorsTab from "../AuthorsTab";
 import CommonTitleCard from "../CommonTitleCard";
 import ErrorWarning from "../ErrorWarning";
 import LoadingCard from "../LoadingCard";
@@ -39,6 +40,9 @@ const Institutions = () => {
         <Tabs defaultActiveKey={"production"} type="card" tabBarGutter={5}>
           <TabPane tab="Producción" key="production" forceRender>
             <ProductionWrapper URL={URL} />
+          </TabPane>
+          <TabPane tab="Autores" key="authors">
+            <AuthorsTab URL={URL} />
           </TabPane>
           <TabPane tab="Citaciones" key="citations" forceRender>
             <CitationsWrapper URL={URL} />

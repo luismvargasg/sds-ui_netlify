@@ -36,7 +36,8 @@ const Authors = () => {
     <Row gutter={[15, 15]}>
       <AuthorsTitleCard data={state.data.data} />
       <Col span={24}>
-        <Tabs defaultActiveKey={"production"} type="card" tabBarGutter={5}>
+        <Tabs defaultActiveKey={"topics"} type="card" tabBarGutter={5}>
+          <TabPane tab="Temas" key="topics"></TabPane>
           <TabPane tab="Producción" key="production" forceRender>
             <ProductionWrapper URL={URL} />
           </TabPane>
@@ -46,7 +47,6 @@ const Authors = () => {
           <TabPane tab="Coautorías" key="coauthors" forceRender>
             <CoauthorsWrapper URL={URL} />
           </TabPane>
-          <TabPane tab="Temas" key="topics"></TabPane>
         </Tabs>
       </Col>
     </Row>

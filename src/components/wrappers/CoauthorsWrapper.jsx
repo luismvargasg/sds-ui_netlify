@@ -28,7 +28,7 @@ const CoauthorsWrapper = ({ URL }) => {
     <Row gutter={[15, 15]}>
       <Col xs={24} md={8}>
         <CoauthorsList
-          data={state.data.data.coauthors}
+          data={state.data.data.coauthors || state.data.data.institutions}
           title="Lista de Coautores"
           height={600}
         />

@@ -9,12 +9,13 @@ import { Column } from "@ant-design/charts";
 const ColumnChart = ({ data, title, total, height = 422 }) => {
   let config = {
     data: data,
-    padding: 35,
+    appendPadding: [20, 20, 0, 20],
     xField: "year",
     yField: "value",
-    label: { position: "middle" },
-    scrollbar: { type: "horizontal" },
-    columnWidthRatio: 0.9,
+    /* label: { position: "middle" }, */
+    /* scrollbar: { type: "horizontal" }, */
+    slider: { start: 0.0, end: 1 },
+    columnWidthRatio: 0.6,
     columnBackground: { style: { fill: "rgba(0,0,0,0.1)" } },
     tooltip: {
       formatter: (datum) => {
@@ -27,8 +28,8 @@ const ColumnChart = ({ data, title, total, height = 422 }) => {
     },
     xAxis: {
       label: {
-        autoHide: false,
-        autoRotate: true,
+        /* autoHide: false, */
+        autoRotate: false,
       },
     },
   };
@@ -44,10 +45,9 @@ const ColumnChart = ({ data, title, total, height = 422 }) => {
         <p id="column__statistic">
           Total: <b>{total}</b>
         </p>
-        <Column {...config} style={{ height: "90%", paddingBottom: "20px" }} />
+        <Column {...config} style={{ height: "88%" }} />
       </div>
     </Card>
   );
 };
-
 export default ColumnChart;
