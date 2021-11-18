@@ -11,6 +11,7 @@ import LoadingCard from "../LoadingCard";
 import ProductionWrapper from "../wrappers/ProductionWrapper";
 import CitationsWrapper from "../wrappers/CitationsWrapper";
 import CoauthorsWrapper from "../wrappers/CoauthorsWrapper";
+import TopicsWrapper from "../wrappers/TopicsWrapper";
 
 /* UI Library Components */
 import { Col, Row, Tabs } from "antd";
@@ -37,7 +38,9 @@ const Authors = () => {
       <AuthorsTitleCard data={state.data.data} />
       <Col span={24}>
         <Tabs defaultActiveKey={"topics"} type="card" tabBarGutter={5}>
-          <TabPane tab="Temas" key="topics"></TabPane>
+          <TabPane tab="Temas" key="topics">
+            <TopicsWrapper />
+          </TabPane>
           <TabPane tab="Producción" key="production" forceRender>
             <ProductionWrapper URL={URL} />
           </TabPane>

@@ -9,7 +9,11 @@ import { Card, List, Typography, Space, Avatar } from "antd";
 
 /* Icons */
 import { CitationsIcon } from "../media/icons/citations";
-import { CalendarOutlined, BankOutlined } from "@ant-design/icons";
+import {
+  CalendarOutlined,
+  BankOutlined,
+  TeamOutlined,
+} from "@ant-design/icons";
 
 /* Utilities */
 import { APIRequest } from "../apis/api";
@@ -87,13 +91,24 @@ const AuthorsTab = ({ URL }) => {
               }
               description={
                 <>
-                  <BankOutlined />{" "}
-                  <Link
-                    style={{ fontSize: 12, textDecoration: "underline" }}
-                    href={`/app/institutions?id=${item.affiliation.id}`}
-                  >
-                    {item.affiliation.name}
-                  </Link>
+                  <div>
+                    <TeamOutlined />{" "}
+                    <Link
+                      style={{ fontSize: 12, textDecoration: "underline" }}
+                      href={`/app/groups?id=${item.affiliation.group.id}`}
+                    >
+                      {item.affiliation.group.name}
+                    </Link>
+                  </div>
+                  <div>
+                    <BankOutlined />{" "}
+                    <Link
+                      style={{ fontSize: 12, textDecoration: "underline" }}
+                      href={`/app/institutions?id=${item.affiliation.institution.id}`}
+                    >
+                      {item.affiliation.institution.name}
+                    </Link>
+                  </div>
                 </>
               }
             />

@@ -12,6 +12,7 @@ import LoadingCard from "../LoadingCard";
 import ProductionWrapper from "../wrappers/ProductionWrapper";
 import CitationsWrapper from "../wrappers/CitationsWrapper";
 import CoauthorsWrapper from "../wrappers/CoauthorsWrapper";
+import TopicsWrapper from "../wrappers/TopicsWrapper";
 
 /* UI Library Components */
 import { Col, Row, Tabs } from "antd";
@@ -37,7 +38,10 @@ const Institutions = () => {
     <Row gutter={[15, 15]}>
       <CommonTitleCard data={state.data.data} type="institutions" />
       <Col span={24}>
-        <Tabs defaultActiveKey={"production"} type="card" tabBarGutter={5}>
+        <Tabs defaultActiveKey={"topics"} type="card" tabBarGutter={5}>
+          <TabPane tab="Temas" key="topics">
+            <TopicsWrapper />
+          </TabPane>
           <TabPane tab="Producción" key="production" forceRender>
             <ProductionWrapper URL={URL} />
           </TabPane>
@@ -50,7 +54,6 @@ const Institutions = () => {
           <TabPane tab="Coautorías" key="coauthors" forceRender>
             <CoauthorsWrapper URL={URL} />
           </TabPane>
-          <TabPane tab="Temas" key="topics"></TabPane>
         </Tabs>
       </Col>
     </Row>

@@ -19,14 +19,14 @@ const CoauthorsList = ({ data, title, height = 422 }) => {
         size="small"
         title={title}
         headStyle={{ backgroundColor: "#003e65", color: "white" }}
-        bodyStyle={{ padding: "10px", height: height }}
+        bodyStyle={{ padding: "10px", maxHeight: height }}
       >
         <Table
           rowKey="id"
           dataSource={data}
           scroll={{ y: height - 150 }}
           bordered={true}
-          pagination={{ size: "small" }}
+          pagination={{ size: "small", showSizeChanger: false }}
         >
           <Column
             title="Nombre"

@@ -71,24 +71,32 @@ const AuthorsTitleCard = ({ data, setCurrentURL }) => {
                   ""
                 )}
               </Typography.Title>
-              <Typography.Paragraph
-                style={{ fontSize: 22, margin: 0 }}
-                underline
-              >
-                <BankOutlined style={{ marginRight: "10px", color: "gray" }} />
-                <Link to={`/app/institutions?id=${data.affiliation.id}`}>
-                  {data.affiliation.name}
-                </Link>
-              </Typography.Paragraph>
-              <Typography.Paragraph
-                style={{ fontSize: 22, marginBottom: "5px" }}
-                underline
-              >
-                <TeamOutlined style={{ marginRight: "10px", color: "gray" }} />
-                <Link to={`/app/groups?id=${data.group.id}`}>
-                  {data.group.name}
-                </Link>
-              </Typography.Paragraph>
+              {data.affiliation.name && (
+                <Typography.Paragraph
+                  style={{ fontSize: 22, margin: 0 }}
+                  underline
+                >
+                  <BankOutlined
+                    style={{ marginRight: "10px", color: "gray" }}
+                  />
+                  <Link to={`/app/institutions?id=${data.affiliation.id}`}>
+                    {data.affiliation.name}
+                  </Link>
+                </Typography.Paragraph>
+              )}
+              {data.group.name && (
+                <Typography.Paragraph
+                  style={{ fontSize: 22, marginBottom: "5px" }}
+                  underline
+                >
+                  <TeamOutlined
+                    style={{ marginRight: "10px", color: "gray" }}
+                  />
+                  <Link to={`/app/groups?id=${data.group.id}`}>
+                    {data.group.name}
+                  </Link>
+                </Typography.Paragraph>
+              )}
               <Space wrap>{renderedButtons(data.external_urls)}</Space>
             </>
           }

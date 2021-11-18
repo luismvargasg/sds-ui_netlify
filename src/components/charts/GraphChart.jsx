@@ -10,7 +10,7 @@ import G6 from "@antv/g6";
 const GraphChart = ({ data, title, height = 622 }) => {
   const ref = useRef(null);
 
-  const testdata = {
+  /* const testdata = {
     nodes: [
       { id: "node0", size: 50, degree: 20, label: "Luis Miguel" },
       { id: "node1", size: 30, degree: 20, label: "Gerardo Gutierrez" },
@@ -25,11 +25,11 @@ const GraphChart = ({ data, title, height = 622 }) => {
         coauthorships: 13,
       },
     ],
-  };
+  }; */
 
-  data.nodes.map((item) => (item.size = item.style.keyshape.size));
+  /* data.nodes.map((item) => (item.size = item.style.keyshape.size));
   data.nodes.map((item) => (item.label = item.style.label.value));
-  data.edges.map((item) => (item.size = item.style.keyshape.lineWidth));
+  data.edges.map((item) => (item.size = item.style.keyshape.lineWidth)); */
 
   /* const testData = data.map((item) => {}); */
 
@@ -62,11 +62,11 @@ const GraphChart = ({ data, title, height = 622 }) => {
               formatText(model) {
                 return `${model.coauthorships} ${
                   model.coauthorships > 1 ? "coautorías" : "coautoría"
-                } entre ${model.source} y ${model.target}`;
+                }`;
               },
             },
             "drag-node",
-            "activate-relations",
+            /* "activate-relations", */
           ],
         },
         layout: {
