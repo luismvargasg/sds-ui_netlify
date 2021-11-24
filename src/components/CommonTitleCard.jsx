@@ -16,7 +16,8 @@ import { ReadOutlined, BankOutlined } from "@ant-design/icons";
 const { Meta } = Card;
 
 const CommonTitleCard = ({ data, type }) => {
-  const logoPath = data.logo || data.institution[0].logo;
+  const logoPath =
+    type === "institutions" ? data.logo : data.institution[0].logo;
 
   return (
     <Col span={24}>

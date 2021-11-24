@@ -11,7 +11,10 @@ import logo_obs_salud from "../media/logo_obs_salud.svg";
 import logo_saludata_w from "../media/logo_saludata_w.svg";
 import logo_sds_w from "../media/logo_sds_w.svg";
 
-const Header = () => {
+/* Utilities */
+import { Link } from "react-router-dom";
+
+const Header = ({ setURL }) => {
   return (
     <Layout.Header
       style={{
@@ -21,18 +24,17 @@ const Header = () => {
         zIndex: 999,
         height: "auto",
         backgroundColor: "#009fe3",
-        /* lineHeight: "80px", */
       }}
     >
-      <Row style={{ textAlign: "center" }}>
+      <Row style={{ textAlign: "center", fontSize: 13 }}>
         <Col xs={24} sm={6} xl={4} xxl={3}>
-          <a href="/app">
+          <Link to="/app">
             <img
               src={logo_obs_salud}
               alt="Logotipo Observartorio Distrital"
               className="header__logo"
             />
-          </a>
+          </Link>
         </Col>
         <Col
           xs={{ span: 24, order: 3 }}
@@ -40,7 +42,7 @@ const Header = () => {
           xl={{ span: 10, order: 2, offset: 2 }}
           xxl={{ span: 10, order: 2, offset: 3 }}
         >
-          <SearchBar />
+          <SearchBar setURL={setURL} />
         </Col>
         <Col
           xs={{ span: 12, order: 1 }}

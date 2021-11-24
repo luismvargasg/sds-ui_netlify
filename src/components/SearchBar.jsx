@@ -34,15 +34,18 @@ const OPTIONS = [
   },
 ];
 
-const BASEURL = "/app/search";
-
-const SearchBar = () => {
-  let history = useHistory();
+const SearchBar = ({ setURL }) => {
+  const history = useHistory();
   const [selected, setSelected] = useState(OPTIONS[0]);
 
   const searchRequest = (input) => {
     history.push(
-      `${BASEURL}?data=${selected.value}&max=10&page=1`.concat(
+      `/app/search?data=${selected.value}`.concat(
+        input ? `&keywords=${input}` : ""
+      )
+    );
+    setURL(
+      `/app/search?data=${selected.value}`.concat(
         input ? `&keywords=${input}` : ""
       )
     );

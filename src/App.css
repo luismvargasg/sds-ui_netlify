@@ -41,13 +41,14 @@
   padding: 15px;
 }
 
-.footer-container p {
-  height: 200px;
-  line-height: 200px;
+.footer-container {
+  padding: 15px;
+  min-height: 210px;
   background-color: #2a4668;
-  text-align: center;
+}
+
+.footer-container p {
   margin: 0;
-  padding: 0;
 }
 
 #column__statistic {
@@ -63,4 +64,24 @@
 .white-text {
   color: white;
   display: inline;
+}
+
+.home--button {
+  width: 200px;
+}
+
+.margin-20 {
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.white--link {
+  color: white;
+  text-decoration: underline;
+}
+
+.ant-list-item-meta-title > a {
+  font-size: 12;
+  text-decoration: underline;
+  color: #096dd9;
 }

@@ -1,3 +1,5 @@
+import React, { useState } from "react";
+
 /* Styles */
 import "./App.css";
 
@@ -8,6 +10,8 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
+import { useLocation } from "react-router";
+import ScrollToTop from "./utils/ScrollToTop";
 
 /* Components */
 import FilterDrawer from "./components/FilterDrawer";
@@ -15,23 +19,27 @@ import Header from "./layouts/Header";
 import Footer from "./layouts/Footer";
 
 /* Modules */
+import About from "./components/modules/About";
 import Authors from "./components/modules/Authors";
 import Groups from "./components/modules/Groups";
-import Institutions from "./components/modules/Institutions";
 import Home from "./components/modules/Home";
+import Institutions from "./components/modules/Institutions";
+import Normatividad from "./components/modules/Normatividad";
 import SearchResult from "./components/modules/SearchResult";
 
 /* UI Library Components */
 import { Layout, BackTop } from "antd";
 
 function App() {
+  const location = useLocation();
+  const [URL, setURL] = useState(location.pathname + location.search);
   return (
     <Router>
+      <ScrollToTop />
       <BackTop />
       <FilterDrawer />
       <Layout>
-        <Header />
-
+        <Header setURL={setURL} />
         <Layout.Content
           style={{
             minHeight: "70vh",
@@ -42,10 +50,14 @@ function App() {
           <Switch>
             <Redirect exact from="/" to="/app" />
             <Route exact path="/app" component={Home} />
-            <Route exact path="/app/search" component={SearchResult} />
+            <Route exact path="/app/about" component={About} />
+            <Route exact path="/app/search">
+              <SearchResult URL={URL} setURL={setURL} />
+            </Route>
             <Route exact path="/app/authors" component={Authors} />
             <Route exact path="/app/groups" component={Groups} />
             <Route exact path="/app/institutions" component={Institutions} />
+            <Route exact path="/app/normatividad" component={Normatividad} />
           </Switch>
         </Layout.Content>
         <Footer />

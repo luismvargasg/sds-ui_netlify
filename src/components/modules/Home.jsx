@@ -1,15 +1,29 @@
 import React from "react";
 
 /* UI Library Components */
-import { Col, Row, Typography } from "antd";
+import { Button, Col, Modal, Row, Typography } from "antd";
 
 /* Charts */
 import MapChart from "../charts/MapChart";
+
+/* Utils */
+import { homeTexts, homeTitles } from "../../utils/texts";
 
 /* UI Library Sub-components*/
 const { Title } = Typography;
 
 const Home = () => {
+  const showModal = (title) => {
+    Modal.info({
+      width: "800px",
+      title: homeTitles[title],
+      maskClosable: true,
+      icon: null,
+      okText: "Cerrar",
+      content: homeTexts[title],
+    });
+  };
+
   return (
     <>
       <Row
@@ -27,21 +41,57 @@ const Home = () => {
             tempore voluptates eius!
           </Title>
         </Col>
-        <Col
-          style={{
-            backgroundColor: "#dce1e6",
-            margin: "40px",
-            minHeight: "350px",
-          }}
-          span={24}
-        >
-          <Row
-            gutter={[15, 15]}
-            justify="space-around"
-            style={{ textAlign: "center" }}
+      </Row>
+      <Row
+        style={{
+          padding: "40px 5px",
+          textAlign: "center",
+          backgroundColor: "#dce1e6",
+          minHeight: "140px",
+        }}
+        gutter={[10, 10]}
+        justify="center"
+        align="middle"
+      >
+        <Col className="margin-20">
+          <Button
+            onClick={() => showModal("mision")}
+            size="large"
+            type="dashed"
+            className="home--button"
           >
-            <Col xs={24} md={5}></Col>
-          </Row>
+            Misión
+          </Button>
+        </Col>
+        <Col className="margin-20">
+          <Button
+            onClick={() => showModal("vision")}
+            size="large"
+            type="dashed"
+            className="home--button"
+          >
+            Visión
+          </Button>
+        </Col>
+        <Col className="margin-20">
+          <Button
+            onClick={() => showModal("hacemos")}
+            size="large"
+            type="dashed"
+            className="home--button"
+          >
+            Qué hacemos
+          </Button>
+        </Col>
+        <Col className="margin-20">
+          <Button
+            onClick={() => showModal("objetivos")}
+            size="large"
+            type="dashed"
+            className="home--button"
+          >
+            Objetivos
+          </Button>
         </Col>
       </Row>
       <Row
