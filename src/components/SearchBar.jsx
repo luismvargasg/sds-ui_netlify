@@ -24,8 +24,8 @@ const OPTIONS = [
   },
   {
     label: "Producto",
-    value: "production",
-    key: "production",
+    value: "literature",
+    key: "literature",
   },
   {
     label: "Tema",

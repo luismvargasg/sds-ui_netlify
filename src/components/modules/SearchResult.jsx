@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 /* Components */
 import ErrorWarning from "../ErrorWarning";
 import LoadingCard from "../LoadingCard";
+import ProductionResult from "../ProductionResult";
 
 /* UI Library Components */
 import { Avatar, Card, List } from "antd";
@@ -18,6 +19,7 @@ const queryString = require("query-string");
 
 const SearchResult = ({ URL }) => {
   const parsed = queryString.parse(URL);
+  const type = parsed["/app/search?data"];
   const [pagination, setPagination] = useState({ max: 10, page: 1 });
   const [state, setUrl] = APIRequest(
     `${URL}&max=${pagination.max}&page=${pagination.page}`
@@ -42,7 +44,9 @@ const SearchResult = ({ URL }) => {
   } else if (state.isLoading) {
     return <LoadingCard />;
   }
-  return (
+  return type === "literature" ? (
+    <ProductionResult data={state.data} URL={URL} />
+  ) : (
     <Card
       headStyle={{ backgroundColor: "#003e65", color: "white" }}
       size="small"
@@ -75,11 +79,15 @@ const SearchResult = ({ URL }) => {
           <List.Item>
             <List.Item.Meta
               avatar={
-                <Avatar>
-                  {item.full_name
-                    ? item.full_name.charAt(0)
-                    : item.name.charAt(0)}
-                </Avatar>
+                type === "institutions" ? (
+                  <Avatar size={48} src={item.logo} />
+                ) : (
+                  <Avatar size={48}>
+                    {item.full_name
+                      ? item.full_name.charAt(0)
+                      : item.name.charAt(0)}
+                  </Avatar>
+                )
               }
               title={
                 <Link to={`/app/${parsed["/app/search?data"]}?id=${item.id}`}>
@@ -87,8 +95,9 @@ const SearchResult = ({ URL }) => {
                 </Link>
               }
               description={
-                <>
-                  {/* <div>
+                type !== "institutions" ? (
+                  <>
+                    {/* <div>
                     <TeamOutlined />{" "}
                     <Link
                       style={{ fontSize: 12, textDecoration: "underline" }}
@@ -97,15 +106,20 @@ const SearchResult = ({ URL }) => {
                       {item.affiliation.group.name}
                     </Link>
                   </div> */}
-                  {item.affiliation.id && (
-                    <div>
-                      <BankOutlined />{" "}
-                      <Link to={`/app/institutions?id=${item.affiliation.id}`}>
-                        {item.affiliation.name}
-                      </Link>
-                    </div>
-                  )}
-                </>
+                    {item.affiliation && item.affiliation.id && (
+                      <div>
+                        <BankOutlined />{" "}
+                        <Link
+                          to={`/app/institutions?id=${item.affiliation.id}`}
+                        >
+                          {item.affiliation.name}
+                        </Link>
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  ""
+                )
               }
             />
           </List.Item>

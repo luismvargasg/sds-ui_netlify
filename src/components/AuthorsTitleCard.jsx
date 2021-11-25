@@ -59,7 +59,7 @@ const AuthorsTitleCard = ({ data, setCurrentURL }) => {
           description={
             <>
               <Typography.Title level={2} style={{ marginBottom: 0 }}>
-                {data.full_name}{" "}
+                {data.name}{" "}
                 {data.country ? (
                   <img
                     style={{ paddingBottom: "3px" }}
@@ -71,7 +71,7 @@ const AuthorsTitleCard = ({ data, setCurrentURL }) => {
                   ""
                 )}
               </Typography.Title>
-              {data.affiliation.name && (
+              {data.affiliation.institution && (
                 <Typography.Paragraph
                   style={{ fontSize: 22, margin: 0 }}
                   underline
@@ -79,12 +79,14 @@ const AuthorsTitleCard = ({ data, setCurrentURL }) => {
                   <BankOutlined
                     style={{ marginRight: "10px", color: "gray" }}
                   />
-                  <Link to={`/app/institutions?id=${data.affiliation.id}`}>
-                    {data.affiliation.name}
+                  <Link
+                    to={`/app/institutions?id=${data.affiliation.institution.id}`}
+                  >
+                    {data.affiliation.institution.name}
                   </Link>
                 </Typography.Paragraph>
               )}
-              {data.group.name && (
+              {data.affiliation.group && (
                 <Typography.Paragraph
                   style={{ fontSize: 22, marginBottom: "5px" }}
                   underline
@@ -92,8 +94,8 @@ const AuthorsTitleCard = ({ data, setCurrentURL }) => {
                   <TeamOutlined
                     style={{ marginRight: "10px", color: "gray" }}
                   />
-                  <Link to={`/app/groups?id=${data.group.id}`}>
-                    {data.group.name}
+                  <Link to={`/app/groups?id=${data.affiliation.group.id}`}>
+                    {data.affiliation.group.name}
                   </Link>
                 </Typography.Paragraph>
               )}

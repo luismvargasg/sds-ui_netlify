@@ -48,13 +48,16 @@ const DocumentList = ({ data, tools, title = "Artículos" }) => {
         extra={
           <div>
             <p className="white-text">
-              {data.total} {data.total > 1 ? "resultados" : "resultado"}
+              {data.total || data.total_results}{" "}
+              {data.total || data.total_results > 1
+                ? "resultados"
+                : "resultado"}
             </p>
             <SortProduction tools={tools} key="1" />
           </div>
         }
         actions={
-          data.total_results > 0 && [
+          (data.total_results || data.total > 0) && [
             <DownloadCSVButton key="1" URL={tools.URL} />,
             <DownloadJSONButton key="2" URL={tools.URL} />,
           ]
@@ -68,7 +71,7 @@ const DocumentList = ({ data, tools, title = "Artículos" }) => {
             pagination={{
               size: "small",
               position: "bottom",
-              total: data.total,
+              total: data.total || data.total_results,
               onChange: (page, pageSize) =>
                 onPageChange({
                   page,
