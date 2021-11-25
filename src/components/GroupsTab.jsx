@@ -9,11 +9,6 @@ import { Card, List, Space, Avatar } from "antd";
 
 /* Icons */
 import { CitationsIcon } from "../media/icons/citations";
-import {
-  CalendarOutlined,
-  BankOutlined,
-  TeamOutlined,
-} from "@ant-design/icons";
 
 /* Utilities */
 import { APIRequest } from "../apis/api";
