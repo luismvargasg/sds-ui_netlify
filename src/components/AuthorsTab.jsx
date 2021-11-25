@@ -5,7 +5,7 @@ import ErrorWarning from "./ErrorWarning";
 import LoadingCard from "./LoadingCard";
 
 /* UI Components Library */
-import { Card, List, Typography, Space, Avatar } from "antd";
+import { Card, List, Space, Avatar } from "antd";
 
 /* Icons */
 import { CitationsIcon } from "../media/icons/citations";
@@ -17,9 +17,7 @@ import {
 
 /* Utilities */
 import { APIRequest } from "../apis/api";
-
-/* UI Library Sub-components */
-const { Link } = Typography;
+import { Link } from "react-router-dom";
 
 const AuthorsTab = ({ URL }) => {
   const [pagination, setPagination] = useState({ max: 10, page: 1 });
@@ -84,7 +82,7 @@ const AuthorsTab = ({ URL }) => {
               title={
                 <Link
                   style={{ fontSize: 15, textDecoration: "underline" }}
-                  href={`/app/authors?id=${item.id}`}
+                  to={`/app/authors?id=${item.id}`}
                 >
                   {item.name}
                 </Link>
@@ -95,7 +93,7 @@ const AuthorsTab = ({ URL }) => {
                     <TeamOutlined />{" "}
                     <Link
                       style={{ fontSize: 12, textDecoration: "underline" }}
-                      href={`/app/groups?id=${item.affiliation.group.id}`}
+                      to={`/app/groups?id=${item.affiliation.group.id}`}
                     >
                       {item.affiliation.group.name}
                     </Link>
@@ -104,7 +102,7 @@ const AuthorsTab = ({ URL }) => {
                     <BankOutlined />{" "}
                     <Link
                       style={{ fontSize: 12, textDecoration: "underline" }}
-                      href={`/app/institutions?id=${item.affiliation.institution.id}`}
+                      to={`/app/institutions?id=${item.affiliation.institution.id}`}
                     >
                       {item.affiliation.institution.name}
                     </Link>
