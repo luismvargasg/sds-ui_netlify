@@ -8,6 +8,7 @@ import { useLocation } from "react-router";
 import AuthorsTab from "../AuthorsTab";
 import CommonTitleCard from "../CommonTitleCard";
 import ErrorWarning from "../ErrorWarning";
+import GroupsTab from "../GroupsTab";
 import LoadingCard from "../LoadingCard";
 import ProductionWrapper from "../wrappers/ProductionWrapper";
 import CitationsWrapper from "../wrappers/CitationsWrapper";
@@ -45,8 +46,11 @@ const Institutions = () => {
           <TabPane tab="Producción" key="production" forceRender>
             <ProductionWrapper URL={URL} />
           </TabPane>
-          <TabPane tab="Autores" key="authors">
+          <TabPane tab="Autores" key="authors" forceRender>
             <AuthorsTab URL={URL} />
+          </TabPane>
+          <TabPane tab="Grupos" key="groups" forceRender>
+            <GroupsTab URL={URL} />
           </TabPane>
           <TabPane tab="Citaciones" key="citations" forceRender>
             <CitationsWrapper URL={URL} />

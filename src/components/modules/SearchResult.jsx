@@ -97,22 +97,29 @@ const SearchResult = ({ URL }) => {
               description={
                 type !== "institutions" ? (
                   <>
-                    {/* <div>
-                    <TeamOutlined />{" "}
-                    <Link
-                      style={{ fontSize: 12, textDecoration: "underline" }}
-                      href={`/app/groups?id=${item.affiliation.group.id}`}
-                    >
-                      {item.affiliation.group.name}
-                    </Link>
-                  </div> */}
-                    {item.affiliation && item.affiliation.id && (
+                    {type === "authors" && item.affiliation?.group?.name ? (
+                      <div>
+                        <TeamOutlined />{" "}
+                        <Link
+                          style={{ fontSize: 12, textDecoration: "underline" }}
+                          to={`/app/groups?id=${item.affiliation?.group?.id}`}
+                        >
+                          {item.affiliation?.group?.name}
+                        </Link>
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                    {(item.affiliation?.name ||
+                      item.affiliation?.institution?.name) && (
                       <div>
                         <BankOutlined />{" "}
                         <Link
-                          to={`/app/institutions?id=${item.affiliation.id}`}
+                          style={{ fontSize: 12, textDecoration: "underline" }}
+                          to={`/app/institutions?id=${item.affiliation?.institution?.id}`}
                         >
-                          {item.affiliation.name}
+                          {item.affiliation.name ||
+                            item.affiliation.institution.name}
                         </Link>
                       </div>
                     )}

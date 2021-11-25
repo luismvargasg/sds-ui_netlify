@@ -19,10 +19,10 @@ import {
 import { APIRequest } from "../apis/api";
 import { Link } from "react-router-dom";
 
-const AuthorsTab = ({ URL }) => {
+const GroupsTab = ({ URL }) => {
   const [pagination, setPagination] = useState({ max: 10, page: 1 });
   const [state, setUrl] = APIRequest(
-    `${URL}&data=authors&max=${pagination.max}&page=${pagination.page}`
+    `${URL}&data=groups&max=${pagination.max}&page=${pagination.page}`
   );
 
   const onPageChange = ({ page, pageSize }) => {
@@ -31,7 +31,7 @@ const AuthorsTab = ({ URL }) => {
   };
 
   useEffect(() => {
-    setUrl(`${URL}&data=authors&max=${pagination.max}&page=${pagination.page}`);
+    setUrl(`${URL}&data=groups&max=${pagination.max}&page=${pagination.page}`);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pagination]);
 
@@ -45,12 +45,12 @@ const AuthorsTab = ({ URL }) => {
     <Card
       headStyle={{ backgroundColor: "#003e65", color: "white" }}
       size="small"
-      title="Autores"
+      title="Grupos de Investigación"
     >
       <List
         itemLayout="vertical"
         size="large"
-        dataSource={state.data.data || state.data}
+        dataSource={state.data.data}
         pagination={{
           size: "small",
           position: "bottom",
@@ -68,12 +68,8 @@ const AuthorsTab = ({ URL }) => {
           <List.Item
             actions={[
               <Space style={{ fontSize: 18 }}>
-                {React.createElement(CalendarOutlined)}
-                Publicaciones: {item.papers_count}
-              </Space>,
-              <Space style={{ fontSize: 18 }}>
                 {React.createElement(CitationsIcon)}
-                Citado: {item.citations_count}
+                Citado: {item.citations}
               </Space>,
             ]}
           >
@@ -82,32 +78,10 @@ const AuthorsTab = ({ URL }) => {
               title={
                 <Link
                   style={{ fontSize: 15, textDecoration: "underline" }}
-                  to={`/app/authors?id=${item.id}`}
+                  to={`/app/groups?id=${item.id}`}
                 >
                   {item.name}
                 </Link>
-              }
-              description={
-                <>
-                  <div>
-                    <TeamOutlined />{" "}
-                    <Link
-                      style={{ fontSize: 12, textDecoration: "underline" }}
-                      to={`/app/groups?id=${item.affiliation.group.id}`}
-                    >
-                      {item.affiliation.group.name}
-                    </Link>
-                  </div>
-                  <div>
-                    <BankOutlined />{" "}
-                    <Link
-                      style={{ fontSize: 12, textDecoration: "underline" }}
-                      to={`/app/institutions?id=${item.affiliation.institution.id}`}
-                    >
-                      {item.affiliation.institution.name}
-                    </Link>
-                  </div>
-                </>
               }
             />
           </List.Item>
@@ -117,4 +91,4 @@ const AuthorsTab = ({ URL }) => {
   );
 };
 
-export default AuthorsTab;
+export default GroupsTab;
