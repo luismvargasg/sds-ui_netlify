@@ -44,10 +44,10 @@ const Authors = () => {
           <TabPane tab="Producción" key="production" forceRender>
             <ProductionWrapper URL={URL} />
           </TabPane>
-          <TabPane tab="Citaciones" key="citations" forceRender>
+          <TabPane tab="Citaciones" key="citations" /* forceRender */>
             <CitationsWrapper URL={URL} />
           </TabPane>
-          <TabPane tab="Coautorías" key="coauthors" forceRender>
+          <TabPane tab="Coautorías" key="coauthors" /* forceRender */>
             <CoauthorsWrapper URL={URL} />
           </TabPane>
         </Tabs>

@@ -25,7 +25,7 @@ const ProductionResult = ({ data, URL }) => {
       </Tabs>
     );
   };
-  console.log(data);
+
   return data.open_access ? (
     <Row gutter={[15, 15]}>
       <Col xs={24} sm={24} md={12}>

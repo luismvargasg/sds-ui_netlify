@@ -38,6 +38,12 @@ const SearchBar = ({ setURL }) => {
   const history = useHistory();
   const [selected, setSelected] = useState(OPTIONS[0]);
 
+  window.addEventListener("popstate", () => {
+    setTimeout(() => {
+      setURL(history.location.pathname + history.location.search);
+    }, 5);
+  });
+
   const searchRequest = (input) => {
     history.push(
       `/app/search?data=${selected.value}`.concat(

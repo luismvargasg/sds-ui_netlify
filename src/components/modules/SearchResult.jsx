@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+import { useHistory } from "react-router";
+
 /* Components */
 import ErrorWarning from "../ErrorWarning";
 import LoadingCard from "../LoadingCard";
@@ -17,13 +19,24 @@ import { titles } from "../../utils/texts";
 import { Link } from "react-router-dom";
 const queryString = require("query-string");
 
-const SearchResult = ({ URL }) => {
+const SearchResult = ({ setURL }) => {
+  const history = useHistory();
+  const URL = history.location.pathname + history.location.search;
   const parsed = queryString.parse(URL);
   const type = parsed["/app/search?data"];
   const [pagination, setPagination] = useState({ max: 10, page: 1 });
   const [state, setUrl] = APIRequest(
     `${URL}&max=${pagination.max}&page=${pagination.page}`
   );
+
+  /*   window.addEventListener("popstate", () => {
+    setTimeout(() => {
+      setURL(history.location.pathname + history.location.search);
+      console.log(
+        "en el listener" + history.location.pathname + history.location.search
+      );
+    }, 10000);
+  }); */
 
   useEffect(() => {
     setPagination({ max: 10, page: 1 });

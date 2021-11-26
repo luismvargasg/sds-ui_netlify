@@ -1,21 +1,22 @@
 import React from "react";
 
 /* Libraries */
-//import { ChoroplethMap } from "@ant-design/charts";
+import { ChoroplethMap } from "@ant-design/charts";
 /* import { LineLayer, AMapScene } from "@antv/l7-react"; */
 
 /* UI Library Components */
 import { Card } from "antd";
 
-/* const MapChart = () => {
+const MapChart = () => {
   const config = {
     map: {
       type: "mapbox",
       style: "blank",
       center: [120.19382669582967, 30.258134],
-      zoom: 3,
+      zoom: 0,
       pitch: 0,
     },
+    chinaBorder: false,
     source: {
       data: [],
       joinBy: {
@@ -51,6 +52,7 @@ import { Card } from "antd";
         padding: [5, 5],
       },
     },
+    renderer: "svg",
     state: {
       active: true,
       select: {
@@ -69,12 +71,8 @@ import { Card } from "antd";
       position: "bottomleft",
     },
   };
-  return {
-    <ChoroplethMap {...config} />
-  };
-}; */
 
-/* <div style={{ width: "100%", height: "700px" }}>
+  /* <div style={{ width: "100%", height: "700px" }}>
       <AMapScene
         map={{
           center: [110.19382669582967, 50.258134],
@@ -113,15 +111,15 @@ import { Card } from "antd";
       </AMapScene>
     </div> */
 
-const MapChart = ({ data, title, height = 422 }) => {
+  /* const MapChart = ({ data, title, height = 422 }) => { */
   return (
     <Card
       size="small"
-      title={title}
+      title={"mapa"}
       headStyle={{ backgroundColor: "#003e65", color: "white" }}
-      bodyStyle={{ padding: "10px", height: height }}
+      bodyStyle={{ padding: "10px", height: 600 }}
     >
-      <div style={{ height: "100%" }}>Mapa en construcción</div>
+      <ChoroplethMap {...config} />
     </Card>
   );
 };

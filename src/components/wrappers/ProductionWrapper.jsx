@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 /* Components */
 import DocumentList from "../DocumentList";
@@ -20,19 +20,7 @@ import { Col, Row, Tabs } from "antd";
 const { TabPane } = Tabs;
 
 const ProductionWrapper = ({ URL }) => {
-  const [pagination, setPagination] = useState({ max: 10, page: 1 });
-  const [sort, setSort] = useState("citations");
-  const [state, setUrl] = APIRequest(
-    `${URL}&data=production&max=${pagination.max}&page=${pagination.page}&sort=${sort}`
-  );
-  const tools = { pagination, setPagination, sort, setSort, URL, setUrl };
-
-  useEffect(() => {
-    setUrl(
-      `${URL}&data=production&max=${pagination.max}&page=${pagination.page}&sort=${sort}`
-    );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pagination, sort]);
+  const [state] = APIRequest(`${URL}&data=production`);
 
   const tabMaker = (tabList) => {
     return (
@@ -62,7 +50,7 @@ const ProductionWrapper = ({ URL }) => {
         {state.data.types ? (
           tabMaker(state.data.types)
         ) : (
-          <DocumentList data={state.data} tools={tools} />
+          <DocumentList data={state.data} />
         )}
       </Col>
     </Row>
