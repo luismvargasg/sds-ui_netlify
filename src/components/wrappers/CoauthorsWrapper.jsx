@@ -35,7 +35,7 @@ const CoauthorsWrapper = ({ URL }) => {
       </Col>
       <Col xs={24} md={16}>
         <MapChart
-          data={state.data.geo}
+          data={state.data.data.geo}
           title="Alcance Geográfico"
           height={600}
         />

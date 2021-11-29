@@ -62,10 +62,21 @@ const CoauthorsList = ({ data, title, height = 422 }) => {
         >
           <Column
             title="Nombre"
-            dataIndex={"full_name"}
+            dataIndex={"full_name" || "name"}
             key={"id"}
             render={(name, record) => (
-              <Link to={`/app/authors?&id=${record.id}`}>{name}</Link>
+              <>
+                <Link className="link--sm" to={`/app/authors?&id=${record.id}`}>
+                  {record.name || name}
+                </Link>
+                <br />
+                <Link
+                  className="link--xs"
+                  to={`/app/institutions?&id=${record.affiliations?.institution?.id}`}
+                >
+                  {record.affiliations?.institution?.name}
+                </Link>
+              </>
             )}
           />
           <Column

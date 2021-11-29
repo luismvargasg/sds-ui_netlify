@@ -4,7 +4,7 @@ import React from "react";
 import { Button, Col, Modal, Row, Typography } from "antd";
 
 /* Charts */
-import MapChart from "../charts/MapChart";
+import BogotaMapChart from "../charts/BogotaMapChart";
 
 /* Utils */
 import { homeTexts, homeTitles } from "../../utils/texts";
@@ -27,8 +27,8 @@ const Home = () => {
   return (
     <>
       <Row
-        style={{ padding: "40px 5px", textAlign: "center" }}
-        gutter={[10, 10]}
+        className="home--headline"
+        /* style={{ padding: "40px 5px", textAlign: "center" }} */
         justify="center"
         align="middle"
       >
@@ -49,7 +49,6 @@ const Home = () => {
           backgroundColor: "#dce1e6",
           minHeight: "140px",
         }}
-        gutter={[10, 10]}
         justify="center"
         align="middle"
       >
@@ -94,14 +93,9 @@ const Home = () => {
           </Button>
         </Col>
       </Row>
-      <Row
-        style={{ padding: "40px 5px" }}
-        gutter={[10, 10]}
-        justify="center"
-        align="middle"
-      >
+      <Row justify="center" align="middle" style={{ marginTop: "40px" }}>
         <Col span={24}>
-          <MapChart title="Mapa de Bogotá" />
+          <BogotaMapChart title="Mapa de Bogotá" />
         </Col>
       </Row>
     </>

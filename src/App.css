@@ -32,6 +32,12 @@
   height: 100%;
 }
 
+.map--chart {
+  border: 1px solid white;
+  width: 100%;
+  height: 100%;
+}
+
 #footer {
   max-width: 100%;
   max-height: 100%;
@@ -84,4 +90,25 @@
   font-size: 12;
   text-decoration: underline;
   color: #096dd9;
+}
+
+.home--headline {
+  text-align: center;
+  border: 1px solid white;
+  margin-bottom: 40px;
+}
+
+.map--modal-title {
+  background-color: #b8dbec;
+  text-align: center;
+}
+
+.link--sm {
+  font-size: 15px;
+  text-decoration: underline;
+}
+
+.link--xs {
+  text-decoration: underline;
+  font-size: 12px;
 }

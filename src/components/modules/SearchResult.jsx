@@ -129,7 +129,10 @@ const SearchResult = ({ setURL }) => {
                         <BankOutlined />{" "}
                         <Link
                           style={{ fontSize: 12, textDecoration: "underline" }}
-                          to={`/app/institutions?id=${item.affiliation?.institution?.id}`}
+                          to={`/app/institutions?id=${
+                            item.affiliation?.institution?.id ||
+                            item.affiliation?.id
+                          }`}
                         >
                           {item.affiliation.name ||
                             item.affiliation.institution.name}

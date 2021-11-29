@@ -52,10 +52,10 @@ const Institutions = () => {
           <TabPane tab="Grupos" key="groups" forceRender>
             <GroupsTab URL={URL} />
           </TabPane>
-          <TabPane tab="Citaciones" key="citations" forceRender>
+          <TabPane tab="Citaciones" key="citations">
             <CitationsWrapper URL={URL} />
           </TabPane>
-          <TabPane tab="Coautorías" key="coauthors" forceRender>
+          <TabPane tab="Coautorías" key="coauthors">
             <CoauthorsWrapper URL={URL} />
           </TabPane>
         </Tabs>

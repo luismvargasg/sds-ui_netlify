@@ -1,37 +1,50 @@
 import React from "react";
 
 /* Libraries */
-import { ChoroplethMap } from "@ant-design/charts";
-/* import { LineLayer, AMapScene } from "@antv/l7-react"; */
+import { AreaMap } from "@ant-design/charts";
 
-/* UI Library Components */
+/* UI Library Compoments */
 import { Card } from "antd";
 
-const MapChart = () => {
+import mapData from "../../utils/world_map_final.json";
+
+const MapChart = ({ data, title = "", height = 600 }) => {
+  let tempData = JSON.parse(JSON.stringify(mapData));
+  let processed = tempData;
+  for (let i = 0; i < processed.features.length; i++) {
+    for (let j = 0; j < data.length; j++) {
+      if (processed.features[i].properties.iso_a2 === data[j].country_code) {
+        processed.features[i].properties = { ...data[j] };
+      }
+    }
+  }
+
   const config = {
     map: {
       type: "mapbox",
       style: "blank",
-      center: [120.19382669582967, 30.258134],
-      zoom: 0,
-      pitch: 0,
     },
-    chinaBorder: false,
     source: {
-      data: [],
-      joinBy: {
-        sourceField: "code",
-        geoField: "adcode",
+      data: processed,
+      parser: {
+        type: "geojson",
       },
-    },
-    viewLevel: {
-      level: "world",
-      adcode: "all",
     },
     autoFit: true,
     color: {
-      field: "name",
-      value: ["#B8E1FF", "#7DAAFF", "#3D76DD", "#0047A5", "#001D70"],
+      field: "count",
+      value: [
+        "#f7fcf0",
+        "#e0f3db",
+        "#ccebc5",
+        "#a8ddb5",
+        "#7bccc4",
+        "#4eb3d3",
+        "#2b8cbe",
+        "#0868ac",
+        "#084081",
+      ],
+      scale: { type: "quantile" },
     },
     style: {
       opacity: 1,
@@ -41,7 +54,7 @@ const MapChart = () => {
     },
     label: {
       visible: true,
-      field: "name",
+      field: "country_code",
       style: {
         fill: "#000",
         opacity: 0.8,
@@ -52,7 +65,6 @@ const MapChart = () => {
         padding: [5, 5],
       },
     },
-    renderer: "svg",
     state: {
       active: true,
       select: {
@@ -62,7 +74,7 @@ const MapChart = () => {
       },
     },
     tooltip: {
-      items: ["name", "adcode", "value"],
+      items: ["country", "count"],
     },
     zoom: {
       position: "bottomright",
@@ -72,54 +84,16 @@ const MapChart = () => {
     },
   };
 
-  /* <div style={{ width: "100%", height: "700px" }}>
-      <AMapScene
-        map={{
-          center: [110.19382669582967, 50.258134],
-          pitch: 0,
-          style: "light",
-          zoom: 1,
-        }}
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-        }}
-      >
-        {data && (
-          <LineLayer
-            key={"2"}
-            source={{
-              data,
-            }}
-            size={{
-              values: 1,
-            }}
-            color={{
-              values: "#fff",
-            }}
-            shape={{
-              values: "line",
-            }}
-            style={{
-              opacity: 1,
-            }}
-          />
-        )}
-      </AMapScene>
-    </div> */
-
-  /* const MapChart = ({ data, title, height = 422 }) => { */
   return (
     <Card
       size="small"
-      title={"mapa"}
+      title={title}
       headStyle={{ backgroundColor: "#003e65", color: "white" }}
-      bodyStyle={{ padding: "10px", height: 600 }}
+      bodyStyle={{ padding: "10px", height: height }}
     >
-      <ChoroplethMap {...config} />
+      <div className="chart">
+        <AreaMap {...config} />
+      </div>
     </Card>
   );
 };
