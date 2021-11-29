@@ -16,72 +16,91 @@ import { Link } from "react-router-dom";
 
 const Header = ({ setURL }) => {
   return (
-    <Layout.Header
-      style={{
-        padding: 0,
-        position: "sticky",
-        top: 0,
-        zIndex: 999,
-        height: "auto",
-        backgroundColor: "#009fe3",
-      }}
-    >
-      <Row style={{ textAlign: "center", fontSize: 13 }}>
-        <Col xs={24} sm={6} xl={4} xxl={3}>
-          <Link to="/app">
-            <img
-              src={logo_obs_salud}
-              alt="Logotipo Observartorio Distrital"
-              className="header__logo"
-            />
-          </Link>
-        </Col>
-        <Col
-          xs={{ span: 24, order: 3 }}
-          sm={{ span: 10, order: 2 }}
-          xl={{ span: 10, order: 2, offset: 2 }}
-          xxl={{ span: 10, order: 2, offset: 3 }}
-        >
-          <SearchBar setURL={setURL} />
-        </Col>
-        <Col
-          xs={{ span: 12, order: 1 }}
-          sm={{ span: 4, order: 3 }}
-          xl={{ span: 4, order: 3 }}
-          xxl={{ span: 3, order: 3, offset: 2 }}
-        >
-          <a
-            href="https://saludata.saludcapital.gov.co/osb/"
-            target="_blank"
-            rel="noreferrer noopener"
+    <>
+      <Layout.Header
+        style={{
+          padding: 0,
+          position: "sticky",
+          top: 0,
+          zIndex: 9999,
+          height: "auto",
+          backgroundColor: "#009fe3",
+        }}
+      >
+        <Row justify="space-between" style={{ fontSize: 13 }}>
+          <Col
+            className="mobile--logo-left"
+            xs={24}
+            sm={10}
+            lg={8}
+            xl={7}
+            xxl={6}
           >
-            <img
-              src={logo_saludata_w}
-              alt="Logotipo Saludata"
-              className="header__logo"
-            />
-          </a>
-        </Col>
-        <Col
-          xs={{ span: 12, order: 2 }}
-          sm={{ span: 4, order: 4 }}
-          xl={{ span: 4, order: 4 }}
-          xxl={{ span: 3, order: 4 }}
-        >
-          <a
-            href="http://www.saludcapital.gov.co/"
-            target="_blank"
-            rel="noreferrer noopener"
+            <Link to="/app">
+              <img
+                src={logo_obs_salud}
+                alt="Logotipo Observartorio Distrital"
+                className="header__logo"
+              />
+            </Link>
+          </Col>
+          <Col
+            xs={{ span: 24, order: 3 }}
+            sm={{ span: 24, order: 3 }}
+            lg={{ span: 8, order: 2 }}
+            xl={{ span: 8, order: 2 }}
+            xxl={{ span: 10, order: 2 }}
           >
-            <img
-              src={logo_sds_w}
-              alt="Logotipo Secretaría de Salud de Bogotá"
-              className="header__logo"
-            />
-          </a>
+            <SearchBar setURL={setURL} />
+          </Col>
+          <Col
+            className="mobile--logo"
+            xs={{ span: 24, order: 1 }}
+            sm={{ span: 14, order: 2 }}
+            lg={{ span: 8, order: 3 }}
+            xl={{ span: 7, order: 3 }}
+            xxl={{ span: 6, order: 3 }}
+          >
+            <a
+              href="https://saludata.saludcapital.gov.co/osb/"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              <img
+                src={logo_saludata_w}
+                alt="Logotipo Saludata"
+                className="header__logo"
+              />
+            </a>
+            <a
+              href="http://www.saludcapital.gov.co/"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              <img
+                src={logo_sds_w}
+                alt="Logotipo Secretaría de Salud de Bogotá"
+                className="header__logo"
+              />
+            </a>
+          </Col>
+        </Row>
+      </Layout.Header>
+      <Row justify="center" className="header--menu">
+        <Col className="margin-25">
+          <Link to="/app/module1">Módulo 1</Link>
+        </Col>
+        <Col className="margin-25">
+          <Link to="/app/module2">Módulo 2</Link>
+        </Col>
+        <Col className="margin-25">
+          <Link to="/app/module3">Módulo 3</Link>
+        </Col>
+        <Col className="margin-25">
+          <Link to="/app/module4">Módulo 4</Link>
         </Col>
       </Row>
-    </Layout.Header>
+    </>
   );
 };
 
