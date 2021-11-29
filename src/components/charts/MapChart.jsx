@@ -6,11 +6,12 @@ import { AreaMap } from "@ant-design/charts";
 /* UI Library Compoments */
 import { Card } from "antd";
 
+/* geoJSON */
 import mapData from "../../utils/world_map_final.json";
 
 const MapChart = ({ data, title = "", height = 600 }) => {
   let tempData = JSON.parse(JSON.stringify(mapData));
-  let processed = tempData;
+  let processed = { ...tempData };
   for (let i = 0; i < processed.features.length; i++) {
     for (let j = 0; j < data.length; j++) {
       if (processed.features[i].properties.iso_a2 === data[j].country_code) {
@@ -32,7 +33,7 @@ const MapChart = ({ data, title = "", height = 600 }) => {
     },
     autoFit: true,
     color: {
-      field: "count",
+      field: "log_count",
       value: [
         "#f7fcf0",
         "#e0f3db",
@@ -59,16 +60,15 @@ const MapChart = ({ data, title = "", height = 600 }) => {
         fill: "#000",
         opacity: 0.8,
         fontSize: 10,
-        stroke: "#fff",
-        strokeWidth: 1.5,
+        stroke: "white",
+        strokeWidth: 1,
         textAllowOverlap: false,
         padding: [5, 5],
       },
     },
     state: {
-      active: true,
-      select: {
-        stroke: "black",
+      active: {
+        stroke: "white",
         lineWidth: 1.5,
         lineOpacity: 0.8,
       },
@@ -78,9 +78,6 @@ const MapChart = ({ data, title = "", height = 600 }) => {
     },
     zoom: {
       position: "bottomright",
-    },
-    legend: {
-      position: "bottomleft",
     },
   };
 
