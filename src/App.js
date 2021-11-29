@@ -24,6 +24,10 @@ import Authors from "./components/modules/Authors";
 import Groups from "./components/modules/Groups";
 import Home from "./components/modules/Home";
 import Institutions from "./components/modules/Institutions";
+import Module1 from "./components/modules/Module1";
+import Module2 from "./components/modules/Module2";
+import Module3 from "./components/modules/Module3";
+import Module4 from "./components/modules/Module4";
 import Normatividad from "./components/modules/Normatividad";
 import SearchResult from "./components/modules/SearchResult";
 
@@ -57,6 +61,10 @@ function App() {
             <Route exact path="/app/authors" component={Authors} />
             <Route exact path="/app/groups" component={Groups} />
             <Route exact path="/app/institutions" component={Institutions} />
+            <Route exact path="/app/module1" component={Module1} />
+            <Route exact path="/app/module2" component={Module2} />
+            <Route exact path="/app/module3" component={Module3} />
+            <Route exact path="/app/module4" component={Module4} />
             <Route exact path="/app/normatividad" component={Normatividad} />
           </Switch>
         </Layout.Content>
