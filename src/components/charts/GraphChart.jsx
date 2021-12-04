@@ -10,29 +10,6 @@ import G6 from "@antv/g6";
 const GraphChart = ({ data, title, height = 622 }) => {
   const ref = useRef(null);
 
-  /* const testdata = {
-    nodes: [
-      { id: "node0", size: 50, degree: 20, label: "Luis Miguel" },
-      { id: "node1", size: 30, degree: 20, label: "Gerardo Gutierrez" },
-    ],
-    edges: [
-      {
-        source: "node0",
-        sorceName: "Luis Miguel",
-        target: "node1",
-        targetName: "Gerardo Gutierrez",
-        size: 5,
-        coauthorships: 13,
-      },
-    ],
-  }; */
-
-  /* data.nodes.map((item) => (item.size = item.style.keyshape.size));
-  data.nodes.map((item) => (item.label = item.style.label.value));
-  data.edges.map((item) => (item.size = item.style.keyshape.lineWidth)); */
-
-  /* const testData = data.map((item) => {}); */
-
   useEffect(() => {
     let graph = null;
     if (!graph) {

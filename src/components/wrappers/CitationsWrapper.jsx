@@ -32,7 +32,7 @@ const CitationsWrapper = ({ URL }) => {
           total={state.data.data.citations}
         />
       </Col>
-      <Col xs={24} md={12}>
+      <Col span={24}>
         <MapChart
           data={state.data.data.geo}
           title="Alcance geográfico de citas"
