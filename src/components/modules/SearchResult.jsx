@@ -6,12 +6,18 @@ import { useHistory } from "react-router";
 import ErrorWarning from "../ErrorWarning";
 import LoadingCard from "../LoadingCard";
 import ProductionResult from "../ProductionResult";
+import SortSearchResults from "../SortSearchResults";
 
 /* UI Library Components */
-import { Avatar, Card, List } from "antd";
+import { Avatar, Card, List, Space } from "antd";
 
 /* Icons */
-import { BankOutlined, TeamOutlined } from "@ant-design/icons";
+import {
+  BankOutlined,
+  TeamOutlined,
+  CalendarOutlined,
+} from "@ant-design/icons";
+import { CitationsIcon } from "../../media/icons/citations";
 
 /* Utilities */
 import { APIRequest } from "../../apis/api";
@@ -25,25 +31,23 @@ const SearchResult = ({ setURL }) => {
   const parsed = queryString.parse(URL);
   const type = parsed["/app/search?data"];
   const [pagination, setPagination] = useState({ max: 10, page: 1 });
+  const [sort, setSort] = useState("citations");
   const [state, setUrl] = APIRequest(
-    `${URL}&max=${pagination.max}&page=${pagination.page}`
+    `${URL}&max=${pagination.max}&page=${pagination.page}&sort=${sort}`
   );
-
-  /*   window.addEventListener("popstate", () => {
-    setTimeout(() => {
-      setURL(history.location.pathname + history.location.search);
-      console.log(
-        "en el listener" + history.location.pathname + history.location.search
-      );
-    }, 10000);
-  }); */
+  const tools = { sort, setSort };
 
   useEffect(() => {
     setPagination({ max: 10, page: 1 });
+    setSort("citations");
   }, [URL]);
 
   useEffect(() => {
-    setUrl(`${URL}&max=${pagination.max}&page=${pagination.page}`);
+    setPagination({ max: 10, page: 1 });
+  }, [sort]);
+
+  useEffect(() => {
+    setUrl(`${URL}&max=${pagination.max}&page=${pagination.page}&sort=${sort}`);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pagination]);
 
@@ -65,10 +69,13 @@ const SearchResult = ({ setURL }) => {
       size="small"
       title={titles[parsed["/app/search?data"]]}
       extra={
-        <p className="white-text">
-          {state.data.total_results}{" "}
-          {state.data.total_results === 1 ? "resultado" : "resultados"}
-        </p>
+        <div>
+          <p className="white-text">
+            {state.data.total_results}{" "}
+            {state.data.total_results === 1 ? "resultado" : "resultados"}
+          </p>
+          <SortSearchResults tools={tools} key="1" />
+        </div>
       }
     >
       <List
@@ -89,7 +96,18 @@ const SearchResult = ({ setURL }) => {
           pageSize: pagination.max,
         }}
         renderItem={(item) => (
-          <List.Item>
+          <List.Item
+            actions={[
+              <Space style={{ fontSize: 18 }}>
+                {React.createElement(CalendarOutlined)}
+                Publicaciones: {item.papers_count}
+              </Space>,
+              <Space style={{ fontSize: 18 }}>
+                {React.createElement(CitationsIcon)}
+                Citado: {item.citations_count}
+              </Space>,
+            ]}
+          >
             <List.Item.Meta
               avatar={
                 type === "institutions" ? (

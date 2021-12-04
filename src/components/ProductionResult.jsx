@@ -29,7 +29,7 @@ const ProductionResult = ({ data, URL }) => {
   return data.open_access ? (
     <Row gutter={[15, 15]}>
       <Col xs={24} sm={24} md={12}>
-        <PieChart data={data.open_access} title="Open Access" />
+        <PieChart data={data.open_access} title="Acceso Abierto" />
       </Col>
       <VennChart data={data.venn_source} />
       <Col span={24}>{data.types ? tabMaker(data.types) : ""}</Col>

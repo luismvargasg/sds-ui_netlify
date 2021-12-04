@@ -15,6 +15,14 @@ const PieChart = ({ data, title }) => {
     bronze: "#f3663f",
   };
 
+  const labels = {
+    hybrid: "Híbrido",
+    green: "Verde",
+    gold: "Dorado",
+    closed: "Cerrado",
+    bronze: "Bronce",
+  };
+
   let config = {
     appendPadding: 10,
     data: data,
@@ -26,11 +34,16 @@ const PieChart = ({ data, title }) => {
     pieStyle: { lineWidth: 3 },
     radius: 1,
     innerRadius: 0.4,
+    tooltip: {
+      formatter: (datum) => {
+        return { name: labels[datum.type], value: datum.value + " Productos" };
+      },
+    },
     label: {
       type: "spider",
-      content: "{value} Artículos\n{percentage}",
+      content: "{value} Productos\n{percentage}",
     },
-    interactions: [{ type: "element-selected" }, { type: "element-active" }],
+    interactions: [{ type: "element-active" }],
   };
 
   return (

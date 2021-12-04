@@ -43,7 +43,7 @@ const ProductionWrapper = ({ URL }) => {
   return (
     <Row gutter={[15, 15]}>
       <Col xs={24} sm={24} md={12}>
-        <PieChart data={state.data.open_access} title="Open Access" />
+        <PieChart data={state.data.open_access} title="Acceso Abierto" />
       </Col>
       <VennChart data={state.data.venn_source} />
       <Col span={24}>
