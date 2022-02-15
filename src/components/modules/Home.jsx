@@ -39,7 +39,8 @@ const Home = ({ core }) => {
           style={{ marginTop: "40px", marginBottom: 0, textAlign: "center" }}
         >
           <Card size="small" bordered style={{ borderRadius: "10px" }}>
-            <Title level={3}>
+            <Title level={2}>Central de información científica</Title>
+            <Title level={4}>
               La información puede ser consultada por temas, productos,
               instituciones, grupos de investigación o autores.
             </Title>
