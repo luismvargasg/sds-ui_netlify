@@ -1,19 +1,16 @@
 import React from "react";
 
+/* Libraries */
 import { WordCloud } from "@ant-design/charts";
+
+/* UI Library Componens */
 import { Card } from "antd";
 
-const WordCloudChart = ({ title }) => {
-  const data = [
-    { name: "Covid-19", value: 5 },
-    { name: "Pulmones", value: 6 },
-    { name: "Cáncer", value: 3 },
-    { name: "Diagnóstico", value: 10 },
-    { name: "Arterial", value: 2 },
-    { name: "paciente", value: 5 },
-    { name: "infección", value: 4 },
-    { name: "tamización", value: 2 },
-  ];
+/* Utilities */
+import { useHistory } from "react-router-dom";
+
+const WordCloudChart = ({ title, data, core }) => {
+  const history = useHistory();
   let config = {
     data: data,
     wordField: "name",
@@ -39,7 +36,17 @@ const WordCloudChart = ({ title }) => {
       hoverable
     >
       <div className="chart">
-        <WordCloud {...config} />
+        <WordCloud
+          {...config}
+          onReady={(plot) => {
+            plot.on("plot:click", (evt) => {
+              if (evt.data) {
+                history.push(`/app/subjects?id=${evt.data.data.datum.id}`);
+                core.setURL(`/app/subjects?id=${evt.data.data.datum.id}`);
+              }
+            });
+          }}
+        />
       </div>
     </Card>
   );

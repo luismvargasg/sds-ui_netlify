@@ -17,6 +17,11 @@ const Footer = () => {
             </p>
             <br />
             <p>
+              <Link to="/app/manual" className="white--link">
+                Manual de usuario
+              </Link>
+            </p>
+            <p>
               <Link to="/app/about" className="white--link">
                 Acerca de esta plataforma
               </Link>
@@ -27,8 +32,8 @@ const Footer = () => {
               </Link>
             </p>
             <br />
-            <p>Versión: 0.0.1</p>
-            <p>Última actualización: 22/11/2021</p>
+            <p>Versión: 0.1.0</p>
+            <p>Última actualización: 15/02/2022</p>
             <p>Hecho en Colombia</p>
           </div>
         </Col>

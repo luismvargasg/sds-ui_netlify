@@ -16,7 +16,7 @@ import { BankOutlined, TeamOutlined, ReadOutlined } from "@ant-design/icons";
 /* UI Library Sub-components */
 const { Meta } = Card;
 
-const AuthorsTitleCard = ({ data, setCurrentURL }) => {
+const AuthorsTitleCard = ({ core, data }) => {
   const iconList = {
     orcid: orcid(),
     scholar: scholar(),
@@ -26,18 +26,15 @@ const AuthorsTitleCard = ({ data, setCurrentURL }) => {
 
   const renderedButtons = (URLList) => {
     return URLList.map((item) => (
-      <Button
-        type="link"
-        key={item.source}
-        href={item.url}
-        icon={iconList[item.source]}
-      />
+      <a href={item.url} key={item.source} target="_blank" rel="noreferrer">
+        <Button type="link" icon={iconList[item.source]} />
+      </a>
     ));
   };
 
   return (
     <Col span={24}>
-      <Card>
+      <Card className="pattern">
         <Meta
           avatar={
             <Avatar
@@ -71,7 +68,7 @@ const AuthorsTitleCard = ({ data, setCurrentURL }) => {
                   ""
                 )}
               </Typography.Title>
-              {data.affiliation.institution && (
+              {data.affiliation.institution.name && (
                 <Typography.Paragraph
                   style={{ fontSize: 22, margin: 0 }}
                   underline
@@ -81,12 +78,17 @@ const AuthorsTitleCard = ({ data, setCurrentURL }) => {
                   />
                   <Link
                     to={`/app/institutions?id=${data.affiliation.institution.id}`}
+                    onClick={() =>
+                      core.setURL(
+                        `/app/institutions?id=${data.affiliation.institution.id}`
+                      )
+                    }
                   >
                     {data.affiliation.institution.name}
                   </Link>
                 </Typography.Paragraph>
               )}
-              {data.affiliation.group && (
+              {data.affiliation.group.name && (
                 <Typography.Paragraph
                   style={{ fontSize: 22, marginBottom: "5px" }}
                   underline
@@ -94,7 +96,12 @@ const AuthorsTitleCard = ({ data, setCurrentURL }) => {
                   <TeamOutlined
                     style={{ marginRight: "10px", color: "gray" }}
                   />
-                  <Link to={`/app/groups?id=${data.affiliation.group.id}`}>
+                  <Link
+                    to={`/app/groups?id=${data.affiliation.group.id}`}
+                    onClick={() =>
+                      core.setURL(`/app/groups?id=${data.affiliation.group.id}`)
+                    }
+                  >
                     {data.affiliation.group.name}
                   </Link>
                 </Typography.Paragraph>

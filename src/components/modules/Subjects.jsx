@@ -6,14 +6,12 @@ import { useLocation } from "react-router";
 
 /* Components */
 import AuthorsTab from "../AuthorsTab";
-import CommonTitleCard from "../CommonTitleCard";
 import ErrorWarning from "../ErrorWarning";
 import GroupsTab from "../GroupsTab";
+import InstitutionsTab from "../InstitutionsTab";
 import LoadingCard from "../LoadingCard";
 import ProductionWrapper from "../wrappers/ProductionWrapper";
-import CitationsWrapper from "../wrappers/CitationsWrapper";
-import CoauthorsWrapper from "../wrappers/CoauthorsWrapper";
-import SubjectsWrapper from "../wrappers/SubjectsWrapper";
+import SubjectsTitleCard from "../SubjectsTitleCard";
 
 /* UI Library Components */
 import { Col, Row, Tabs } from "antd";
@@ -21,13 +19,13 @@ import { Col, Row, Tabs } from "antd";
 /* UI Library Sub-components */
 const { TabPane } = Tabs;
 
-const Institutions = ({ core }) => {
+const Subjects = ({ core }) => {
   const location = useLocation();
   let URL = location.pathname + location.search;
   const [state, setUrl] = APIRequest(`${URL}&data=info`);
 
   useEffect(() => {
-    document.title = "Instituciones | SALUDATA";
+    document.title = "Temas | SALUDATA";
   }, []);
 
   useEffect(() => {
@@ -45,26 +43,20 @@ const Institutions = ({ core }) => {
   }, 10);
   return (
     <Row gutter={[15, 15]}>
-      <CommonTitleCard data={state.data.data} type="institutions" />
+      <SubjectsTitleCard data={state.data.data} />
       <Col span={24}>
-        <Tabs defaultActiveKey={"topics"} type="card" tabBarGutter={5}>
-          <TabPane tab="Temas" key="topics">
-            <SubjectsWrapper core={core} />
-          </TabPane>
-          <TabPane tab="Producción" key="production" forceRender>
-            <ProductionWrapper core={core} />
-          </TabPane>
-          <TabPane tab="Autores" key="authors" forceRender>
+        <Tabs defaultActiveKey={"authors"} type="card" tabBarGutter={5}>
+          <TabPane tab="Autores" key="authors">
             <AuthorsTab core={core} />
           </TabPane>
           <TabPane tab="Grupos" key="groups" forceRender>
             <GroupsTab core={core} />
           </TabPane>
-          <TabPane tab="Citaciones" key="citations">
-            <CitationsWrapper core={core} />
+          <TabPane tab="Instituciones" key="institutions" forceRender>
+            <InstitutionsTab core={core} />
           </TabPane>
-          <TabPane tab="Coautorías" key="coauthors">
-            <CoauthorsWrapper core={core} />
+          <TabPane tab="Producción" key="production" forceRender>
+            <ProductionWrapper core={core} />
           </TabPane>
         </Tabs>
       </Col>
@@ -72,4 +64,4 @@ const Institutions = ({ core }) => {
   );
 };
 
-export default Institutions;
+export default Subjects;

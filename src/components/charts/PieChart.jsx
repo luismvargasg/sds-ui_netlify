@@ -24,7 +24,7 @@ const PieChart = ({ data, title }) => {
   };
 
   let config = {
-    appendPadding: 10,
+    appendPadding: 20,
     data: data,
     angleField: "value",
     colorField: "type",
@@ -36,14 +36,22 @@ const PieChart = ({ data, title }) => {
     innerRadius: 0.4,
     tooltip: {
       formatter: (datum) => {
-        return { name: labels[datum.type], value: datum.value + " Productos" };
+        return {
+          name: labels[datum.type],
+          value: datum.value + (datum.value === 1 ? " Producto" : " Productos"),
+        };
       },
     },
     label: {
       type: "spider",
-      content: "{value} Productos\n{percentage}",
+      content: "{value} Productos, {percentage}",
     },
     interactions: [{ type: "element-active" }],
+    legend: {
+      itemName: {
+        formatter: (item) => labels[item],
+      },
+    },
   };
 
   return (
@@ -54,8 +62,8 @@ const PieChart = ({ data, title }) => {
       bodyStyle={{ padding: "10px", height: "420px" }}
       hoverable
     >
-      <div style={{ height: "100%" }}>
-        <Pie {...config} className="chart" />
+      <div className="chart">
+        <Pie {...config} />
       </div>
     </Card>
   );

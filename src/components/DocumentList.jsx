@@ -18,7 +18,7 @@ import { CalendarOutlined, ReadOutlined } from "@ant-design/icons";
 /* UI Library Sub-components */
 const { Link } = Typography;
 
-const DocumentList = ({ data, tools, title = "Artículos" }) => {
+const DocumentList = ({ data, tools, title = "Artículos", core }) => {
   const onPageChange = ({ page, pageSize }) => {
     tools.setPagination({ page: page, max: pageSize });
     window.scrollTo(0, 745);
@@ -35,6 +35,7 @@ const DocumentList = ({ data, tools, title = "Artículos" }) => {
       closable: true,
       icon: null,
       okText: "Cerrar",
+      maskClosable: true,
       content: <DocumentModal documentID={id} />,
       onOk() {},
     });
@@ -122,7 +123,11 @@ const DocumentList = ({ data, tools, title = "Artículos" }) => {
                     </div>
                   }
                 />
-                Autores: {AuthorsHorizontalList(item.authors)}
+                Autores:{" "}
+                {AuthorsHorizontalList({
+                  authorsList: item.authors,
+                  core: core,
+                })}
               </List.Item>
             )}
           ></List>

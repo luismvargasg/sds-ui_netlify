@@ -1,6 +1,10 @@
 import React from "react";
 
-const Normatividad = () => {
+const Normatividad = ({ core }) => {
+  setTimeout(() => {
+    core.setHome(false);
+  }, 10);
+
   return (
     <div>
       <h1>Normatividad del sistema de investigación en salud.</h1>

@@ -17,7 +17,7 @@ import { Link } from "react-router-dom";
 const GroupsTab = ({ core }) => {
   const [pagination, setPagination] = useState({ max: 10, page: 1 });
   const [state, setUrl] = APIRequest(
-    `${core.URL}&data=groups&max=${pagination.max}&page=${pagination.page}`
+    `${core.URL}&data=institutions&max=${pagination.max}&page=${pagination.page}`
   );
 
   const onPageChange = ({ page, pageSize }) => {
@@ -27,7 +27,7 @@ const GroupsTab = ({ core }) => {
 
   useEffect(() => {
     setUrl(
-      `${core.URL}&data=groups&max=${pagination.max}&page=${pagination.page}`
+      `${core.URL}&data=institutions&max=${pagination.max}&page=${pagination.page}`
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pagination]);
@@ -79,8 +79,10 @@ const GroupsTab = ({ core }) => {
               title={
                 <Link
                   style={{ fontSize: 15, textDecoration: "underline" }}
-                  to={`/app/groups?id=${item.id}`}
-                  onClick={() => core.setURL(`/app/groups?id=${item.id}`)}
+                  to={`/app/institutions  ?id=${item.id}`}
+                  onClick={() =>
+                    core.setURL(`/app/institutions  ?id=${item.id}`)
+                  }
                 >
                   {item.name}
                 </Link>

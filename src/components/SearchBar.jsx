@@ -8,19 +8,9 @@ import { Select, Input } from "antd";
 
 const OPTIONS = [
   {
-    label: "Autor",
-    value: "authors",
-    key: "authors",
-  },
-  {
-    label: "Grupo",
-    value: "groups",
-    key: "groups",
-  },
-  {
-    label: "Institución",
-    value: "institutions",
-    key: "institutions",
+    label: "Tema",
+    value: "subjects",
+    key: "subjects",
   },
   {
     label: "Producto",
@@ -28,19 +18,29 @@ const OPTIONS = [
     key: "literature",
   },
   {
-    label: "Tema",
-    value: "topic",
-    key: "topic",
+    label: "Institución",
+    value: "institutions",
+    key: "institutions",
+  },
+  {
+    label: "Grupo",
+    value: "groups",
+    key: "groups",
+  },
+  {
+    label: "Autor",
+    value: "authors",
+    key: "authors",
   },
 ];
 
-const SearchBar = ({ setURL }) => {
+const SearchBar = ({ core }) => {
   const history = useHistory();
   const [selected, setSelected] = useState(OPTIONS[0]);
 
   window.addEventListener("popstate", () => {
     setTimeout(() => {
-      setURL(history.location.pathname + history.location.search);
+      core.setURL(history.location.pathname + history.location.search);
     }, 5);
   });
 
@@ -50,11 +50,12 @@ const SearchBar = ({ setURL }) => {
         input ? `&keywords=${input}` : ""
       )
     );
-    setURL(
+    core.setURL(
       `/app/search?data=${selected.value}`.concat(
         input ? `&keywords=${input}` : ""
       )
     );
+    core.setHome(false);
   };
 
   return (

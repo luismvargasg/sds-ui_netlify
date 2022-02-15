@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 /* UI Library Components */
 import { Button, Divider, Tooltip } from "antd";
 
-const AuthorsHorizontalList = (authorsList) => {
+const AuthorsHorizontalList = ({ authorsList, core }) => {
   const [authorsQuantity, setAuthorsQuantity] = useState(10);
   const [showingAll, setShowingAll] = useState(false);
 
@@ -19,22 +19,22 @@ const AuthorsHorizontalList = (authorsList) => {
         <Link
           style={{ fontSize: 15, textDecoration: "underline" }}
           to={`/app/authors?id=${author.id}`}
+          onClick={() => core.setURL(`/app/authors?id=${author.id}`)}
         >
           {author.full_name}
         </Link>
-        {author.affiliations.map((item, index) => (
-          <div key={index}>
-            <Link
-              style={{ fontSize: 12, textDecoration: "underline" }}
-              to={`/app/${
-                item.type === "group" ? "groups" : "institutions"
-              }?id=${item.id}`}
-              key={item.id}
-            >
-              {item.name}
-            </Link>
-          </div>
-        ))}
+        <br />
+        <Link
+          style={{ fontSize: 12, textDecoration: "underline" }}
+          to={`/app/institutions?id=${author.affiliation?.institution?.id}`}
+          onClick={() =>
+            core.setURL(
+              `/app/institutions?id=${author.affiliation?.institution?.id}`
+            )
+          }
+        >
+          {author.affiliation?.institution?.name}
+        </Link>
       </>
     );
   };

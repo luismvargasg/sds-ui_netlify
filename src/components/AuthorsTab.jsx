@@ -19,10 +19,10 @@ import {
 import { APIRequest } from "../apis/api";
 import { Link } from "react-router-dom";
 
-const AuthorsTab = ({ URL }) => {
+const AuthorsTab = ({ core }) => {
   const [pagination, setPagination] = useState({ max: 10, page: 1 });
   const [state, setUrl] = APIRequest(
-    `${URL}&data=authors&max=${pagination.max}&page=${pagination.page}`
+    `${core.URL}&data=authors&max=${pagination.max}&page=${pagination.page}`
   );
 
   const onPageChange = ({ page, pageSize }) => {
@@ -31,7 +31,9 @@ const AuthorsTab = ({ URL }) => {
   };
 
   useEffect(() => {
-    setUrl(`${URL}&data=authors&max=${pagination.max}&page=${pagination.page}`);
+    setUrl(
+      `${core.URL}&data=authors&max=${pagination.max}&page=${pagination.page}`
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pagination]);
 
@@ -78,35 +80,58 @@ const AuthorsTab = ({ URL }) => {
             ]}
           >
             <List.Item.Meta
-              avatar={<Avatar>{item.name.charAt(0)}</Avatar>}
+              avatar={
+                <Avatar className="avatar" size="large">
+                  {item.name.charAt(0)}
+                </Avatar>
+              }
               title={
                 <Link
                   style={{ fontSize: 15, textDecoration: "underline" }}
                   to={`/app/authors?id=${item.id}`}
+                  onClick={() => core.setURL(`/app/authors?id=${item.id}`)}
                 >
                   {item.name}
                 </Link>
               }
               description={
                 <>
-                  <div>
-                    <TeamOutlined />{" "}
-                    <Link
-                      style={{ fontSize: 12, textDecoration: "underline" }}
-                      to={`/app/groups?id=${item.affiliation.group.id}`}
-                    >
-                      {item.affiliation.group.name}
-                    </Link>
-                  </div>
-                  <div>
-                    <BankOutlined />{" "}
-                    <Link
-                      style={{ fontSize: 12, textDecoration: "underline" }}
-                      to={`/app/institutions?id=${item.affiliation.institution.id}`}
-                    >
-                      {item.affiliation.institution.name}
-                    </Link>
-                  </div>
+                  {item.affiliation.group.name ? (
+                    <div>
+                      <TeamOutlined />{" "}
+                      <Link
+                        style={{ fontSize: 12, textDecoration: "underline" }}
+                        to={`/app/groups?id=${item.affiliation.group.id}`}
+                        onClick={() =>
+                          core.setURL(
+                            `/app/groups?id=${item.affiliation.group.id}`
+                          )
+                        }
+                      >
+                        {item.affiliation.group.name}
+                      </Link>
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                  {item.affiliation.institution.name ? (
+                    <div>
+                      <BankOutlined />{" "}
+                      <Link
+                        style={{ fontSize: 12, textDecoration: "underline" }}
+                        to={`/app/institutions?id=${item.affiliation.institution.id}`}
+                        onClick={() =>
+                          core.setURL(
+                            `/app/institutions?id=${item.affiliation.institution.id}`
+                          )
+                        }
+                      >
+                        {item.affiliation.institution.name}
+                      </Link>
+                    </div>
+                  ) : (
+                    ""
+                  )}
                 </>
               }
             />

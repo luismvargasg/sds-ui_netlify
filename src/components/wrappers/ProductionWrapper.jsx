@@ -19,15 +19,15 @@ import { Col, Row, Tabs } from "antd";
 /* UI Library Sub-components */
 const { TabPane } = Tabs;
 
-const ProductionWrapper = ({ URL }) => {
-  const [state] = APIRequest(`${URL}&data=production`);
+const ProductionWrapper = ({ core }) => {
+  const [state] = APIRequest(`${core.URL}&data=production`);
 
   const tabMaker = (tabList) => {
     return (
       <Tabs defaultActiveKey="0" type="card" tabBarGutter={5}>
         {tabList.map((item, i) => (
           <TabPane tab={item} key={i}>
-            <DocumentByType type={item} URL={URL} />
+            <DocumentByType type={item} core={core} />
           </TabPane>
         ))}
       </Tabs>
@@ -50,7 +50,7 @@ const ProductionWrapper = ({ URL }) => {
         {state.data.types ? (
           tabMaker(state.data.types)
         ) : (
-          <DocumentList data={state.data} />
+          <DocumentList data={state.data} core={core} />
         )}
       </Col>
     </Row>

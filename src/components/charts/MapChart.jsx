@@ -74,7 +74,10 @@ const MapChart = ({ data, title = "", height = 600 }) => {
       },
     },
     tooltip: {
-      items: ["country", "count"],
+      items: [
+        { field: "country", alias: "País" },
+        { field: "count", alias: "Cantidad" },
+      ],
     },
     zoom: {
       position: "bottomright",

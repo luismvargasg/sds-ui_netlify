@@ -10,7 +10,7 @@ import { Card, Table } from "antd";
 /* UI Library Sub-components */
 const { Column } = Table;
 
-const CoauthorsList = ({ data, title, height = 422 }) => {
+const CoauthorsList = ({ data, title, height = 422, core }) => {
   const type = useHistory();
 
   if (type.location.pathname === "/app/institutions") {
@@ -33,7 +33,14 @@ const CoauthorsList = ({ data, title, height = 422 }) => {
             dataIndex={"name"}
             key={"id"}
             render={(name, record) => (
-              <Link to={`/app/institutions?&id=${record.id}`}>{name}</Link>
+              <Link
+                to={`/app/institutions?&id=${record.id}`}
+                onClick={() =>
+                  core.setURL(`/app/institutions?&id=${record.id}`)
+                }
+              >
+                {name}
+              </Link>
             )}
           />
           <Column
@@ -66,13 +73,22 @@ const CoauthorsList = ({ data, title, height = 422 }) => {
             key={"id"}
             render={(name, record) => (
               <>
-                <Link className="link--sm" to={`/app/authors?&id=${record.id}`}>
+                <Link
+                  className="link--sm"
+                  to={`/app/authors?id=${record.id}`}
+                  onClick={() => core.setURL(`/app/authors?id=${record.id}`)}
+                >
                   {record.name || name}
                 </Link>
                 <br />
                 <Link
                   className="link--xs"
                   to={`/app/institutions?&id=${record.affiliations?.institution?.id}`}
+                  onClick={() =>
+                    core.setURL(
+                      `/app/institutions?&id=${record.affiliations?.institution?.id}`
+                    )
+                  }
                 >
                   {record.affiliations?.institution?.name}
                 </Link>

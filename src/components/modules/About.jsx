@@ -1,6 +1,10 @@
 import React from "react";
 
-const About = () => {
+const About = ({ core }) => {
+  setTimeout(() => {
+    core.setHome(false);
+  }, 10);
+
   return (
     <div>
       <h1>Acerca de esta plataforma</h1>

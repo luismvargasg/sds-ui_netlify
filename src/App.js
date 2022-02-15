@@ -26,10 +26,12 @@ import Home from "./components/modules/Home";
 import Institutions from "./components/modules/Institutions";
 import Module1 from "./components/modules/Module1";
 import Module2 from "./components/modules/Module2";
-import Module3 from "./components/modules/Module3";
-import Module4 from "./components/modules/Module4";
+import Compendium from "./components/modules/Compendium";
+import Calls from "./components/modules/Calls";
 import Normatividad from "./components/modules/Normatividad";
 import SearchResult from "./components/modules/SearchResult";
+import Subjects from "./components/modules/Subjects";
+import UserManual from "./components/modules/UserManual";
 
 /* UI Library Components */
 import { Layout, BackTop } from "antd";
@@ -37,13 +39,17 @@ import { Layout, BackTop } from "antd";
 function App() {
   const location = useLocation();
   const [URL, setURL] = useState(location.pathname + location.search);
+  const [filters, setFilters] = useState(null);
+  const [home, setHome] = useState(false);
+  const core = { URL, setURL, filters, setFilters, home, setHome };
+
   return (
     <Router>
       <ScrollToTop />
       <BackTop />
-      <FilterDrawer />
+      <FilterDrawer core={core} />
       <Layout>
-        <Header setURL={setURL} />
+        <Header core={core} />
         <Layout.Content
           style={{
             minHeight: "70vh",
@@ -53,19 +59,41 @@ function App() {
         >
           <Switch>
             <Redirect exact from="/" to="/app" />
-            <Route exact path="/app" component={Home} />
-            <Route exact path="/app/about" component={About} />
-            <Route exact path="/app/search">
-              <SearchResult URL={URL} setURL={setURL} />
+            <Route exact path="/app">
+              <Home core={core} />
             </Route>
-            <Route exact path="/app/authors" component={Authors} />
-            <Route exact path="/app/groups" component={Groups} />
-            <Route exact path="/app/institutions" component={Institutions} />
+            <Route exact path="/app/about">
+              <About core={core} />
+            </Route>
+            <Route exact path="/app/search">
+              <SearchResult core={core} />
+            </Route>
+            <Route exact path="/app/authors">
+              <Authors core={core} />
+            </Route>
+            <Route exact path="/app/groups">
+              <Groups core={core} />
+            </Route>
+            <Route exact path="/app/institutions">
+              <Institutions core={core} />
+            </Route>
+            <Route exact path="/app/subjects">
+              <Subjects core={core} />
+            </Route>
             <Route exact path="/app/module1" component={Module1} />
+            <Route exact path="/app/manual">
+              <UserManual core={core} />
+            </Route>
             <Route exact path="/app/module2" component={Module2} />
-            <Route exact path="/app/module3" component={Module3} />
-            <Route exact path="/app/module4" component={Module4} />
-            <Route exact path="/app/normatividad" component={Normatividad} />
+            <Route exact path="/app/compendium">
+              <Compendium core={core} />
+            </Route>
+            <Route exact path="/app/calls">
+              <Calls core={core} />
+            </Route>
+            <Route exact path="/app/normatividad">
+              <Normatividad core={core} />
+            </Route>
           </Switch>
         </Layout.Content>
         <Footer />

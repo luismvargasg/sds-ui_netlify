@@ -1,63 +1,97 @@
 import React from "react";
 
+/* Components */
+import DocumentModal from "../DocumentModal";
+
 /* Libraries */
 import { AreaMap } from "@ant-design/charts";
 
-/* Utils */
-import TempModal from "../../utils/TempModal";
+/* Utilities */
+import { APIRequest } from "../../apis/api";
 
 /* UI Library Components */
-import { Modal } from "antd";
-
-/* geoJSON */
-import data from "../../utils/bogota_rotated.json";
+import { Modal, Spin } from "antd";
+//import RelationGraph from "./RelationGraph";
 
 const BogotaMapChart = ({ height = 600 }) => {
+  const [state] = APIRequest("/app/home");
   const docInfo = (e) => {
-    Modal.info({
-      width: "1200px",
-      title: (
-        <p className="map--modal-title">
-          Artículo generado en la Localidad: {e.feature.properties.LOC}
-        </p>
-      ),
-      icon: null,
-      okText: "Cerrar",
-      maskClosable: true,
-      content: <TempModal />,
-      onOk() {},
-    });
+    if (e.feature.properties.article.title.length > 0) {
+      Modal.info({
+        width: "1200px",
+        title: (
+          <p className="map--modal-title">
+            {e.feature.properties.article.title}
+          </p>
+        ),
+        icon: null,
+        okText: "Cerrar",
+        maskClosable: true,
+        content: <DocumentModal documentID={e.feature.properties.article.id} />,
+        onOk() {},
+      });
+    } else
+      Modal.info({
+        width: "1200px",
+        title: (
+          <p className="map--modal-title">
+            No hay artículos disponibles para esta localidad
+          </p>
+        ),
+        icon: null,
+        okText: "Cerrar",
+        maskClosable: true,
+        content: "",
+        onOk() {},
+      });
   };
+
+  if (state.isLoading) {
+    return (
+      <div className="spin--container">
+        <Spin size="large" />
+      </div>
+    );
+  }
+  if (state.isError) {
+    return null;
+  }
 
   const config = {
     map: {
       type: "mapbox",
       style: "blank",
+      //minZoom: 10,
+      //maxZoom: 10,
     },
     source: {
-      data: data,
+      data: state.data.data,
       parser: {
         type: "geojson",
       },
     },
     autoFit: true,
-    color: "#d7d8d4",
+    color: "#90cedc", //#d7d8d4
     style: {
       opacity: 1,
       stroke: "#f0f2f5",
       lineWidth: 2,
     },
     state: {
-      active: { fill: "#4abfe3", stroke: "white", lineWidth: 3 },
+      active: { fill: "#4abfdc", stroke: "white", lineWidth: 3 },
     },
-    tooltip: false,
+    tooltip: {
+      anchor: "top-right",
+      offsets: [60, -20],
+      items: [{ field: "article.title", alias: "Artículo:" }],
+    },
     label: {
       visible: true,
-      field: "LOC",
+      field: "loc",
       style: {
         fill: "#000",
         opacity: 0.9,
-        fontSize: 10,
+        fontSize: 11,
         stroke: "#fff",
         strokeWidth: 1.5,
         textAllowOverlap: true,
@@ -77,16 +111,24 @@ const BogotaMapChart = ({ height = 600 }) => {
   };
 
   return (
-    <div className="map--chart">
-      <div style={{ height: height, margin: "5px" }}>
-        <AreaMap
-          {...config}
-          onReady={(plot) => {
-            plotEvents(plot);
-          }}
-        />
+    <>
+      {/* <div>
+        <RelationGraph data={state.data.subject_tree.Medicine} />
       </div>
-    </div>
+      <div>
+        <RelationGraph data={state.data.subject_tree.Psychology} />
+      </div> */}
+      <div className="map--chart" /* style={{ marginTop: "20px" }} */>
+        <div style={{ height: height, margin: "5px" }}>
+          <AreaMap
+            {...config}
+            onReady={(plot) => {
+              plotEvents(plot);
+            }}
+          />
+        </div>
+      </div>
+    </>
   );
 };
 

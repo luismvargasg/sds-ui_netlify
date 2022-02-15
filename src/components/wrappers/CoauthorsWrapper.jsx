@@ -15,8 +15,8 @@ import GraphChart from "../charts/GraphChart";
 /* UI Library Components */
 import { Col, Row } from "antd";
 
-const CoauthorsWrapper = ({ URL }) => {
-  const [state] = APIRequest(`${URL}&data=coauthors`);
+const CoauthorsWrapper = ({ core }) => {
+  const [state] = APIRequest(`${core.URL}&data=coauthors`);
 
   if (state.isError) {
     return <ErrorWarning />;
@@ -31,6 +31,7 @@ const CoauthorsWrapper = ({ URL }) => {
           data={state.data.data.coauthors || state.data.data.institutions}
           title="Lista de Coautores"
           height={600}
+          core={core}
         />
       </Col>
       <Col xs={24} md={16}>

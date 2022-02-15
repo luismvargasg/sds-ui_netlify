@@ -31,7 +31,7 @@ const OpenAccessStatus = ({ status }) => {
         icon={React.createElement(open_access_icon)}
         color={renderedColor(status)}
       >
-        Open Access
+        Acceso Abierto
       </Tag>
     </Tooltip>
   );

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { useHistory } from "react-router";
+//import { useHistory } from "react-router";
 
 /* Components */
 import ErrorWarning from "../ErrorWarning";
@@ -9,7 +9,7 @@ import ProductionResult from "../ProductionResult";
 import SortSearchResults from "../SortSearchResults";
 
 /* UI Library Components */
-import { Avatar, Card, List, Space } from "antd";
+import { Avatar, Card, Col, List, Row, Space } from "antd";
 
 /* Icons */
 import {
@@ -22,10 +22,10 @@ import { CitationsIcon } from "../../media/icons/citations";
 /* Utilities */
 import { APIRequest } from "../../apis/api";
 import { titles } from "../../utils/texts";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 const queryString = require("query-string");
 
-const SearchResult = ({ setURL }) => {
+const SearchResult = ({ core }) => {
   const history = useHistory();
   const URL = history.location.pathname + history.location.search;
   const parsed = queryString.parse(URL);
@@ -36,6 +36,10 @@ const SearchResult = ({ setURL }) => {
     `${URL}&max=${pagination.max}&page=${pagination.page}&sort=${sort}`
   );
   const tools = { sort, setSort };
+
+  useEffect(() => {
+    document.title = "Resultados de Búsqueda | SALUDATA";
+  }, []);
 
   useEffect(() => {
     setPagination({ max: 10, page: 1 });
@@ -61,112 +65,152 @@ const SearchResult = ({ setURL }) => {
   } else if (state.isLoading) {
     return <LoadingCard />;
   }
+  setTimeout(() => {
+    core.setFilters(state.data.filters);
+    core.setHome(false);
+  }, 10);
   return type === "literature" ? (
-    <ProductionResult data={state.data} URL={URL} />
+    <ProductionResult data={state.data} URL={core.URL} />
   ) : (
-    <Card
-      headStyle={{ backgroundColor: "#003e65", color: "white" }}
-      size="small"
-      title={titles[parsed["/app/search?data"]]}
-      extra={
-        <div>
-          <p className="white-text">
-            {state.data.total_results}{" "}
-            {state.data.total_results === 1 ? "resultado" : "resultados"}
-          </p>
-          <SortSearchResults tools={tools} key="1" />
-        </div>
-      }
-    >
-      <List
-        itemLayout="vertical"
-        size="large"
-        dataSource={state.data.data}
-        pagination={{
-          size: "small",
-          position: "bottom",
-          total: state.data.total_results,
-          onChange: (page, pageSize) =>
-            onPageChange({
-              page,
-              pageSize,
-            }),
-          hideOnSinglePage: true,
-          current: pagination.page,
-          pageSize: pagination.max,
-        }}
-        renderItem={(item) => (
-          <List.Item
-            actions={[
-              <Space style={{ fontSize: 18 }}>
-                {React.createElement(CalendarOutlined)}
-                Publicaciones: {item.papers_count}
-              </Space>,
-              <Space style={{ fontSize: 18 }}>
-                {React.createElement(CitationsIcon)}
-                Citado: {item.citations_count}
-              </Space>,
-            ]}
-          >
-            <List.Item.Meta
-              avatar={
-                type === "institutions" ? (
-                  <Avatar size={48} src={item.logo} />
-                ) : (
-                  <Avatar size={48}>
-                    {item.full_name
-                      ? item.full_name.charAt(0)
-                      : item.name.charAt(0)}
-                  </Avatar>
-                )
-              }
-              title={
-                <Link to={`/app/${parsed["/app/search?data"]}?id=${item.id}`}>
-                  {item.full_name || item.name}
-                </Link>
-              }
-              description={
-                type !== "institutions" ? (
-                  <>
-                    {type === "authors" && item.affiliation?.group?.name ? (
-                      <div>
-                        <TeamOutlined />{" "}
-                        <Link
-                          style={{ fontSize: 12, textDecoration: "underline" }}
-                          to={`/app/groups?id=${item.affiliation?.group?.id}`}
-                        >
-                          {item.affiliation?.group?.name}
-                        </Link>
-                      </div>
+    <Row align="center">
+      <Col span={24}>
+        <Card
+          headStyle={{ backgroundColor: "#003e65", color: "white" }}
+          size="small"
+          bodyStyle={{ padding: "10px 0 10px 10px" }}
+          title={titles[parsed["/app/search?data"]]}
+          extra={
+            <div>
+              <p className="white-text">
+                {state.data.total_results}{" "}
+                {state.data.total_results === 1 ? "resultado" : "resultados"}
+              </p>
+              <SortSearchResults tools={tools} key="1" />
+            </div>
+          }
+        >
+          <List
+            itemLayout="vertical"
+            size="large"
+            dataSource={state.data.data}
+            pagination={{
+              size: "small",
+              position: "bottom",
+              total: state.data.total_results,
+              onChange: (page, pageSize) =>
+                onPageChange({
+                  page,
+                  pageSize,
+                }),
+              hideOnSinglePage: true,
+              current: pagination.page,
+              pageSize: pagination.max,
+            }}
+            renderItem={(item) => (
+              <List.Item
+                actions={[
+                  <Space style={{ fontSize: 18 }}>
+                    {React.createElement(CalendarOutlined)}
+                    Publicaciones: {item.papers_count || item.products_count}
+                  </Space>,
+                  item.citations_count ? (
+                    <Space style={{ fontSize: 18 }}>
+                      {React.createElement(CitationsIcon)}
+                      Citado: {item.citations_count}
+                    </Space>
+                  ) : (
+                    ""
+                  ),
+                ]}
+              >
+                <List.Item.Meta
+                  avatar={
+                    type === "institutions" ? (
+                      item.logo ? (
+                        <Avatar size={48} src={item.logo} />
+                      ) : (
+                        <Avatar className="avatar" size={48} src={item.logo}>
+                          U
+                        </Avatar>
+                      )
+                    ) : (
+                      <Avatar
+                        className="avatar"
+                        size={{
+                          xs: 40,
+                          sm: 50,
+                          md: 60,
+                          lg: 60,
+                          xl: 60,
+                          xxl: 60,
+                        }}
+                      >
+                        {item.name.charAt(0)}
+                      </Avatar>
+                    )
+                  }
+                  title={
+                    <Link
+                      className="searchResult--link"
+                      to={`/app/${parsed["/app/search?data"]}?id=${item.id}`}
+                      onClick={() =>
+                        core.setURL(
+                          `/app/${parsed["/app/search?data"]}?id=${item.id}`
+                        )
+                      }
+                    >
+                      {item.name}
+                    </Link>
+                  }
+                  description={
+                    type !== "institutions" ? (
+                      <>
+                        {type === "authors" && item.affiliation?.group?.name ? (
+                          <div>
+                            <TeamOutlined />{" "}
+                            <Link
+                              className="affiliation--link"
+                              to={`/app/groups?id=${item.affiliation?.group?.id}`}
+                              onClick={() =>
+                                core.setURL(
+                                  `/app/groups?id=${item.affiliation?.group?.id}`
+                                )
+                              }
+                            >
+                              {item.affiliation?.group?.name}
+                            </Link>
+                          </div>
+                        ) : (
+                          ""
+                        )}
+                        {item.affiliation?.institution?.name && (
+                          <div>
+                            <BankOutlined />{" "}
+                            <Link
+                              className="affiliation--link"
+                              to={`/app/institutions?id=${item.affiliation?.institution?.id}`}
+                              onClick={() =>
+                                core.setURL(
+                                  `/app/institutions?id=${item.affiliation?.institution?.id}`
+                                )
+                              }
+                            >
+                              {item.affiliation?.institution?.name}
+                            </Link>
+                          </div>
+                        )}
+                      </>
                     ) : (
                       ""
-                    )}
-                    {(item.affiliation?.name ||
-                      item.affiliation?.institution?.name) && (
-                      <div>
-                        <BankOutlined />{" "}
-                        <Link
-                          style={{ fontSize: 12, textDecoration: "underline" }}
-                          to={`/app/institutions?id=${
-                            item.affiliation?.institution?.id ||
-                            item.affiliation?.id
-                          }`}
-                        >
-                          {item.affiliation.name ||
-                            item.affiliation.institution.name}
-                        </Link>
-                      </div>
-                    )}
-                  </>
-                ) : (
-                  ""
-                )
-              }
-            />
-          </List.Item>
-        )}
-      />
-    </Card>
+                    )
+                  }
+                />
+              </List.Item>
+            )}
+          />
+        </Card>
+      </Col>
+    </Row>
   );
 };
 

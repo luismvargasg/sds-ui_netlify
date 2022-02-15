@@ -13,13 +13,13 @@ import { Col, Row, Tabs } from "antd";
 /* UI Library Sub-components */
 const { TabPane } = Tabs;
 
-const ProductionResult = ({ data, URL }) => {
+const ProductionResult = ({ data, core }) => {
   const tabMaker = (tabList) => {
     return (
       <Tabs defaultActiveKey="0" type="card" tabBarGutter={5}>
         {tabList.map((item, i) => (
           <TabPane tab={item} key={i}>
-            <DocumentByType type={item} URL={URL} literature={true} />
+            <DocumentByType type={item} core={core} literature={true} />
           </TabPane>
         ))}
       </Tabs>

@@ -15,13 +15,13 @@ import { ReadOutlined, BankOutlined } from "@ant-design/icons";
 /* UI Library Sub-components */
 const { Meta } = Card;
 
-const CommonTitleCard = ({ data, type }) => {
+const CommonTitleCard = ({ core, data, type }) => {
   const logoPath =
-    type === "institutions" ? data.logo : data.institution[0].logo;
+    type === "institutions" ? data.logo : data.affiliation.institution.logo;
 
   return (
     <Col span={24}>
-      <Card actions={externalUrls(data.external_urls)}>
+      <Card actions={externalUrls(data.external_urls)} className="pattern">
         <Meta
           avatar={
             <Avatar
@@ -54,8 +54,15 @@ const CommonTitleCard = ({ data, type }) => {
                       style={{ marginRight: "10px", color: "gray" }}
                     />
 
-                    <Link to={`/app/institutions?id=${data.institution[0].id}`}>
-                      {data.institution[0].name}
+                    <Link
+                      to={`/app/institutions?id=${data.affiliation.institution.id}`}
+                      onClick={() =>
+                        core.setURL(
+                          `/app/institutions?id=${data.affiliation.institution.id}`
+                        )
+                      }
+                    >
+                      {data.affiliation.institution.name}
                     </Link>
                   </>
                 )}

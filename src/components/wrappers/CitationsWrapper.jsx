@@ -14,8 +14,8 @@ import { Col, Row } from "antd";
 import ColumnChart from "../charts/ColumnChart";
 import MapChart from "../charts/MapChart";
 
-const CitationsWrapper = ({ URL }) => {
-  const [state] = APIRequest(`${URL}&data=citations`);
+const CitationsWrapper = ({ core }) => {
+  const [state] = APIRequest(`${core.URL}&data=citations`);
 
   if (state.isError) {
     return <ErrorWarning />;

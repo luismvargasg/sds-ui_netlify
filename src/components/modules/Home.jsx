@@ -1,101 +1,73 @@
-import React from "react";
+import React, { useEffect } from "react";
+
+/* Components */
+import HomeTable from "../HomeTable";
+import SearchBar from "../SearchBar";
+import { ReactComponent as Banner } from "../../media/banner.svg";
 
 /* UI Library Components */
-import { Button, Col, Modal, Row, Typography } from "antd";
+import { Card, Col, Divider, Row, Typography } from "antd";
 
 /* Charts */
 import BogotaMapChart from "../charts/BogotaMapChart";
 
-/* Utils */
-import { homeTexts, homeTitles } from "../../utils/texts";
-
 /* UI Library Sub-components*/
 const { Title } = Typography;
 
-const Home = () => {
-  const showModal = (title) => {
-    Modal.info({
-      width: "800px",
-      title: homeTitles[title],
-      maskClosable: true,
-      icon: null,
-      okText: "Cerrar",
-      content: homeTexts[title],
-    });
-  };
+const Home = ({ core }) => {
+  useEffect(() => {
+    document.title = "SALUDATA";
+    core.setFilters(null);
+    core.setHome(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
-      <Row
-        className="home--headline"
-        /* style={{ padding: "40px 5px", textAlign: "center" }} */
-        justify="center"
-        align="middle"
-      >
-        <Col flex sm={24} lg={12}>
-          <Title>Lorem Ipsum</Title>
-          <Title level={2}>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsa enim
-            illum maiores facere, debitis aliquid facilis, nemo sunt fugiat
-            repellat aperiam doloribus doloremque! Porro, optio? Unde aliquam
-            tempore voluptates eius!
+      <Banner id="home__banner" />
+      <Row justify="space-around" align="middle">
+        <Col flex sm={24} xl={10} xxl={8}>
+          <Title id="home__head--title">
+            Conozca la producción científica realizada en Bogotá sobre temas de
+            interés en salud y bienestar.
           </Title>
         </Col>
-      </Row>
-      <Row
-        style={{
-          padding: "40px 5px",
-          textAlign: "center",
-          backgroundColor: "#dce1e6",
-          minHeight: "140px",
-        }}
-        justify="center"
-        align="middle"
-      >
-        <Col className="margin-20">
-          <Button
-            onClick={() => showModal("mision")}
-            size="large"
-            type="dashed"
-            className="home--button"
-          >
-            Misión
-          </Button>
-        </Col>
-        <Col className="margin-20">
-          <Button
-            onClick={() => showModal("vision")}
-            size="large"
-            type="dashed"
-            className="home--button"
-          >
-            Visión
-          </Button>
-        </Col>
-        <Col className="margin-20">
-          <Button
-            onClick={() => showModal("hacemos")}
-            size="large"
-            type="dashed"
-            className="home--button"
-          >
-            Qué hacemos
-          </Button>
-        </Col>
-        <Col className="margin-20">
-          <Button
-            onClick={() => showModal("objetivos")}
-            size="large"
-            type="dashed"
-            className="home--button"
-          >
-            Objetivos
-          </Button>
+        <Col
+          sm={24}
+          xl={12}
+          xxl={10}
+          style={{ marginTop: "40px", marginBottom: 0, textAlign: "center" }}
+        >
+          <Card size="small" bordered style={{ borderRadius: "10px" }}>
+            <Title level={3}>
+              La información puede ser consultada por temas, productos,
+              instituciones, grupos de investigación o autores.
+            </Title>
+            <div className="searchbar--container">
+              <SearchBar core={core} />
+            </div>
+            <div id="home__table--container">
+              <HomeTable />
+            </div>
+          </Card>
         </Col>
       </Row>
-      <Row justify="center" align="middle" style={{ marginTop: "40px" }}>
-        <Col span={24}>
-          <BogotaMapChart title="Mapa de Bogotá" />
+      <Row justify="center" style={{ marginTop: "60px" }}>
+        <Col xs={20} lg={14}>
+          <Divider style={{ fontSize: "24px" }}>Mapa</Divider>
+        </Col>
+      </Row>
+      <Row justify="space-around" align="middle" style={{ marginTop: "15px" }}>
+        <Col xs={24} lg={15}>
+          <BogotaMapChart />
+        </Col>
+        <Col xs={24} lg={6}>
+          <Title level={2}>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam
+            veritatis eaque porro dolor dolores incidunt. Atque incidunt
+            officiis deserunt dolorum dolor neque ullam iste? Error cum quos
+            numquam! Perferendis, ullam.
+          </Title>
         </Col>
       </Row>
     </>

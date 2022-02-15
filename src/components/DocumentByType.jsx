@@ -8,19 +8,26 @@ import DocumentList from "./DocumentList";
 import ErrorWarning from "./ErrorWarning";
 import LoadingCard from "./LoadingCard";
 
-const DocumentByType = ({ type, URL, literature = false }) => {
+const DocumentByType = ({ type, core, literature = false }) => {
   const [pagination, setPagination] = useState({ max: 10, page: 1 });
   const [sort, setSort] = useState("citations");
   const [state, setUrl] = APIRequest(
-    `${URL}${literature ? "" : "&data=production"}&type=${type}&max=${
+    `${core.URL}${literature ? "" : "&data=production"}&type=${type}&max=${
       pagination.max
     }&page=${pagination.page}&sort=${sort}`
   );
-  const tools = { pagination, setPagination, sort, setSort, URL, setUrl };
+  const tools = {
+    pagination,
+    setPagination,
+    sort,
+    setSort,
+    URL: core.URL,
+    setUrl,
+  };
 
   useEffect(() => {
     setUrl(
-      `${URL}${literature ? "" : "&data=production"}&type=${type}&max=${
+      `${core.URL}${literature ? "" : "&data=production"}&type=${type}&max=${
         pagination.max
       }&page=${pagination.page}&sort=${sort}`
     );
@@ -33,7 +40,9 @@ const DocumentByType = ({ type, URL, literature = false }) => {
   if (state.isLoading) {
     return <LoadingCard />;
   }
-  return <DocumentList data={state.data} tools={tools} title={type} />;
+  return (
+    <DocumentList data={state.data} tools={tools} title={type} core={core} />
+  );
 };
 
 export default DocumentByType;
