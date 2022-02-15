@@ -30,6 +30,7 @@ const Authors = ({ core }) => {
 
   useEffect(() => {
     setUrl(`${core.URL}&data=info`);
+    core.setFilters(state.data.filters);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [core.URL]);
 

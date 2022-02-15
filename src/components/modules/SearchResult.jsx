@@ -22,18 +22,18 @@ import { CitationsIcon } from "../../media/icons/citations";
 /* Utilities */
 import { APIRequest } from "../../apis/api";
 import { titles } from "../../utils/texts";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 const queryString = require("query-string");
 
 const SearchResult = ({ core }) => {
-  const history = useHistory();
-  const URL = history.location.pathname + history.location.search;
-  const parsed = queryString.parse(URL);
+  //const history = useHistory();
+  //const URL = history.location.pathname + history.location.search;
+  const parsed = queryString.parse(core.URL);
   const type = parsed["/app/search?data"];
   const [pagination, setPagination] = useState({ max: 10, page: 1 });
   const [sort, setSort] = useState("citations");
   const [state, setUrl] = APIRequest(
-    `${URL}&max=${pagination.max}&page=${pagination.page}&sort=${sort}`
+    `${core.URL}&max=${pagination.max}&page=${pagination.page}&sort=${sort}`
   );
   const tools = { sort, setSort };
 
@@ -44,14 +44,16 @@ const SearchResult = ({ core }) => {
   useEffect(() => {
     setPagination({ max: 10, page: 1 });
     setSort("citations");
-  }, [URL]);
+  }, [core.URL]);
 
   useEffect(() => {
     setPagination({ max: 10, page: 1 });
   }, [sort]);
 
   useEffect(() => {
-    setUrl(`${URL}&max=${pagination.max}&page=${pagination.page}&sort=${sort}`);
+    setUrl(
+      `${core.URL}&max=${pagination.max}&page=${pagination.page}&sort=${sort}`
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pagination]);
 
@@ -70,7 +72,7 @@ const SearchResult = ({ core }) => {
     core.setHome(false);
   }, 10);
   return type === "literature" ? (
-    <ProductionResult data={state.data} URL={core.URL} />
+    <ProductionResult data={state.data} core={core} />
   ) : (
     <Row align="center">
       <Col span={24}>

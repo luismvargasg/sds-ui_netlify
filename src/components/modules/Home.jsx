@@ -54,7 +54,9 @@ const Home = ({ core }) => {
       </Row>
       <Row justify="center" style={{ marginTop: "60px" }}>
         <Col xs={20} lg={14}>
-          <Divider style={{ fontSize: "24px" }}>Mapa</Divider>
+          <Divider style={{ fontSize: "24px" }}>
+            Investigación en salud sobre el territorio
+          </Divider>
         </Col>
       </Row>
       <Row justify="space-around" align="middle" style={{ marginTop: "15px" }}>
@@ -62,11 +64,12 @@ const Home = ({ core }) => {
           <BogotaMapChart />
         </Col>
         <Col xs={24} lg={6}>
-          <Title level={2}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam
-            veritatis eaque porro dolor dolores incidunt. Atque incidunt
-            officiis deserunt dolorum dolor neque ullam iste? Error cum quos
-            numquam! Perferendis, ullam.
+          <Title level={3}>
+            Este mapa muestra un artículo seleccionado de manera aleatoria, cuyo
+            lugar de análisis se corresponde con una localidad de Bogotá. Si
+            está interesado en conocer más investigaciones sobre una localidad
+            específica, ingrese al buscador y utilice el nombre de la localidad
+            como palabra clave en la opción “Producto”.
           </Title>
         </Col>
       </Row>
