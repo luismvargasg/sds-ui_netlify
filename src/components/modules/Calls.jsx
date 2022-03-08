@@ -22,7 +22,7 @@ const Calls = ({ core }) => {
   return (
     <Row justify="center" style={{ marginTop: "50px" }}>
       <Col xxl={18} md={22} xs={24}>
-        <Title level={3}>Directorio de convocatioras Públicas</Title>
+        <Title level={3}>Directorio de convocatorias Públicas</Title>
         <Divider />
         <Title level={4}>NIH Grants & Funding</Title>
         <CallsTableNih />

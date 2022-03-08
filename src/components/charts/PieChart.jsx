@@ -4,7 +4,7 @@ import React from "react";
 import { Pie } from "@ant-design/charts";
 
 /* UI Library Components */
-import { Card } from "antd";
+import { Card, Empty } from "antd";
 
 const PieChart = ({ data, title }) => {
   const bgColor = {
@@ -53,7 +53,6 @@ const PieChart = ({ data, title }) => {
       },
     },
   };
-
   return (
     <Card
       size="small"
@@ -63,7 +62,14 @@ const PieChart = ({ data, title }) => {
       hoverable
     >
       <div className="chart">
-        <Pie {...config} />
+        {data.length > 0 ? (
+          <Pie {...config} />
+        ) : (
+          <Empty
+            image={Empty.PRESENTED_IMAGE_SIMPLE}
+            description="Datos insuficientes"
+          />
+        )}
       </div>
     </Card>
   );

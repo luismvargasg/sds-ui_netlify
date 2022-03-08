@@ -28,7 +28,7 @@ import Module1 from "./components/modules/Module1";
 import Module2 from "./components/modules/Module2";
 import Compendium from "./components/modules/Compendium";
 import Calls from "./components/modules/Calls";
-import Normatividad from "./components/modules/Normatividad";
+import Regulations from "./components/modules/Regulations";
 import SearchResult from "./components/modules/SearchResult";
 import Subjects from "./components/modules/Subjects";
 import UserManual from "./components/modules/UserManual";
@@ -91,12 +91,12 @@ function App() {
             <Route exact path="/app/calls">
               <Calls core={core} />
             </Route>
-            <Route exact path="/app/normatividad">
-              <Normatividad core={core} />
+            <Route exact path="/app/regulations">
+              <Regulations core={core} />
             </Route>
           </Switch>
         </Layout.Content>
-        <Footer />
+        <Footer core={core} />
       </Layout>
     </Router>
   );

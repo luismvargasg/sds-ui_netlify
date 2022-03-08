@@ -7,9 +7,17 @@ import SearchBar from "../components/SearchBar";
 import { Button, Col, Layout, Modal, Row, Tooltip } from "antd";
 
 /* logotypes */
-import logo_obs_salud from "../media/logo_obs_salud.svg";
 import logo_saludata_w from "../media/logo_saludata_w.svg";
 import logo_sds_w from "../media/logo_sds_w.svg";
+
+/* Icons */
+import {
+  HomeOutlined,
+  InfoCircleOutlined,
+  LineChartOutlined,
+  BarChartOutlined,
+  FileSearchOutlined,
+} from "@ant-design/icons";
 
 /* Utilities */
 import { Link } from "react-router-dom";
@@ -18,7 +26,7 @@ const Header = ({ core }) => {
   const showModal = () => {
     Modal.info({
       width: "800px",
-      title: "Acerca del Observatorio",
+      title: "Acerca de este módulo",
       maskClosable: true,
       icon: null,
       okText: "Cerrar",
@@ -26,9 +34,8 @@ const Header = ({ core }) => {
         <>
           <br />
           <p>
-            El Observatorio Distrital de Investigación en Salud reúne la
-            producción científica realizada en Bogotá sobre temas de interés en
-            salud y bienestar.
+            El Módulo de Investigación en Salud reúne la producción científica
+            realizada en Bogotá sobre temas de interés en salud y bienestar.
           </p>
           <p>
             La producción científica se refiere a los artículos, libros,
@@ -42,16 +49,18 @@ const Header = ({ core }) => {
             globales.
           </p>
           <p>
-            A través de las distintas opciones de búsqueda, se podrá acceder a
-            información que permite hacer análisis en diferentes niveles: desde
-            la construcción de estados del arte, estudios de caso, hasta el
-            seguimiento a un tema específico que derive en nuevas
+            A través de las distintas opciones de búsqueda, la comunidad
+            académica, y científica, los tomadores de decisiones, los
+            profesionales de las entidades de salud y la ciudadanía, podrán
+            acceder a información que permite hacer análisis en diferentes
+            niveles: desde la construcción de estados del arte, estudios de
+            caso, hasta el seguimiento a un tema específico que derive en nuevas
             investigaciones, desarrollos tecnológicos, farmacéuticos o de
             políticas públicas.
           </p>
           <p>
-            El Observatorio Distrital de Investigación en Salud hace parte del
-            Observatorio de Bogotá Saludata.
+            El Módulo de Investigación en Salud hace parte del Observatorio de
+            Bogotá SaluData.
           </p>
         </>
       ),
@@ -82,13 +91,17 @@ const Header = ({ core }) => {
             xl={7}
             xxl={6}
           >
-            <Link to="/app">
+            <a
+              href="https://saludata.saludcapital.gov.co/osb/"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
               <img
-                src={logo_obs_salud}
-                alt="Logotipo Observartorio Distrital"
+                src={logo_saludata_w}
+                alt="Logotipo Saludata"
                 className="header__logo"
               />
-            </Link>
+            </a>
           </Col>
           <Col
             xs={{ span: 24, order: 3 }}
@@ -108,17 +121,6 @@ const Header = ({ core }) => {
             xxl={{ span: 6, order: 3 }}
           >
             <a
-              href="https://saludata.saludcapital.gov.co/osb/"
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              <img
-                src={logo_saludata_w}
-                alt="Logotipo Saludata"
-                className="header__logo"
-              />
-            </a>
-            <a
               href="http://www.saludcapital.gov.co/"
               target="_blank"
               rel="noreferrer noopener"
@@ -135,24 +137,44 @@ const Header = ({ core }) => {
       <Col className="header--menu">
         <Row justify="center" align="middle">
           <Col className="margin-25">
+            <Link to="/app">
+              <HomeOutlined className="header__icon" />
+              Inicio
+            </Link>
+          </Col>
+          <Col className="margin-25">
             <Button
               type="link"
               style={{ color: "white", padding: 0 }}
               onClick={() => showModal()}
+              icon={<InfoCircleOutlined />}
             >
-              Acerca del Observatorio
+              Acerca de este módulo
             </Button>
           </Col>
           <Col className="margin-25">
             <Tooltip
               color={"gray"}
-              title="¿Cuáles son los temas en los que se concentra la investigación científica en salud de Bogotá? 
-Aquí podrá conocer los temas más frecuentes y su relación con agendas locales y globales de investigación. Use los filtros disponibles para ver información específica."
+              title={
+                <>
+                  <p>
+                    ¿Cuáles son los temas en los que se concentra la
+                    investigación científica en salud de Bogotá?
+                  </p>
+                  <p>
+                    Aquí podrá conocer los temas más frecuentes y su relación
+                    con los planes y políticas públicas del distrito, y los
+                    Objetivos de Desarrollo Sostenible. Use los filtros
+                    disponibles para ver información específica.
+                  </p>
+                </>
+              }
             >
               <Link
                 to="/app/module2"
                 onClick={() => core.setURL("/app/module2")}
               >
+                <LineChartOutlined className="header__icon" />
                 Tendencias
               </Link>
             </Tooltip>
@@ -160,14 +182,25 @@ Aquí podrá conocer los temas más frecuentes y su relación con agendas locale
           <Col className="margin-25">
             <Tooltip
               color={"gray"}
-              title="Conozca quiénes hacen investigación científica en el área de la salud en la ciudad. 
-Aquí podrá conocer la producción científica de instituciones, grupos y autores. Use los filtros disponibles para ver información específica.
-"
+              title={
+                <>
+                  <p>
+                    Conozca quiénes hacen investigación científica en el área de
+                    la salud en la ciudad.
+                  </p>
+                  <p>
+                    Aquí podrá conocer la producción científica de
+                    instituciones, grupos y autores. Use los filtros disponibles
+                    para ver información específica.
+                  </p>
+                </>
+              }
             >
               <Link
                 to="/app/compendium"
                 onClick={() => core.setURL("/app/compendium")}
               >
+                <BarChartOutlined className="header__icon" />
                 Capacidades científicas
               </Link>
             </Tooltip>
@@ -178,6 +211,7 @@ Aquí podrá conocer la producción científica de instituciones, grupos y autor
               title="Consulte las convocatorias locales, nacionales e internacionales que financian o apoyan proyectos de investigación en salud."
             >
               <Link to="/app/calls" onClick={() => core.setURL("/app/calls")}>
+                <FileSearchOutlined className="header__icon" />
                 Convocatorias
               </Link>
             </Tooltip>

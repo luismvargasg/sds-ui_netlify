@@ -83,14 +83,14 @@ const CoauthorsList = ({ data, title, height = 422, core }) => {
                 <br />
                 <Link
                   className="link--xs"
-                  to={`/app/institutions?&id=${record.affiliations?.institution?.id}`}
+                  to={`/app/institutions?&id=${record.affiliation?.institution?.id}`}
                   onClick={() =>
                     core.setURL(
-                      `/app/institutions?&id=${record.affiliations?.institution?.id}`
+                      `/app/institutions?&id=${record.affiliation?.institution?.id}`
                     )
                   }
                 >
-                  {record.affiliations?.institution?.name}
+                  {record.affiliation?.institution?.name}
                 </Link>
               </>
             )}

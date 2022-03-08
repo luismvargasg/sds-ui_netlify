@@ -1,19 +1,22 @@
 import React from "react";
 
 /* UI Library Components */
-import { Layout, Col, Row } from "antd";
+import { Layout, Col, Row, Divider } from "antd";
+
+/* logotypes */
+import logo_sds_w from "../media/logo_sds_w.svg";
 
 /* Utilities */
 import { Link } from "react-router-dom";
 
-const Footer = () => {
+const Footer = ({ core }) => {
   return (
     <Layout.Footer id="footer">
       <Row gutter={[15, 15]} align="middle">
         <Col xs={24} md={12} xxl={6}>
           <div className="footer-container">
             <p>
-              <b>Observatorio Distrital de Investigación en Salud</b>
+              <b>Módulo de Investigación en Salud</b>
             </p>
             <br />
             <p>
@@ -27,14 +30,17 @@ const Footer = () => {
               </Link>
             </p>
             <p>
-              <Link to="/app/normatividad" className="white--link">
+              <Link
+                to="/app/regulations"
+                className="white--link"
+                onClick={() => core.setURL("/app/regulations")}
+              >
                 Normatividad del sistema de investigación en salud
               </Link>
             </p>
             <br />
-            <p>Versión: 0.1.0</p>
-            <p>Última actualización: 15/02/2022</p>
-            <p>Hecho en Colombia</p>
+            <p>Versión: 0.1.1</p>
+            <p>Última actualización: 08/03/2022</p>
           </div>
         </Col>
         <Col xs={24} md={12} xxl={6}>
@@ -122,6 +128,16 @@ const Footer = () => {
             </p>
           </div>
         </Col>
+      </Row>
+      <Row align="middle">
+        <Divider style={{ margin: 0 }}>
+          <img
+            src={logo_sds_w}
+            alt="Logotipo Secretaría de Salud de Bogotá"
+            className="header__logo"
+            style={{ width: "220px" }}
+          />
+        </Divider>
       </Row>
     </Layout.Footer>
   );

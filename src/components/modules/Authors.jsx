@@ -25,7 +25,7 @@ const Authors = ({ core }) => {
   const [state, setUrl] = APIRequest(`${core.URL}&data=info`);
 
   useEffect(() => {
-    document.title = "Autores | SALUDATA";
+    document.title = "SALUDATA | Autores";
   }, []);
 
   useEffect(() => {
