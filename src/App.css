@@ -167,6 +167,23 @@
   width: 200px;
 }
 
+.color {
+  background-color: #0062a7;
+  line-height: 150px;
+}
+
+.ods__box {
+  text-align: center;
+  color: white;
+  transition: 0.3s;
+}
+
+.ods__box :hover {
+  box-shadow: -0.5rem 0.5rem black;
+  transform: translate(4px, -4px);
+  transition: 0.3s;
+}
+
 #home__head--title {
   text-align: left;
   color: #94ffa7;
@@ -188,6 +205,14 @@
 
 /* ----- CONTENT ----- */
 
+.divider__title {
+  font-size: 30px;
+}
+
+#logo__ods {
+  height: 110px;
+}
+
 #regulations__table--link {
   font-size: 18px;
 }
@@ -196,6 +221,27 @@
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   background-size: cover;
   background-image: url("/src/media/title_banner.svg");
+}
+
+#info__1 {
+  fill: #0062a7;
+}
+
+.test__info2 {
+  text-align: center;
+  width: 150px;
+  color: white;
+  font-size: 20px;
+  padding: 10px;
+  margin: 75px 0;
+}
+
+.test__info {
+  text-align: center;
+  color: white;
+  width: 150px;
+  margin: 25px 0;
+  font-size: 30px;
 }
 
 /* ----- UI LIBRARY OVERWRITE ----- */

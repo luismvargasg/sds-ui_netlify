@@ -45,7 +45,7 @@ export const APIRequest = (initialUrl) => {
       dispatch({ type: "FETCH_INIT" });
 
       try {
-        const result = await get(`http://clustercien.udea.edu.co:8989${url}`);
+        const result = await get(process.env.REACT_APP_API_URL + url);
 
         if (!didCancel) {
           dispatch({ type: "FETCH_SUCCESS", payload: result.data });
