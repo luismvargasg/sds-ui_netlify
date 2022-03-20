@@ -22,7 +22,7 @@ const AuthorsListOnModal = ({ authors }) => {
                 Autor de correspondencia.
                 <br />
                 Afiliación:{" "}
-                {author.affiliation.institution.name
+                {author.affiliation?.institution?.name
                   ? author.affiliation.institution.name
                   : "No disponible"}
                 .
@@ -36,7 +36,7 @@ const AuthorsListOnModal = ({ authors }) => {
           <Tooltip
             key={author.id}
             title={`Afiliación: ${
-              author.affiliation.institution.name
+              author.affiliation?.institution?.name
                 ? author.affiliation.institution.name
                 : "No disponible"
             }.`}
