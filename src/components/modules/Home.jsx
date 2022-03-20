@@ -55,7 +55,7 @@ const Home = ({ core }) => {
       </Row>
       <Row justify="center" style={{ marginTop: "60px" }}>
         <Col xs={20} lg={14}>
-          <Divider style={{ fontSize: "24px" }}>
+          <Divider id="home__map--title">
             Investigación en salud sobre el territorio
           </Divider>
         </Col>

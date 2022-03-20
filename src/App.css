@@ -192,6 +192,10 @@
   text-shadow: 10px 10px 15px rgba(0, 0, 0, 0.4);
 }
 
+#home__map--title {
+  font-size: 24px;
+}
+
 #home__table--container {
   padding-left: 15px;
   padding-right: 15px;
@@ -347,6 +351,11 @@
     font-weight: 600;
     text-shadow: none;
     margin: 20px 0 0 0;
+  }
+
+  #home__map--title {
+    font-size: 18px;
+    white-space: normal;
   }
 }
 
