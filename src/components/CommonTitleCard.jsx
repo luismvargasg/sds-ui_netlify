@@ -1,5 +1,8 @@
 import React from "react";
 
+/* Components */
+import PoliciesTag from "./PoliciesTag";
+
 /* Utilities */
 import { Link } from "react-router-dom";
 
@@ -7,7 +10,7 @@ import { Link } from "react-router-dom";
 import { externalUrls } from "./externalUrls";
 
 /* UI Library Components*/
-import { Col, Card, Avatar, Typography } from "antd";
+import { Col, Card, Avatar, Row, Typography } from "antd";
 
 /* Icons */
 import { ReadOutlined, BankOutlined } from "@ant-design/icons";
@@ -67,6 +70,29 @@ const CommonTitleCard = ({ core, data, type }) => {
                   </>
                 )}
               </Typography.Paragraph>
+              <Row gutter={[5, 5]} style={{ marginTop: "10px" }}>
+                {data.policies.ODS && (
+                  <PoliciesTag
+                    type="ODS"
+                    data={data.policies.ODS}
+                    core={core}
+                  />
+                )}
+                {data.policies.PDD && (
+                  <PoliciesTag
+                    type="PDD"
+                    data={data.policies.PDD}
+                    core={core}
+                  />
+                )}
+                {data.policies.PTS && (
+                  <PoliciesTag
+                    type="PTS"
+                    data={data.policies.PTS}
+                    core={core}
+                  />
+                )}
+              </Row>
             </>
           }
         />

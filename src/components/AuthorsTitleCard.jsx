@@ -1,10 +1,13 @@
 import React from "react";
 
+/* Components */
+import PoliciesTag from "./PoliciesTag";
+
 /* Utilities */
 import { Link } from "react-router-dom";
 
 /* UI Library Components */
-import { Avatar, Button, Card, Col, Space, Typography } from "antd";
+import { Avatar, Button, Card, Col, Row, Space, Typography } from "antd";
 
 /* Icons */
 import orcid from "../media/icons/orcid";
@@ -107,6 +110,29 @@ const AuthorsTitleCard = ({ core, data }) => {
                 </Typography.Paragraph>
               )}
               <Space wrap>{renderedButtons(data.external_urls)}</Space>
+              <Row style={{ marginTop: "10px" }}>
+                {data.policies.ODS && (
+                  <PoliciesTag
+                    type="ODS"
+                    data={data.policies.ODS}
+                    core={core}
+                  />
+                )}
+                {data.policies.PDD && (
+                  <PoliciesTag
+                    type="PDD"
+                    data={data.policies.PDD}
+                    core={core}
+                  />
+                )}
+                {data.policies.PTS && (
+                  <PoliciesTag
+                    type="PTS"
+                    data={data.policies.PTS}
+                    core={core}
+                  />
+                )}
+              </Row>
             </>
           }
         />

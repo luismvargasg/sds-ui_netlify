@@ -248,7 +248,47 @@
   font-size: 30px;
 }
 
+#tag__logo {
+  height: 45px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+#tag__avatar {
+  background-color: rgb(76, 159, 56);
+  margin-left: 10px;
+  height: 34px;
+  width: 34px;
+}
+
+#policies__tag {
+  border: 1px dashed #aaa;
+}
+
+#notfound__icon {
+  font-size: 100px;
+  text-align: center;
+  color: orange;
+  margin-top: 40px;
+}
+
+#notfound__title {
+  text-align: center;
+  font-size: 120px;
+  font-weight: 700;
+  color: #042e42;
+}
+
+.align__center {
+  text-align: center;
+}
+
 /* ----- UI LIBRARY OVERWRITE ----- */
+
+.title--margin0 {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
 
 .loading-card__container {
   text-align: center;

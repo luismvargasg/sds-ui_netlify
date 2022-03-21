@@ -28,6 +28,8 @@ import Module1 from "./components/modules/Module1";
 import Module2 from "./components/modules/Module2";
 import Compendium from "./components/modules/Compendium";
 import Calls from "./components/modules/Calls";
+import NotFound from "./components/modules/NotFound";
+import Policies from "./components/modules/Policies";
 import Regulations from "./components/modules/Regulations";
 import SearchResult from "./components/modules/SearchResult";
 import Subjects from "./components/modules/Subjects";
@@ -93,6 +95,12 @@ function App() {
             </Route>
             <Route exact path="/app/regulations">
               <Regulations core={core} />
+            </Route>
+            <Route exact path="/app/policies">
+              <Policies core={core} />
+            </Route>
+            <Route>
+              <NotFound core={core} />
             </Route>
           </Switch>
         </Layout.Content>
