@@ -52,7 +52,11 @@ const Regulations = ({ core }) => {
           pagination={false}
           rowKey={(record) => state.data.data.indexOf(record)}
         >
-          <Column align="center" render={() => <FilePdfOutlined />} />
+          <Column
+            align="center"
+            responsive={["sm"]}
+            render={() => <FilePdfOutlined />}
+          />
           <Column
             title="Documento"
             dataIndex="filename"
@@ -65,9 +69,11 @@ const Regulations = ({ core }) => {
               </a>
             )}
           />
+          <Column title="Fecha" dataIndex="date" width={130} />
           <Column
             title="Tamaño"
             dataIndex="size"
+            width={130}
             render={(item) =>
               item < 1024
                 ? `${item.toFixed(2)} KB`
