@@ -39,8 +39,8 @@ const Footer = ({ core }) => {
               </Link>
             </p>
             <br />
-            <p>Versión: 0.1.1</p>
-            <p>Última actualización: 08/03/2022</p>
+            <p>Versión: 0.2.0</p>
+            <p>Última actualización: 24/03/2022</p>
           </div>
         </Col>
         <Col xs={24} md={12} xxl={6}>

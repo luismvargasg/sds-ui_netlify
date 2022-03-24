@@ -20,7 +20,7 @@ const PoliciesTag = ({ type, data, core }) => {
 
   if (policies) {
     return (
-      <Tag id="policies__tag">
+      <Tag className="policies__tag">
         <img src={logo[type]} alt={`Logotipo de ${type}`} id="tag__logo" />
         {type === "ODS" ? (
           typeof data === "number" ? (
@@ -35,7 +35,7 @@ const PoliciesTag = ({ type, data, core }) => {
     );
   }
   return type === "ODS" ? (
-    <Tag id="policies__tag">
+    <Tag className="policies__tag">
       <img src={logo[type]} alt={`Logotipo de ${type}`} id="tag__logo" />
       {typeof data === "number" ? (
         <Avatar id="tag__avatar">{data}</Avatar>

@@ -261,8 +261,9 @@
   width: 34px;
 }
 
-#policies__tag {
+.policies__tag {
   border: 1px dashed #aaa;
+  margin-left: 5px;
 }
 
 #notfound__icon {
