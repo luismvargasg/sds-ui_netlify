@@ -19,7 +19,7 @@ const PoliciesTitleCard = ({ core, data }) => {
             <>
               <PoliciesTag
                 type={data.abbreviations}
-                data={data.ids}
+                data={data.index}
                 core={core}
               />
               <Title level={2} className="title--margin0">

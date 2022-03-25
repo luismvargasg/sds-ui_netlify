@@ -23,7 +23,7 @@ const PoliciesTag = ({ type, data, core }) => {
       <Tag className="policies__tag">
         <img src={logo[type]} alt={`Logotipo de ${type}`} id="tag__logo" />
         {type === "ODS" ? (
-          typeof data === "number" ? (
+          typeof data === "string" ? (
             <Avatar id="tag__avatar">{data}</Avatar>
           ) : (
             data.map((item) => <Avatar id="tag__avatar">{item.index}</Avatar>)
