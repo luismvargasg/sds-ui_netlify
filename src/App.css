@@ -263,7 +263,7 @@
 
 .policies__tag {
   border: 1px dashed #aaa;
-  margin-left: 5px;
+  margin-left: 1px;
 }
 
 #notfound__icon {
@@ -282,6 +282,10 @@
 
 .align__center {
   text-align: center;
+}
+
+.compendium__row--height {
+  height: 140px;
 }
 
 /* ----- UI LIBRARY OVERWRITE ----- */

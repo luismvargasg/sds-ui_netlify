@@ -1,24 +1,39 @@
-import React from "react";
+import React from 'react';
 
 /* Libraries */
-import { WordCloud } from "@ant-design/charts";
+import { WordCloud } from '@ant-design/charts';
 
-const TinyWordCloudChart = ({ data }) => {
-  const newData = data.splice(0, 9);
+/* Utilities */
+import { useHistory } from 'react-router-dom';
+
+const TinyWordCloudChart = React.memo(function ({ data, core }) {
+  const history = useHistory();
   let config = {
-    data: newData,
-    wordField: "name",
-    weightField: "value",
-    colorField: "name",
+    data: data,
+    wordField: 'name',
+    weightField: 'value',
+    colorField: 'name',
     wordStyle: {
-      fontFamily: "Verdana",
-      fontSize: [5, 20],
+      fontFamily: 'Verdana',
+      fontSize: [10, 22],
       rotation: 0,
     },
-    height: 70,
+    height: 120,
   };
 
-  return <WordCloud {...config} />;
-};
+  return (
+    <WordCloud
+      {...config}
+      onReady={(plot) => {
+        plot.on('plot:click', (evt) => {
+          if (evt.data) {
+            history.push(`/app/subjects?id=${evt.data.data.datum.id}`);
+            core.setURL(`/app/subjects?id=${evt.data.data.datum.id}`);
+          }
+        });
+      }}
+    />
+  );
+});
 
 export default TinyWordCloudChart;

@@ -5,7 +5,7 @@ import { Line } from "@ant-design/plots";
 
 const TinyLineChart = ({ data }) => {
   const config = {
-    height: 70,
+    height: 120,
     //width: 400,
     //autoFit: false,
     data,

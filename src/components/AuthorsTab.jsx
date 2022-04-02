@@ -52,7 +52,7 @@ const AuthorsTab = ({ core }) => {
       <List
         itemLayout="vertical"
         size="large"
-        dataSource={state.data.data || state.data}
+        dataSource={state.data.data.authors /* || state.data */}
         pagination={{
           size: "small",
           position: "bottom",
