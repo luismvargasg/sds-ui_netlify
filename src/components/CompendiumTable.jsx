@@ -26,6 +26,10 @@ const CompendiumTable = ({ core, type }) => {
   const [state, setUrl] = APIRequest(
     `${URL}?data=${type}&page=${pagination.page}&max=${pagination.max}`
   );
+  const title = {
+    groups: 'Grupo de investigación',
+    institutions: 'Institución',
+  };
 
   useEffect(() => {
     setUrl(`${URL}?data=${type}&page=${pagination.page}&max=${pagination.max}`);
@@ -62,11 +66,11 @@ const CompendiumTable = ({ core, type }) => {
           render={(index) => <b>{index}</b>}
         />
         <Column
-          title="Grupo"
+          title={title[type]}
           render={(item) => (
             <Link
-              to={`/app/groups?id=${item.id}`}
-              onClick={() => core.setURL(`/app/groups?id=${item.id}`)}
+              to={`/app/${type}?id=${item.id}`}
+              onClick={() => core.setURL(`/app/${type}?id=${item.id}`)}
             >
               {item.name}
             </Link>
