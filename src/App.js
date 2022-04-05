@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 /* Styles */
-import "./App.css";
+import './App.css';
 
 /* Utilities */
 import {
@@ -9,34 +9,35 @@ import {
   Switch,
   Route,
   Redirect,
-} from "react-router-dom";
-import { useLocation } from "react-router";
-import ScrollToTop from "./utils/ScrollToTop";
+} from 'react-router-dom';
+import { useLocation } from 'react-router';
+import ScrollToTop from './utils/ScrollToTop';
 
 /* Components */
-import FilterDrawer from "./components/FilterDrawer";
-import Header from "./layouts/Header";
-import Footer from "./layouts/Footer";
+import FilterDrawer from './components/FilterDrawer';
+import Header from './layouts/Header';
+import Footer from './layouts/Footer';
 
 /* Modules */
-import About from "./components/modules/About";
-import Authors from "./components/modules/Authors";
-import Groups from "./components/modules/Groups";
-import Home from "./components/modules/Home";
-import Institutions from "./components/modules/Institutions";
-import Module1 from "./components/modules/Module1";
-import Module2 from "./components/modules/Module2";
-import Compendium from "./components/modules/Compendium";
-import Calls from "./components/modules/Calls";
-import NotFound from "./components/modules/NotFound";
-import Policies from "./components/modules/Policies";
-import Regulations from "./components/modules/Regulations";
-import SearchResult from "./components/modules/SearchResult";
-import Subjects from "./components/modules/Subjects";
-import UserManual from "./components/modules/UserManual";
+import About from './components/modules/About';
+import Authors from './components/modules/Authors';
+import Groups from './components/modules/Groups';
+import Home from './components/modules/Home';
+import Institutions from './components/modules/Institutions';
+import Module1 from './components/modules/Module1';
+import Module2 from './components/modules/Module2';
+import Compendium from './components/modules/Compendium';
+import Calls from './components/modules/Calls';
+import NotFound from './components/modules/NotFound';
+import Policies from './components/modules/Policies';
+import Regulations from './components/modules/Regulations';
+import SearchResult from './components/modules/SearchResult';
+import Subjects from './components/modules/Subjects';
+import UserManual from './components/modules/UserManual';
+import Metrics from './components/modules/Metrics';
 
 /* UI Library Components */
-import { Layout, BackTop } from "antd";
+import { Layout, BackTop } from 'antd';
 
 function App() {
   const location = useLocation();
@@ -54,9 +55,9 @@ function App() {
         <Header core={core} />
         <Layout.Content
           style={{
-            minHeight: "70vh",
-            position: "relative",
-            margin: "15px",
+            minHeight: '70vh',
+            position: 'relative',
+            margin: '15px',
           }}
         >
           <Switch>
@@ -98,6 +99,9 @@ function App() {
             </Route>
             <Route exact path="/app/policies">
               <Policies core={core} />
+            </Route>
+            <Route exact path="/app/metrics">
+              <Metrics core={core} />
             </Route>
             <Route>
               <NotFound core={core} />
