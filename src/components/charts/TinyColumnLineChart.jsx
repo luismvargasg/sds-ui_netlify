@@ -10,7 +10,7 @@ const TinyColumnLineChart = React.memo(function ({ data }) {
   const labels = { citations: 'Citaciones', products: 'Productos' };
   const config = {
     data: [data, data],
-    height: 120,
+    height: 140,
     xField: 'year',
     yField: ['products', 'citations'],
     tooltip: {

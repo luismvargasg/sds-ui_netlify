@@ -1,20 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 
 /* Utilities */
-import { APIRequest } from "../../apis/api";
-import { useLocation } from "react-router";
+import { APIRequest } from '../../apis/api';
+import { useLocation } from 'react-router';
 
 /* Components */
-import AuthorsTab from "../AuthorsTab";
-import ErrorWarning from "../ErrorWarning";
-import GroupsTab from "../GroupsTab";
-import InstitutionsTab from "../InstitutionsTab";
-import LoadingCard from "../LoadingCard";
-import ProductionWrapper from "../wrappers/ProductionWrapper";
-import SubjectsTitleCard from "../SubjectsTitleCard";
+import AuthorsTab from '../AuthorsTab';
+import ErrorWarning from '../ErrorWarning';
+import SubjectsTable from '../SubjectsTable';
+import LoadingCard from '../LoadingCard';
+import ProductionWrapper from '../wrappers/ProductionWrapper';
+import SubjectsTitleCard from '../SubjectsTitleCard';
 
 /* UI Library Components */
-import { Col, Row, Tabs } from "antd";
+import { Col, Row, Tabs } from 'antd';
 
 /* UI Library Sub-components */
 const { TabPane } = Tabs;
@@ -25,7 +24,7 @@ const Subjects = ({ core }) => {
   const [state, setUrl] = APIRequest(`${URL}&data=info`);
 
   useEffect(() => {
-    document.title = "Temas | SALUDATA";
+    document.title = 'Temas | SALUDATA';
   }, []);
 
   useEffect(() => {
@@ -43,19 +42,19 @@ const Subjects = ({ core }) => {
   }, 10);
   return (
     <Row gutter={[15, 15]}>
-      <SubjectsTitleCard data={state.data.data} />
+      <SubjectsTitleCard data={state.data.data} core={core} />
       <Col span={24}>
-        <Tabs defaultActiveKey={"authors"} type="card" tabBarGutter={5}>
+        <Tabs defaultActiveKey={'authors'} type="card" tabBarGutter={5}>
           <TabPane tab="Autores" key="authors">
             <AuthorsTab core={core} />
           </TabPane>
-          <TabPane tab="Grupos" key="groups" forceRender>
-            <GroupsTab core={core} />
+          <TabPane tab="Grupos" key="groups">
+            <SubjectsTable core={core} type="groups" />
           </TabPane>
-          <TabPane tab="Instituciones" key="institutions" forceRender>
-            <InstitutionsTab core={core} />
+          <TabPane tab="Instituciones" key="institutions">
+            <SubjectsTable core={core} type="institutions" />
           </TabPane>
-          <TabPane tab="Producción" key="production" forceRender>
+          <TabPane tab="Producción" key="production">
             <ProductionWrapper core={core} />
           </TabPane>
         </Tabs>

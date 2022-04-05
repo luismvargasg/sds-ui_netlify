@@ -1,24 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
 /* Components */
-import FilterMultipleSelect from "./FilterMultipleSelect";
-import YearsRangeFilter from "./YearsRangeFilter";
+import FilterMultipleSelect from './FilterMultipleSelect';
+import YearsRangeFilter from './YearsRangeFilter';
 
 /* UI Library Components */
-import { Drawer, Button } from "antd";
+import { Drawer, Button } from 'antd';
 
 /* Icons */
-import { FilterOutlined } from "@ant-design/icons";
+import { FilterOutlined } from '@ant-design/icons';
 
 /* Utilities */
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 
 const FilterDrawer = ({ core }) => {
   const history = useHistory();
   const [visible, setVisible] = useState(false);
-  const [institutions, setInstitutions] = useState("");
-  const [groups, setGroups] = useState("");
-  const [years, setYears] = useState("");
+  const [institutions, setInstitutions] = useState('');
+  const [groups, setGroups] = useState('');
+  const [years, setYears] = useState('');
 
   const showDrawer = () => {
     setVisible(true);
@@ -31,12 +31,13 @@ const FilterDrawer = ({ core }) => {
   const onClick = () => {
     const URL = new URLSearchParams(history.location.search);
     let filteredURL = `${history.location.pathname}?`;
+    console.log(URL);
 
-    filteredURL += URL.has("data") ? `data=${URL.get("data")}` : "";
-    filteredURL += URL.has("id") ? `id=${URL.get("id")}` : "";
-    filteredURL += URL.has("keywords")
-      ? `&keywords=${URL.get("keywords")}`
-      : "";
+    filteredURL += URL.has('data') ? `data=${URL.get('data')}` : '';
+    filteredURL += URL.has('id') ? `id=${URL.get('id')}` : '';
+    filteredURL += URL.has('keywords')
+      ? `&keywords=${URL.get('keywords')}`
+      : '';
 
     if (core.filters.institutions && institutions) {
       filteredURL += `&institution=${institutions}`;
@@ -47,7 +48,6 @@ const FilterDrawer = ({ core }) => {
     if (core.filters.start_year && years) {
       filteredURL += `&start_year=${years.start_year}&end_year=${years.end_year}`;
     }
-
     core.setURL(filteredURL);
     history.push(filteredURL);
     onClose();
@@ -55,9 +55,9 @@ const FilterDrawer = ({ core }) => {
 
   useEffect(() => {
     core.setFilters(null);
-    setInstitutions("");
-    setGroups("");
-    setYears("");
+    setInstitutions('');
+    setGroups('');
+    setYears('');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [core.URL]);
 
@@ -74,7 +74,7 @@ const FilterDrawer = ({ core }) => {
       </Button>
       <Drawer
         title="Filtros"
-        placement={"left"}
+        placement={'left'}
         style={{ zIndex: 1002 }}
         onClose={onClose}
         visible={visible}
@@ -98,9 +98,9 @@ const FilterDrawer = ({ core }) => {
             </Button>
           </>
         }
-        footerStyle={{ textAlign: "right" }}
+        footerStyle={{ textAlign: 'right' }}
       >
-        {!core.filters ? "No hay filtros disponibles." : ""}
+        {!core.filters ? 'No hay filtros disponibles.' : ''}
         {core.filters?.institutions && (
           <FilterMultipleSelect
             list={core.filters?.institutions}

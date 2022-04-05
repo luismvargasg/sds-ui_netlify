@@ -6,17 +6,33 @@ import CompendiumTable from '../CompendiumTable';
 /* UI Library Components */
 import { Tabs } from 'antd';
 
+/* Utilities */
+import { APIRequest } from '../../apis/api';
+/* import { useLocation } from 'react-router-dom'; */
+
 /* UI Library Sub-components */
 const { TabPane } = Tabs;
 
 const Compendium = ({ core }) => {
+  /*  const location = useLocation(); */
+  /* let URL = location.pathname; */
+  const [state] = APIRequest(core.URL);
+
+  /*  useEffect(() => {
+    setUrl(`${URL}?data=info`);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [core.URL]); */
+
   useEffect(() => {
     document.title = 'Capacidades científicas | SALUDATA';
   }, []);
 
-  setTimeout(() => {
-    core.setHome(false);
-  }, 10);
+  if (!state.isLoading) {
+    setTimeout(() => {
+      core.setFilters(state.data.filters);
+      core.setHome(false);
+    }, 10);
+  }
 
   return (
     <Tabs defaultActiveKey="groups" type="card" tabBarGutter={5}>
@@ -25,6 +41,9 @@ const Compendium = ({ core }) => {
       </TabPane>
       <TabPane tab="Instituciones" key="institutions">
         <CompendiumTable core={core} type="institutions" />
+      </TabPane>
+      <TabPane tab="Temas" key="subjects">
+        <CompendiumTable core={core} type="subjects" />
       </TabPane>
     </Tabs>
   );

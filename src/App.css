@@ -1,4 +1,4 @@
-@import "~antd/dist/antd.css";
+@import '~antd/dist/antd.css';
 
 /* ----- HEADER ----- */
 
@@ -192,7 +192,7 @@
   text-shadow: 10px 10px 15px rgba(0, 0, 0, 0.4);
 }
 
-#home__map--title {
+#home__divider--title {
   font-size: 24px;
 }
 
@@ -224,7 +224,7 @@
 .pattern {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   background-size: cover;
-  background-image: url("/src/media/title_banner.svg");
+  background-image: url('/src/media/title_banner.svg');
 }
 
 #info__1 {
@@ -285,7 +285,7 @@
 }
 
 .compendium__row--height {
-  height: 140px;
+  height: 160px;
 }
 
 /* ----- UI LIBRARY OVERWRITE ----- */

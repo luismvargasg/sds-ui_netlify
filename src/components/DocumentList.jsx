@@ -1,24 +1,23 @@
-import React from "react";
+import React from 'react';
 
 /* Components */
-import AuthorsHorizontalList from "./AuthorsHorizontalList";
-import DocumentModal from "./DocumentModal";
-import DownloadCSVButton from "./DownloadCSVButton";
-import DownloadJSONButton from "./DownloadJSONButton";
-import OpenAccessStatus from "./OpenAccessStatus";
-import SortProduction from "./SortProduction";
+import AuthorsHorizontalList from './AuthorsHorizontalList';
+import DocumentModal from './DocumentModal';
+import OpenAccessStatus from './OpenAccessStatus';
+import SortProduction from './SortProduction';
+import SubjectsHorizontalList from './SubjectsHorizontalList';
 
 /* UI Library Components */
-import { Card, List, Modal, Space, Typography } from "antd";
+import { Card, List, Modal, Space, Typography } from 'antd';
 
 /* Icons */
-import { CitationsIcon } from "../media/icons/citations";
-import { CalendarOutlined, ReadOutlined } from "@ant-design/icons";
+import { CitationsIcon } from '../media/icons/citations';
+import { CalendarOutlined, ReadOutlined } from '@ant-design/icons';
 
 /* UI Library Sub-components */
 const { Link } = Typography;
 
-const DocumentList = ({ data, tools, title = "Artículos", core }) => {
+const DocumentList = ({ data, tools, title = 'Artículos', core }) => {
   const onPageChange = ({ page, pageSize }) => {
     tools.setPagination({ page: page, max: pageSize });
     window.scrollTo(0, 745);
@@ -26,15 +25,15 @@ const DocumentList = ({ data, tools, title = "Artículos", core }) => {
 
   const docInfo = (title, id, status) => {
     Modal.info({
-      width: "1200px",
+      width: '1200px',
       title: [
         title,
-        " ",
+        ' ',
         status && <OpenAccessStatus status={status} key="0" />,
       ],
       closable: true,
       icon: null,
-      okText: "Cerrar",
+      okText: 'Cerrar',
       maskClosable: true,
       content: <DocumentModal documentID={id} />,
       onOk() {},
@@ -44,24 +43,18 @@ const DocumentList = ({ data, tools, title = "Artículos", core }) => {
   if (data.data.length && data.data[0].title) {
     return (
       <Card
-        headStyle={{ backgroundColor: "#003e65", color: "white" }}
+        headStyle={{ backgroundColor: '#003e65', color: 'white' }}
         size="small"
         extra={
           <div>
             <p className="white-text">
-              {data.total || data.total_results}{" "}
+              {data.total || data.total_results}{' '}
               {data.total || data.total_results > 1
-                ? "resultados"
-                : "resultado"}
+                ? 'resultados'
+                : 'resultado'}
             </p>
             <SortProduction tools={tools} key="1" />
           </div>
-        }
-        actions={
-          (data.total_results || data.total > 0) && [
-            <DownloadCSVButton key="1" URL={tools.URL} />,
-            <DownloadJSONButton key="2" URL={tools.URL} />,
-          ]
         }
         title={title}
       >
@@ -70,8 +63,8 @@ const DocumentList = ({ data, tools, title = "Artículos", core }) => {
             itemLayout="vertical"
             size="small"
             pagination={{
-              size: "small",
-              position: "bottom",
+              size: 'small',
+              position: 'bottom',
               total: data.total || data.total_results,
               onChange: (page, pageSize) =>
                 onPageChange({
@@ -109,7 +102,7 @@ const DocumentList = ({ data, tools, title = "Artículos", core }) => {
                     >
                       {item.title}
                     </Link>,
-                    " ",
+                    ' ',
                     item.open_access_status && (
                       <OpenAccessStatus
                         status={item.open_access_status}
@@ -123,9 +116,14 @@ const DocumentList = ({ data, tools, title = "Artículos", core }) => {
                     </div>
                   }
                 />
-                Autores:{" "}
+                Autores:{' '}
                 {AuthorsHorizontalList({
                   authorsList: item.authors,
+                  core: core,
+                })}
+                Temas:{' '}
+                {SubjectsHorizontalList({
+                  subjectsList: item.subjects,
                   core: core,
                 })}
               </List.Item>
@@ -136,7 +134,7 @@ const DocumentList = ({ data, tools, title = "Artículos", core }) => {
     );
   } else {
     return (
-      <Card title={"Artículos"} size="small">
+      <Card title={'Artículos'} size="small">
         <List></List>
       </Card>
     );

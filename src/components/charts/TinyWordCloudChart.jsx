@@ -11,14 +11,25 @@ const TinyWordCloudChart = React.memo(function ({ data, core }) {
   let config = {
     data: data,
     wordField: 'name',
-    weightField: 'value',
+    weightField: 'products',
     colorField: 'name',
     wordStyle: {
       fontFamily: 'Verdana',
       fontSize: [10, 22],
       rotation: 0,
     },
-    height: 120,
+    height: 140,
+    tooltip: {
+      formatter: (datum) => {
+        return {
+          name: datum.text,
+          value:
+            datum.value === 1
+              ? `${datum.value} producto`
+              : `${datum.value} productos`,
+        };
+      },
+    },
   };
 
   return (
