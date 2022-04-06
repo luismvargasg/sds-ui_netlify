@@ -13,6 +13,14 @@ const TinyColumnLineChart = React.memo(function ({ data }) {
     height: 140,
     xField: 'year',
     yField: ['products', 'citations'],
+    yAxis: [
+      {
+        title: { text: 'Productos', style: { fontWeight: 500, fontSize: 15 } },
+      },
+      {
+        title: { text: 'Citaciones', style: { fontWeight: 500, fontSize: 15 } },
+      },
+    ],
     tooltip: {
       customContent: (title, items) => {
         return (
