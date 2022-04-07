@@ -1,0 +1,259 @@
+import React, { useEffect, useState } from 'react';
+
+/* Components */
+import ErrorWarning from './ErrorWarning';
+import LoadingCard from './LoadingCard';
+import SortCompendium from './SortCompendium';
+
+/* UI Library Components */
+import { Card, List, Table } from 'antd';
+
+/* Utilities */
+import { APIRequest } from '../apis/api';
+import { useLocation } from 'react-router';
+import { Link } from 'react-router-dom';
+
+/* Charts */
+import TinyColumnLineChart from './charts/TinyColumnLineChart';
+import TinyWordCloudChart from './charts/TinyWordCloudChart';
+
+/* UI Library Sub-components */
+const { Column } = Table;
+
+const CompendiumTable = ({ core, type }) => {
+  const [pagination, setPagination] = useState({ page: 1, max: 5 });
+  const [sort, setSort] = useState('citations');
+  const location = useLocation();
+  let URL = new URLSearchParams(location.search);
+  URL.delete('data');
+  URL.set('data', type);
+
+  /* let URL = location.pathname; */
+
+  const [state, setUrl] = APIRequest(
+    `${location.pathname}?${URL.toString()}&page=${pagination.page}&max=${
+      pagination.max
+    }&sort=${sort}`
+  );
+
+  /* const [state, setUrl] = APIRequest(
+    `${core.URL}?data=${type}&page=${pagination.page}&max=${pagination.max}&sort=${sort}`
+  ); */
+  const title = {
+    groups: 'Grupo de investigación',
+    institutions: 'Institución',
+    subjects: 'Tema',
+  };
+
+  useEffect(() => {
+    setUrl(
+      `${location.pathname}?${URL.toString()}&page=${pagination.page}&max=${
+        pagination.max
+      }&sort=${sort}`
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pagination, sort, core.URL]);
+
+  if (state.isError) {
+    return <ErrorWarning />;
+  } else if (state.isLoading) {
+    return <LoadingCard />;
+  }
+  if (type === 'subjects') {
+    return (
+      <Card
+        size="small"
+        bordered={false}
+        style={{ backgroundColor: '#fafafa' }}
+        bodyStyle={{ padding: 0 }}
+        extra={<SortCompendium sort={sort} setSort={setSort} />}
+      >
+        <Table
+          size="small"
+          dataSource={state.data.data}
+          bordered
+          rowKey={(record) => record.id}
+          pagination={{
+            total: state.data.total,
+            showSizeChanger: true,
+            current: pagination.page,
+            pageSize: pagination.max,
+            pageSizeOptions: [5, 10, 15],
+            onChange: (page, max) => setPagination({ page: page, max: max }),
+          }}
+          rowClassName="compendium__row--height"
+          scroll={{ x: 1400 }}
+        >
+          <Column
+            align="center"
+            title="Puesto"
+            dataIndex="index"
+            render={(index) => <b>{index}</b>}
+          />
+          <Column
+            title={title[type]}
+            render={(item) => (
+              <Link
+                to={`/app/${type}?id=${item.id}`}
+                onClick={() => core.setURL(`/app/${type}?id=${item.id}`)}
+              >
+                {item.name}
+              </Link>
+            )}
+          />
+          <Column
+            width={'18%'}
+            title="Instituciones"
+            dataIndex={'institutions'}
+            render={(institutionsList) => (
+              <List
+                size="small"
+                dataSource={institutionsList}
+                renderItem={(item) => (
+                  <List.Item
+                    style={{ paddingTop: '3px', paddingBottom: '3px' }}
+                  >
+                    <Link
+                      to={`/app/institutions?id=${item.id}`}
+                      onClick={() =>
+                        core.setURL(`/app/institutions?id=${item.id}`)
+                      }
+                    >
+                      {item.name}
+                    </Link>
+                  </List.Item>
+                )}
+              />
+            )}
+          />
+          <Column
+            width={'18%'}
+            title="Grupos"
+            dataIndex={'groups'}
+            render={(groupsList) => (
+              <List
+                size="small"
+                dataSource={groupsList}
+                renderItem={(item) => (
+                  <List.Item>
+                    <Link
+                      to={`/app/groups?id=${item.id}`}
+                      onClick={() => core.setURL(`/app/groups?id=${item.id}`)}
+                    >
+                      {item.name}
+                    </Link>
+                  </List.Item>
+                )}
+              />
+            )}
+          />
+          <Column
+            width={'18%'}
+            title="Autores"
+            dataIndex={'authors'}
+            render={(authorsList) => (
+              <List
+                size="small"
+                dataSource={authorsList}
+                renderItem={(item) => (
+                  <List.Item>
+                    <Link
+                      to={`/app/authors?id=${item.id}`}
+                      onClick={() => core.setURL(`/app/authors?id=${item.id}`)}
+                    >
+                      {item.name}
+                    </Link>
+                  </List.Item>
+                )}
+              />
+            )}
+          />
+          <Column
+            title="Productos y Citas por año"
+            dataIndex={'plot'}
+            render={(item) => <TinyColumnLineChart data={item} />}
+            width={'30%'}
+          />
+        </Table>
+      </Card>
+    );
+  }
+  return (
+    <Card
+      size="small"
+      bordered={false}
+      style={{ backgroundColor: '#fafafa' }}
+      bodyStyle={{ padding: 0 }}
+      extra={<SortCompendium sort={sort} setSort={setSort} />}
+    >
+      <Table
+        size="small"
+        dataSource={state.data.data}
+        bordered
+        rowKey={(record) => record.id}
+        pagination={{
+          total: state.data.total,
+          showSizeChanger: true,
+          current: pagination.page,
+          pageSize: pagination.max,
+          pageSizeOptions: [5, 10, 15],
+          onChange: (page, max) => setPagination({ page: page, max: max }),
+        }}
+        rowClassName="compendium__row--height"
+        scroll={{ x: 1400 }}
+      >
+        <Column
+          align="center"
+          title="Puesto"
+          dataIndex="index"
+          render={(index) => <b>{index}</b>}
+        />
+        <Column
+          title={title[type]}
+          render={(item) => (
+            <Link
+              to={`/app/${type}?id=${item.id}`}
+              onClick={() => core.setURL(`/app/${type}?id=${item.id}`)}
+            >
+              {item.name}
+            </Link>
+          )}
+        />
+        {type !== 'institutions' ? (
+          <Column
+            title="Afiliación"
+            dataIndex={'affiliations'}
+            render={(item) => (
+              <Link
+                to={`/app/institutions?id=${item.institution.id}`}
+                onClick={() =>
+                  core.setURL(`/app/institutions?id=${item.institution.id}`)
+                }
+              >
+                {item.institution.name}
+              </Link>
+            )}
+          />
+        ) : (
+          ''
+        )}
+        <Column title="Productos totales" dataIndex={'products_count'} />
+        <Column title="Citas totales" dataIndex={'citations_count'} />
+        <Column
+          title="Productos y Citas por año"
+          dataIndex={'plot'}
+          render={(item) => <TinyColumnLineChart data={item} />}
+          width={'30%'}
+        />
+        <Column
+          title="Temas"
+          dataIndex={'subjects'}
+          width={'30%'}
+          render={(item) => <TinyWordCloudChart data={item} core={core} />}
+        />
+      </Table>
+    </Card>
+  );
+};
+
+export default CompendiumTable;

@@ -4,7 +4,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 /* UI Library */
-import { Avatar, Tag } from "antd";
+import { Avatar, Row, Tag } from "antd";
 
 /* Icons */
 import { CheckCircleOutlined } from "@ant-design/icons";
@@ -23,7 +23,7 @@ const PoliciesTag = ({ type, data, core }) => {
       <Tag className="policies__tag">
         <img src={logo[type]} alt={`Logotipo de ${type}`} id="tag__logo" />
         {type === "ODS" ? (
-          typeof data === "number" ? (
+          typeof data === "string" ? (
             <Avatar id="tag__avatar">{data}</Avatar>
           ) : (
             data.map((item) => <Avatar id="tag__avatar">{item.index}</Avatar>)
@@ -36,20 +36,22 @@ const PoliciesTag = ({ type, data, core }) => {
   }
   return type === "ODS" ? (
     <Tag className="policies__tag">
-      <img src={logo[type]} alt={`Logotipo de ${type}`} id="tag__logo" />
-      {typeof data === "number" ? (
-        <Avatar id="tag__avatar">{data}</Avatar>
-      ) : (
-        data.map((item) => (
-          <Link
-            key={item.id}
-            to={`/app/policies?id=${item.id}`}
-            onClick={() => core.setURL(`/app/policies?id=${item.id}`)}
-          >
-            <Avatar id="tag__avatar">{item.index}</Avatar>
-          </Link>
-        ))
-      )}
+      <Row align="middle" gutter={[5, 5]}>
+        <img src={logo[type]} alt={`Logotipo de ${type}`} id="tag__logo" />
+        {typeof data === "number" ? (
+          <Avatar id="tag__avatar">{data}</Avatar>
+        ) : (
+          data.map((item) => (
+            <Link
+              key={item.id}
+              to={`/app/policies?id=${item.id}`}
+              onClick={() => core.setURL(`/app/policies?id=${item.id}`)}
+            >
+              <Avatar id="tag__avatar">{item.index}</Avatar>
+            </Link>
+          ))
+        )}
+      </Row>
     </Tag>
   ) : (
     <Link
@@ -57,7 +59,7 @@ const PoliciesTag = ({ type, data, core }) => {
       to={`/app/policies?id=${data[0].id}`}
       onClick={() => core.setURL(`/app/policies?id=${data[0].id}`)}
     >
-      <Tag id="policies__tag">
+      <Tag className="policies__tag">
         <img src={logo[type]} alt={`Logotipo de ${type}`} id="tag__logo" />
         <Avatar id="tag__avatar" icon={<CheckCircleOutlined />} />
       </Tag>

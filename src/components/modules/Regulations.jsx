@@ -41,10 +41,11 @@ const Regulations = ({ core }) => {
         </Title>
         <Divider />
         <Title level={4}>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus
-          veritatis expedita quis, quas velit explicabo cupiditate voluptatum!
-          Tempore, modi rem! Suscipit perferendis ea modi ullam. Pariatur porro
-          exercitationem similique sit!
+          Aquí podrá consultar y descargar los documentos correspondientes a
+          resoluciones, planes, políticas o directrices locales, nacionales e
+          internacionales que definen marcos de acción para los sistemas de
+          salud y las agendas de investigación locales, nacionales e
+          internacionales.
         </Title>
         <Table
           style={{ marginTop: "30px" }}

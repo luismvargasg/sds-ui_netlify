@@ -70,7 +70,7 @@ const CommonTitleCard = ({ core, data, type }) => {
                   </>
                 )}
               </Typography.Paragraph>
-              <Row gutter={[5, 5]} style={{ marginTop: "10px" }}>
+              <Row style={{ marginTop: "10px" }}>
                 {data.policies.ODS && (
                   <PoliciesTag
                     type="ODS"

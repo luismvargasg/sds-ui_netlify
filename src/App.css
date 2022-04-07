@@ -1,4 +1,4 @@
-@import "~antd/dist/antd.css";
+@import '~antd/dist/antd.css';
 
 /* ----- HEADER ----- */
 
@@ -172,18 +172,6 @@
   line-height: 150px;
 }
 
-.ods__box {
-  text-align: center;
-  color: white;
-  transition: 0.3s;
-}
-
-.ods__box :hover {
-  box-shadow: -0.5rem 0.5rem black;
-  transform: translate(4px, -4px);
-  transition: 0.3s;
-}
-
 #home__head--title {
   text-align: left;
   color: #94ffa7;
@@ -192,7 +180,7 @@
   text-shadow: 10px 10px 15px rgba(0, 0, 0, 0.4);
 }
 
-#home__map--title {
+#home__divider--title {
   font-size: 24px;
 }
 
@@ -224,28 +212,7 @@
 .pattern {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   background-size: cover;
-  background-image: url("/src/media/title_banner.svg");
-}
-
-#info__1 {
-  fill: #0062a7;
-}
-
-.test__info2 {
-  text-align: center;
-  width: 150px;
-  color: white;
-  font-size: 20px;
-  padding: 10px;
-  margin: 75px 0;
-}
-
-.test__info {
-  text-align: center;
-  color: white;
-  width: 150px;
-  margin: 25px 0;
-  font-size: 30px;
+  background-image: url('/src/media/title_banner.svg');
 }
 
 #tag__logo {
@@ -256,14 +223,14 @@
 
 #tag__avatar {
   background-color: rgb(76, 159, 56);
-  margin-left: 10px;
+  margin: 5px;
   height: 34px;
   width: 34px;
 }
 
 .policies__tag {
   border: 1px dashed #aaa;
-  margin-left: 5px;
+  margin-left: 1px;
 }
 
 #notfound__icon {
@@ -282,6 +249,26 @@
 
 .align__center {
   text-align: center;
+}
+
+.compendium__row--height {
+  height: 160px;
+}
+
+.ods__box {
+  text-align: center;
+}
+
+.ods__name {
+  font-weight: 500;
+  font-style: italic;
+  font-size: 16px;
+}
+
+.ods__button--container {
+  position: absolute;
+  bottom: 15px;
+  width: 95%;
 }
 
 /* ----- UI LIBRARY OVERWRITE ----- */
@@ -417,4 +404,58 @@
     margin-top: 0px;
     text-align: center;
   }
+}
+
+/*  SVG */
+
+.st0 {
+  fill: #ffffff;
+}
+.st1 {
+  fill: #eee;
+}
+.st2 {
+  fill: url(#SVGID_1_);
+}
+.st3 {
+  fill: url(#SVGID_2_);
+}
+.st4 {
+  fill: url(#SVGID_3_);
+}
+.st5 {
+  fill: url(#SVGID_4_);
+}
+.st6 {
+  fill: url(#SVGID_5_);
+}
+.st7 {
+  fill: url(#SVGID_6_);
+}
+.st8 {
+  fill: url(#SVGID_7_);
+}
+.st9 {
+  fill: url(#SVGID_8_);
+}
+.st10 {
+  fill: #ffffff;
+  stroke: url(#SVGID_9_);
+  stroke-width: 8.0755;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-miterlimit: 10;
+}
+.st11 {
+  font-weight: 600;
+}
+.st12 {
+  font-size: 25px;
+}
+.st13 {
+  font-size: 30px;
+}
+
+.svg__shadow {
+  filter: drop-shadow(6px 8px 5px rgba(0, 0, 0, 0.25));
 }

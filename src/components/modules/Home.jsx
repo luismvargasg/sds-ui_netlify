@@ -1,25 +1,31 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 
 /* Components */
-import HomeTable from "../HomeTable";
-import SearchBar from "../SearchBar";
-import { ReactComponent as Banner } from "../../media/banner.svg";
+import HomeTable from '../HomeTable';
+import SearchBar from '../SearchBar';
+import { ReactComponent as Banner } from '../../media/banner.svg';
 
 /* UI Library Components */
-import { Card, Col, Divider, Row, Typography } from "antd";
+import { Card, Col, Divider, Row, Typography } from 'antd';
+
+/* Icons */
+import { LinkOutlined } from '@ant-design/icons';
 
 /* Charts */
-import BogotaMapChart from "../charts/BogotaMapChart";
+import BogotaMapChart from '../charts/BogotaMapChart';
+import { Link } from 'react-router-dom';
 
 /* UI Library Sub-components*/
 const { Title } = Typography;
 
 const Home = ({ core }) => {
-  useEffect(() => {
-    document.title = "SALUDATA";
-    core.setFilters(null);
+  setTimeout(() => {
     core.setHome(true);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    core.setFilters(null);
+  }, 10);
+
+  useEffect(() => {
+    document.title = 'SALUDATA';
   }, []);
 
   return (
@@ -36,9 +42,9 @@ const Home = ({ core }) => {
           sm={24}
           xl={12}
           xxl={10}
-          style={{ marginTop: "40px", marginBottom: 0, textAlign: "center" }}
+          style={{ marginTop: '40px', marginBottom: 0, textAlign: 'center' }}
         >
-          <Card size="small" bordered style={{ borderRadius: "10px" }}>
+          <Card size="small" bordered style={{ borderRadius: '10px' }}>
             <Title level={2}>Central de información científica</Title>
             <Title level={4}>
               La información puede ser consultada por temas, productos,
@@ -50,17 +56,32 @@ const Home = ({ core }) => {
             <div id="home__table--container">
               <HomeTable />
             </div>
+            <p style={{ textAlign: 'left', padding: '0 16px' }}>
+              * Los indicadores aquí presentados buscan cumplir con los
+              principios de métricas responsables, para mayor información por
+              favor sigue este{' '}
+              <Link
+                to="/app/metrics"
+                onClick={() => core.setURL('/app/metrics')}
+              >
+                enlace <LinkOutlined />
+              </Link>
+              .
+            </p>
           </Card>
         </Col>
       </Row>
-      <Row justify="center" style={{ marginTop: "60px" }}>
+      <Row justify="center" style={{ marginTop: '60px' }}>
         <Col xs={20} lg={14}>
-          <Divider id="home__map--title">
+          <Divider
+            id="home__divider--title"
+            style={{ whiteSpace: 'break-spaces' }}
+          >
             Investigación en salud sobre el territorio
           </Divider>
         </Col>
       </Row>
-      <Row justify="space-around" align="middle" style={{ marginTop: "15px" }}>
+      <Row justify="space-around" align="middle" style={{ marginTop: '15px' }}>
         <Col xs={24} lg={15}>
           <BogotaMapChart />
         </Col>

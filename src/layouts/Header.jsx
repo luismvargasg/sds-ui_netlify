@@ -1,14 +1,14 @@
-import React from "react";
+import React from 'react';
 
 /* Components */
-import SearchBar from "../components/SearchBar";
+import SearchBar from '../components/SearchBar';
 
 /* UI Library Components */
-import { Button, Col, Layout, Modal, Row, Tooltip } from "antd";
+import { Button, Col, Layout, Modal, Row, Tooltip } from 'antd';
 
 /* logotypes */
-import logo_saludata_w from "../media/logo_saludata_w.svg";
-import logo_sds_w from "../media/logo_sds_w.svg";
+import logo_saludata_w from '../media/logo_saludata_w.svg';
+import logo_sds_w from '../media/logo_sds_w.svg';
 
 /* Icons */
 import {
@@ -17,19 +17,19 @@ import {
   LineChartOutlined,
   BarChartOutlined,
   FileSearchOutlined,
-} from "@ant-design/icons";
+} from '@ant-design/icons';
 
 /* Utilities */
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const Header = ({ core }) => {
   const showModal = () => {
     Modal.info({
-      width: "800px",
-      title: "Acerca de este módulo",
+      width: '800px',
+      title: 'Acerca de este módulo',
       maskClosable: true,
       icon: null,
-      okText: "Cerrar",
+      okText: 'Cerrar',
       content: (
         <>
           <br />
@@ -72,14 +72,14 @@ const Header = ({ core }) => {
       <Layout.Header
         style={{
           padding: 0,
-          position: "sticky",
+          position: 'sticky',
           top: 0,
           zIndex: 1001,
-          height: "auto",
-          lineHeight: "56px",
-          backgroundColor: "#009fe3",
+          height: 'auto',
+          lineHeight: '56px',
+          backgroundColor: '#009fe3',
           boxShadow:
-            "0 5px 10px rgba(15, 15, 20, 0.25), 0 10px 20px rgba(0, 0, 0, 0.1)",
+            '0 5px 10px rgba(15, 15, 20, 0.25), 0 10px 20px rgba(0, 0, 0, 0.1)',
         }}
       >
         <Row justify="space-between" style={{ fontSize: 13 }}>
@@ -110,7 +110,7 @@ const Header = ({ core }) => {
             xl={{ span: 8, order: 2 }}
             xxl={{ span: 10, order: 2 }}
           >
-            {!core.home ? <SearchBar core={core} /> : ""}
+            {!core.home ? <SearchBar core={core} /> : ''}
           </Col>
           <Col
             className="mobile--logo"
@@ -145,7 +145,7 @@ const Header = ({ core }) => {
           <Col className="margin-25">
             <Button
               type="link"
-              style={{ color: "white", padding: 0 }}
+              style={{ color: 'white', padding: 0 }}
               onClick={() => showModal()}
               icon={<InfoCircleOutlined />}
             >
@@ -154,7 +154,7 @@ const Header = ({ core }) => {
           </Col>
           <Col className="margin-25">
             <Tooltip
-              color={"gray"}
+              color={'gray'}
               title={
                 <>
                   <p>
@@ -171,8 +171,8 @@ const Header = ({ core }) => {
               }
             >
               <Link
-                to="/app/module2"
-                onClick={() => core.setURL("/app/module2")}
+                to="/app/trends"
+                onClick={() => core.setURL('/app/trends')}
               >
                 <LineChartOutlined className="header__icon" />
                 Tendencias
@@ -181,7 +181,7 @@ const Header = ({ core }) => {
           </Col>
           <Col className="margin-25">
             <Tooltip
-              color={"gray"}
+              color={'gray'}
               title={
                 <>
                   <p>
@@ -197,8 +197,8 @@ const Header = ({ core }) => {
               }
             >
               <Link
-                to="/app/compendium"
-                onClick={() => core.setURL("/app/compendium")}
+                to="/app/compendium?data=info"
+                onClick={() => core.setURL('/app/compendium?data=info')}
               >
                 <BarChartOutlined className="header__icon" />
                 Capacidades científicas
@@ -207,10 +207,10 @@ const Header = ({ core }) => {
           </Col>
           <Col className="margin-25">
             <Tooltip
-              color={"gray"}
+              color={'gray'}
               title="Consulte las convocatorias locales, nacionales e internacionales que financian o apoyan proyectos de investigación en salud."
             >
-              <Link to="/app/calls" onClick={() => core.setURL("/app/calls")}>
+              <Link to="/app/calls" onClick={() => core.setURL('/app/calls')}>
                 <FileSearchOutlined className="header__icon" />
                 Convocatorias
               </Link>
