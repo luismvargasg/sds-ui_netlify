@@ -24,8 +24,7 @@ import Authors from './components/modules/Authors';
 import Groups from './components/modules/Groups';
 import Home from './components/modules/Home';
 import Institutions from './components/modules/Institutions';
-import Module1 from './components/modules/Module1';
-import Module2 from './components/modules/Module2';
+import Trends from './components/modules/Trends';
 import Compendium from './components/modules/Compendium';
 import Calls from './components/modules/Calls';
 import NotFound from './components/modules/NotFound';
@@ -83,11 +82,12 @@ function App() {
             <Route exact path="/app/subjects">
               <Subjects core={core} />
             </Route>
-            <Route exact path="/app/module1" component={Module1} />
             <Route exact path="/app/manual">
               <UserManual core={core} />
             </Route>
-            <Route exact path="/app/module2" component={Module2} />
+            <Route exact path="/app/trends">
+              <Trends core={core}/>
+            </Route>
             <Route exact path="/app/compendium">
               <Compendium core={core} />
             </Route>

@@ -171,8 +171,8 @@ const Header = ({ core }) => {
               }
             >
               <Link
-                to="/app/module2"
-                onClick={() => core.setURL('/app/module2')}
+                to="/app/trends"
+                onClick={() => core.setURL('/app/trends')}
               >
                 <LineChartOutlined className="header__icon" />
                 Tendencias

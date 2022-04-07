@@ -27,12 +27,14 @@ const Compendium = ({ core }) => {
     document.title = 'Capacidades científicas | SALUDATA';
   }, []);
 
-  if (!state.isLoading) {
-    setTimeout(() => {
-      core.setFilters(state.data.filters);
-      core.setHome(false);
-    }, 10);
-  }
+  useEffect(() => {
+    core.setFilters(state.data.filters);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state]);
+
+  setTimeout(() => {
+    core.setHome(false);
+  }, 10);
 
   return (
     <Tabs defaultActiveKey="groups" type="card" tabBarGutter={5}>

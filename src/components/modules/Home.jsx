@@ -19,11 +19,13 @@ import { Link } from 'react-router-dom';
 const { Title } = Typography;
 
 const Home = ({ core }) => {
+  setTimeout(() => {
+    core.setHome(true);
+    core.setFilters(null);
+  }, 10);
+
   useEffect(() => {
     document.title = 'SALUDATA';
-    core.setFilters(null);
-    core.setHome(true);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -71,7 +73,10 @@ const Home = ({ core }) => {
       </Row>
       <Row justify="center" style={{ marginTop: '60px' }}>
         <Col xs={20} lg={14}>
-          <Divider id="home__divider--title">
+          <Divider
+            id="home__divider--title"
+            style={{ whiteSpace: 'break-spaces' }}
+          >
             Investigación en salud sobre el territorio
           </Divider>
         </Col>
