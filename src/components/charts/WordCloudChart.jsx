@@ -1,45 +1,49 @@
-import React from "react";
+import React from 'react';
 
 /* Libraries */
-import { WordCloud } from "@ant-design/charts";
+import { WordCloud } from '@ant-design/charts';
 
-/* UI Library Componens */
-import { Card } from "antd";
+/* UI Library Components */
+import { Card } from 'antd';
+
+/* Componentes */
+import InfoButton from '../infoButton';
 
 /* Utilities */
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 
 const WordCloudChart = ({ title, data, core }) => {
   const history = useHistory();
   let config = {
     data: data,
-    wordField: "name",
-    weightField: "value",
-    colorField: "name",
+    wordField: 'name',
+    weightField: 'value',
+    colorField: 'name',
     wordStyle: {
-      fontFamily: "Verdana",
+      fontFamily: 'Verdana',
       fontSize: [20, 100],
       rotation: 0,
     },
     random: function random() {
       return 0.5;
     },
-    renderer: "svg",
+    renderer: 'svg',
   };
 
   return (
     <Card
       size="small"
       title={title}
-      headStyle={{ backgroundColor: "#003e65", color: "white" }}
-      bodyStyle={{ padding: "10px", height: "420px" }}
+      headStyle={{ backgroundColor: '#003e65', color: 'white' }}
+      bodyStyle={{ padding: '10px', height: '420px' }}
       hoverable
+      extra={<InfoButton title="Temas" type={'subjects'} />}
     >
       <div className="chart">
         <WordCloud
           {...config}
           onReady={(plot) => {
-            plot.on("plot:click", (evt) => {
+            plot.on('plot:click', (evt) => {
               if (evt.data) {
                 history.push(`/app/subjects?id=${evt.data.data.datum.id}`);
                 core.setURL(`/app/subjects?id=${evt.data.data.datum.id}`);

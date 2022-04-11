@@ -303,8 +303,8 @@ const Infographic = ({
           >
             {documentsValue}
           </text>
-          <text transform="matrix(1 0 0 1 49 135)" className="st11 st12">
-            Documentos
+          <text transform="matrix(1 0 0 1 65 135)" className="st11 st12">
+            Productos
           </text>
         </g>
         <g>

@@ -1,18 +1,18 @@
-import React from "react";
+import React from 'react';
 
 /* Utilities */
-import { APIRequest } from "../../apis/api";
+import { APIRequest } from '../../apis/api';
 
 /* Components */
-import ErrorWarning from "../ErrorWarning";
-import LoadingCard from "../LoadingCard";
+import ErrorWarning from '../ErrorWarning';
+import LoadingCard from '../LoadingCard';
 
 /* UI Library Components */
-import { Col, Row } from "antd";
+import { Col, Row } from 'antd';
 
 /* Charts */
-import ColumnChart from "../charts/ColumnChart";
-import MapChart from "../charts/MapChart";
+import ColumnChart from '../charts/ColumnChart';
+import MapChart from '../charts/MapChart';
 
 const CitationsWrapper = ({ core }) => {
   const [state] = APIRequest(`${core.URL}&data=citations`);
@@ -36,6 +36,7 @@ const CitationsWrapper = ({ core }) => {
         <MapChart
           data={state.data.data.geo}
           title="Alcance geográfico de citas"
+          type="citationsMap"
         />
       </Col>
     </Row>

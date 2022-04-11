@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react';
 
 /* UI Library Components */
-import { Layout, Col, Row, Divider } from "antd";
+import { Layout, Col, Row, Divider } from 'antd';
 
 /* logotypes */
-import logo_sds_w from "../media/logo_sds_w.svg";
+import logo_sds_w from '../media/logo_sds_w.svg';
 
 /* Utilities */
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const Footer = ({ core }) => {
   return (
@@ -25,22 +25,19 @@ const Footer = ({ core }) => {
               </Link>
             </p>
             <p>
-              <Link to="/app/about" className="white--link">
-                Acerca de esta plataforma
-              </Link>
-            </p>
-            <p>
               <Link
                 to="/app/regulations"
                 className="white--link"
-                onClick={() => core.setURL("/app/regulations")}
+                onClick={() => core.setURL('/app/regulations')}
               >
                 Normatividad del sistema de investigación en salud
               </Link>
             </p>
             <br />
-            <p>Versión: 0.2.0</p>
-            <p>Última actualización: 24/03/2022</p>
+            <p>E-mail: cdeis@saludcapital.gov.co </p>
+            <p>Teléfono: (601) 3649090 extensión 9005</p>
+            <p>Versión: 0.3.0</p>
+            <p>Última actualización: 07/04/2022</p>
           </div>
         </Col>
         <Col xs={24} md={12} xxl={6}>
@@ -50,7 +47,7 @@ const Footer = ({ core }) => {
             </p>
             <br />
             <p>Carrera 32 No. 12-81</p>
-            <p>Conmutador (571)3649090 ext.9792</p>
+            <p>Conmutador (601) 3649090 ext.9792</p>
             <p>E-mail: observatoriodesalud@saludcapital.gov.co</p>
             <p>Horario de atención:</p>
             <p>lunes a viernes 8:00 a.m. a 5:00 p.m.</p>
@@ -64,7 +61,7 @@ const Footer = ({ core }) => {
             </p>
             <br />
             <p>Carrera 8 No. 10-55</p>
-            <p>Teléfono: (571) 381 3000</p>
+            <p>Teléfono: (601) 381 3000</p>
             <p>Horario de atención al público:</p>
             <p>lunes a viernes 9:30 a.m. a 7:00 p.m.</p>
             <p>Bogotá-Colombia</p>
@@ -135,7 +132,7 @@ const Footer = ({ core }) => {
             src={logo_sds_w}
             alt="Logotipo Secretaría de Salud de Bogotá"
             className="header__logo"
-            style={{ width: "220px" }}
+            style={{ width: '220px' }}
           />
         </Divider>
       </Row>

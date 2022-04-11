@@ -19,7 +19,6 @@ import Header from './layouts/Header';
 import Footer from './layouts/Footer';
 
 /* Modules */
-import About from './components/modules/About';
 import Authors from './components/modules/Authors';
 import Groups from './components/modules/Groups';
 import Home from './components/modules/Home';
@@ -64,9 +63,6 @@ function App() {
             <Route exact path="/app">
               <Home core={core} />
             </Route>
-            <Route exact path="/app/about">
-              <About core={core} />
-            </Route>
             <Route exact path="/app/search">
               <SearchResult core={core} />
             </Route>
@@ -86,7 +82,7 @@ function App() {
               <UserManual core={core} />
             </Route>
             <Route exact path="/app/trends">
-              <Trends core={core}/>
+              <Trends core={core} />
             </Route>
             <Route exact path="/app/compendium">
               <Compendium core={core} />

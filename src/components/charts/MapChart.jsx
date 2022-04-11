@@ -1,15 +1,18 @@
-import React from "react";
+import React from 'react';
 
 /* Libraries */
-import { AreaMap } from "@ant-design/charts";
+import { AreaMap } from '@ant-design/charts';
 
 /* UI Library Compoments */
-import { Card } from "antd";
+import { Card } from 'antd';
+
+/* Componentes */
+import InfoButton from '../infoButton';
 
 /* geoJSON */
-import mapData from "../../utils/world_map_final.json";
+import mapData from '../../utils/world_map_final.json';
 
-const MapChart = ({ data, title = "", height = 600 }) => {
+const MapChart = ({ data, title = '', height = 600, type }) => {
   let tempData = JSON.parse(JSON.stringify(mapData));
   let processed = { ...tempData };
   for (let i = 0; i < processed.features.length; i++) {
@@ -22,45 +25,45 @@ const MapChart = ({ data, title = "", height = 600 }) => {
 
   const config = {
     map: {
-      type: "mapbox",
-      style: "blank",
+      type: 'mapbox',
+      style: 'blank',
     },
     source: {
       data: processed,
       parser: {
-        type: "geojson",
+        type: 'geojson',
       },
     },
     autoFit: true,
     color: {
-      field: "log_count",
+      field: 'log_count',
       value: [
-        "#f7fcf0",
-        "#e0f3db",
-        "#ccebc5",
-        "#a8ddb5",
-        "#7bccc4",
-        "#4eb3d3",
-        "#2b8cbe",
-        "#0868ac",
-        "#084081",
+        '#f7fcf0',
+        '#e0f3db',
+        '#ccebc5',
+        '#a8ddb5',
+        '#7bccc4',
+        '#4eb3d3',
+        '#2b8cbe',
+        '#0868ac',
+        '#084081',
       ],
-      scale: { type: "quantile" },
+      scale: { type: 'quantile' },
     },
     style: {
       opacity: 1,
-      stroke: "#ccc",
+      stroke: '#ccc',
       lineWidth: 0.6,
       lineOpacity: 1,
     },
     label: {
       visible: true,
-      field: "country_code",
+      field: 'country_code',
       style: {
-        fill: "#000",
+        fill: '#000',
         opacity: 0.8,
         fontSize: 10,
-        stroke: "white",
+        stroke: 'white',
         strokeWidth: 1,
         textAllowOverlap: false,
         padding: [5, 5],
@@ -68,19 +71,19 @@ const MapChart = ({ data, title = "", height = 600 }) => {
     },
     state: {
       active: {
-        stroke: "white",
+        stroke: 'white',
         lineWidth: 1.5,
         lineOpacity: 0.8,
       },
     },
     tooltip: {
       items: [
-        { field: "country", alias: "País" },
-        { field: "count", alias: "Cantidad" },
+        { field: 'country', alias: 'País' },
+        { field: 'count', alias: 'Cantidad' },
       ],
     },
     zoom: {
-      position: "bottomright",
+      position: 'bottomright',
     },
   };
 
@@ -88,8 +91,9 @@ const MapChart = ({ data, title = "", height = 600 }) => {
     <Card
       size="small"
       title={title}
-      headStyle={{ backgroundColor: "#003e65", color: "white" }}
-      bodyStyle={{ padding: "10px", height: height }}
+      headStyle={{ backgroundColor: '#003e65', color: 'white' }}
+      bodyStyle={{ padding: '10px', height: height }}
+      extra={<InfoButton title={title} type={type} />}
     >
       <div className="chart">
         <AreaMap {...config} />

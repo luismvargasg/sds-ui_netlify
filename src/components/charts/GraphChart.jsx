@@ -1,11 +1,14 @@
-import React, { useEffect, useRef } from "react";
-import ReactDOM from "react-dom";
+import React, { useEffect, useRef } from 'react';
+import ReactDOM from 'react-dom';
 
 /* UI Library Components */
-import { Card } from "antd";
+import { Card } from 'antd';
+
+/* Componentes */
+import InfoButton from '../infoButton';
 
 /* Libraries */
-import G6 from "@antv/g6";
+import G6 from '@antv/g6';
 
 const GraphChart = ({ data, title, height = 622 }) => {
   const ref = useRef(null);
@@ -20,47 +23,47 @@ const GraphChart = ({ data, title, height = 622 }) => {
         modes: {
           default: [
             {
-              type: "zoom-canvas",
+              type: 'zoom-canvas',
               enableOptimize: true,
               optimizeZoom: 0.9,
             },
             {
-              type: "drag-canvas",
+              type: 'drag-canvas',
               enableOptimize: true,
             },
             {
-              type: "tooltip",
+              type: 'tooltip',
               formatText(model) {
                 return `Grado: ${model.degree}`;
               },
             },
             {
-              type: "edge-tooltip",
+              type: 'edge-tooltip',
               formatText(model) {
                 return `${model.coauthorships} ${
-                  model.coauthorships > 1 ? "coautorías" : "coautoría"
+                  model.coauthorships > 1 ? 'coautorías' : 'coautoría'
                 }`;
               },
             },
-            "drag-node",
+            'drag-node',
             /* "activate-relations", */
           ],
         },
         layout: {
-          type: "gForce" /* data.nodes.length > 50 ? "forceAtlas2" : "gForce" */,
+          type: 'gForce' /* data.nodes.length > 50 ? "forceAtlas2" : "gForce" */,
           preventOverlap: true,
         },
         defaultNode: {
-          style: { stroke: "#00A283", fill: "#00E4A9", fillOpacity: 0.6 },
+          style: { stroke: '#00A283', fill: '#00E4A9', fillOpacity: 0.6 },
           labelCfg: {
             style: { fontSize: 8 },
-            position: "bottom",
+            position: 'bottom',
             offset: 1,
           },
         },
         defaultEdge: {
           style: {
-            stroke: "#e8e7e3",
+            stroke: '#e8e7e3',
           },
         },
       });
@@ -73,8 +76,9 @@ const GraphChart = ({ data, title, height = 622 }) => {
     <Card
       size="small"
       title={title}
-      headStyle={{ backgroundColor: "#003e65", color: "white" }}
-      bodyStyle={{ padding: "10px", height: height }}
+      headStyle={{ backgroundColor: '#003e65', color: 'white' }}
+      bodyStyle={{ padding: '10px', height: height }}
+      extra={<InfoButton title={title} type={'graph'} />}
     >
       <div className="chart">
         <div ref={ref}></div>

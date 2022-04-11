@@ -1,33 +1,36 @@
-import React from "react";
+import React from 'react';
 
 /* Libraries */
-import { Pie } from "@ant-design/charts";
+import { Pie } from '@ant-design/charts';
 
 /* UI Library Components */
-import { Card, Empty } from "antd";
+import { Card, Empty } from 'antd';
+
+/* Componentes */
+import InfoButton from '../infoButton';
 
 const PieChart = ({ data, title }) => {
   const bgColor = {
-    hybrid: "#6448ff",
-    green: "#25ff76",
-    gold: "#ffc03c",
-    closed: "#b4b4b4",
-    bronze: "#f3663f",
+    hybrid: '#6448ff',
+    green: '#25ff76',
+    gold: '#ffc03c',
+    closed: '#b4b4b4',
+    bronze: '#f3663f',
   };
 
   const labels = {
-    hybrid: "Híbrido",
-    green: "Verde",
-    gold: "Dorado",
-    closed: "Cerrado",
-    bronze: "Bronce",
+    hybrid: 'Híbrido',
+    green: 'Verde',
+    gold: 'Dorado',
+    closed: 'Cerrado',
+    bronze: 'Bronce',
   };
 
   let config = {
     appendPadding: 20,
     data: data,
-    angleField: "value",
-    colorField: "type",
+    angleField: 'value',
+    colorField: 'type',
     color: ({ type }) => {
       return bgColor[type];
     },
@@ -38,15 +41,15 @@ const PieChart = ({ data, title }) => {
       formatter: (datum) => {
         return {
           name: labels[datum.type],
-          value: datum.value + (datum.value === 1 ? " Producto" : " Productos"),
+          value: datum.value + (datum.value === 1 ? ' Producto' : ' Productos'),
         };
       },
     },
     label: {
-      type: "spider",
-      content: "{value} Productos, {percentage}",
+      type: 'spider',
+      content: '{value} Productos, {percentage}',
     },
-    interactions: [{ type: "element-active" }],
+    interactions: [{ type: 'element-active' }],
     legend: {
       itemName: {
         formatter: (item) => labels[item],
@@ -57,9 +60,10 @@ const PieChart = ({ data, title }) => {
     <Card
       size="small"
       title={title}
-      headStyle={{ backgroundColor: "#003e65", color: "white" }}
-      bodyStyle={{ padding: "10px", height: "420px" }}
+      headStyle={{ backgroundColor: '#003e65', color: 'white' }}
+      bodyStyle={{ padding: '10px', height: '420px' }}
       hoverable
+      extra={<InfoButton title={title} type={'openAcces'} />}
     >
       <div className="chart">
         {data.length > 0 ? (

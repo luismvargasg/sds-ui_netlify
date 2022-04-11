@@ -1,19 +1,19 @@
-import React from "react";
+import React from 'react';
 
 /* Utilities */
-import { APIRequest } from "../../apis/api";
+import { APIRequest } from '../../apis/api';
 
 /* Components */
-import ErrorWarning from "../ErrorWarning";
-import LoadingCard from "../LoadingCard";
-import CoauthorsList from "../CoauthorsList";
+import ErrorWarning from '../ErrorWarning';
+import LoadingCard from '../LoadingCard';
+import CoauthorsList from '../CoauthorsList';
 
 /* Charts */
-import MapChart from "../charts/MapChart";
-import GraphChart from "../charts/GraphChart";
+import MapChart from '../charts/MapChart';
+import GraphChart from '../charts/GraphChart';
 
 /* UI Library Components */
-import { Col, Row } from "antd";
+import { Col, Row } from 'antd';
 
 const CoauthorsWrapper = ({ core }) => {
   const [state] = APIRequest(`${core.URL}&data=coauthors`);
@@ -39,6 +39,7 @@ const CoauthorsWrapper = ({ core }) => {
           data={state.data.data.geo}
           title="Alcance Geográfico"
           height={600}
+          type="coauthorsMap"
         />
       </Col>
       <Col span={24}>
