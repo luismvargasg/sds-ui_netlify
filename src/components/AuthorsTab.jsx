@@ -52,7 +52,7 @@ const AuthorsTab = ({ core }) => {
       <List
         itemLayout="vertical"
         size="large"
-        dataSource={state.data.data}
+        dataSource={state.data.data.authors}
         pagination={{
           size: 'small',
           position: 'bottom',
@@ -71,7 +71,7 @@ const AuthorsTab = ({ core }) => {
             actions={[
               <Space style={{ fontSize: 18 }}>
                 {React.createElement(CalendarOutlined)}
-                Publicaciones: {item.papers_count}
+                Publicaciones: {item.products_count}
               </Space>,
               <Space style={{ fontSize: 18 }}>
                 {React.createElement(CitationsIcon)}
