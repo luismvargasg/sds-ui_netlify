@@ -1,13 +1,11 @@
-import React from "react";
+import React from 'react';
 
 /* UI Library Components */
-import { Select } from "antd";
+import { Select } from 'antd';
 
-const FilterMultipleSelect = ({ list, type, setFilter }) => {
-  const placeholder = { institutions: "Instituciones", groups: "Grupos" };
-
+const FilterMultipleSelect = ({ list, setFilter }) => {
   const onChange = (e) => {
-    const countriesList = e.join(" ");
+    const countriesList = e.join(' ');
     setFilter(countriesList);
   };
 
@@ -17,20 +15,19 @@ const FilterMultipleSelect = ({ list, type, setFilter }) => {
     });
     return (
       <>
-        <p className="filter--title">Filtrar por {placeholder[type]}:</p>
         <Select
           mode="multiple"
-          //allowClear
-          placeholder={"Selecciona uno o varios"}
+          placeholder={'Selecciona uno o varios'}
           options={options}
           optionFilterProp="label"
           className="filter--container"
           onChange={onChange}
+          autoClearSearchValue
         />
       </>
     );
   }
-  return "";
+  return '';
 };
 
 export default FilterMultipleSelect;

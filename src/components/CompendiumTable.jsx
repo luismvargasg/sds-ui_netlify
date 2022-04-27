@@ -4,9 +4,10 @@ import React, { useEffect, useState } from 'react';
 import ErrorWarning from './ErrorWarning';
 import LoadingCard from './LoadingCard';
 import SortCompendium from './SortCompendium';
+import InfoButton from './infoButton';
 
 /* UI Library Components */
-import { Card, List, Table } from 'antd';
+import { Card, List, Row, Table } from 'antd';
 
 /* Utilities */
 import { APIRequest } from '../apis/api';
@@ -169,7 +170,19 @@ const CompendiumTable = ({ core, type }) => {
             )}
           />
           <Column
-            title="Productos y Citas por año"
+            title={() => {
+              return (
+                <Row justify="space-between" align="middle">
+                  Productos y Citas por años
+                  <div id="table__infoButton">
+                    <InfoButton
+                      title="Productos y citas por año"
+                      type={'columnLine'}
+                    />
+                  </div>
+                </Row>
+              );
+            }}
             dataIndex={'plot'}
             render={(item) => <TinyColumnLineChart data={item} />}
             width={'30%'}
@@ -240,7 +253,19 @@ const CompendiumTable = ({ core, type }) => {
         <Column title="Productos totales" dataIndex={'products_count'} />
         <Column title="Citas totales" dataIndex={'citations_count'} />
         <Column
-          title="Productos y Citas por año"
+          title={() => {
+            return (
+              <Row justify="space-between" align="middle">
+                Productos y Citas por años
+                <div id="table__infoButton">
+                  <InfoButton
+                    title="Productos y citas por año"
+                    type={'columnLine'}
+                  />
+                </div>
+              </Row>
+            );
+          }}
           dataIndex={'plot'}
           render={(item) => <TinyColumnLineChart data={item} />}
           width={'30%'}

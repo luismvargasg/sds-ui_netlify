@@ -1,20 +1,20 @@
-import React from "react";
+import React from 'react';
 
 /* Components */
-import PoliciesTag from "./PoliciesTag";
+import PoliciesTag from './PoliciesTag';
 
 /* Utilities */
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 /* UI Library Components */
-import { Avatar, Button, Card, Col, Row, Space, Typography } from "antd";
+import { Avatar, Button, Card, Col, Row, Space, Typography } from 'antd';
 
 /* Icons */
-import orcid from "../media/icons/orcid";
-import researcherid from "../media/icons/researcherid";
-import scholar from "../media/icons/scholar";
-import scopus from "../media/icons/scopus";
-import { BankOutlined, TeamOutlined, ReadOutlined } from "@ant-design/icons";
+import orcid from '../media/icons/orcid';
+import researcherid from '../media/icons/researcherid';
+import scholar from '../media/icons/scholar';
+import scopus from '../media/icons/scopus';
+import { BankOutlined, TeamOutlined, ReadOutlined } from '@ant-design/icons';
 
 /* UI Library Sub-components */
 const { Meta } = Card;
@@ -46,38 +46,38 @@ const AuthorsTitleCard = ({ core, data }) => {
                 data.logo ? (
                   data.logo
                 ) : (
-                  <ReadOutlined style={{ color: "gray", fontSize: "40px" }} />
+                  <ReadOutlined style={{ color: 'gray', fontSize: '40px' }} />
                 )
               }
               style={{
-                backgroundColor: "white",
+                backgroundColor: 'white',
                 padding: 5,
-                border: "1px solid lightgray",
+                border: '1px solid lightgray',
               }}
             />
           }
           description={
             <>
               <Typography.Title level={2} style={{ marginBottom: 0 }}>
-                {data.name}{" "}
+                {data.name}{' '}
                 {data.country ? (
                   <img
-                    style={{ paddingBottom: "3px" }}
+                    style={{ paddingBottom: '3px' }}
                     alt={`flag of ${data.country}`}
                     title={data.country}
                     src={`https://flagcdn.com/28x21/${data.country_code.toLowerCase()}.png`}
                   />
                 ) : (
-                  ""
+                  ''
                 )}
               </Typography.Title>
-              {data.affiliation.institution.name && (
+              {data.affiliation?.institution?.name && (
                 <Typography.Paragraph
                   style={{ fontSize: 22, margin: 0 }}
                   underline
                 >
                   <BankOutlined
-                    style={{ marginRight: "10px", color: "gray" }}
+                    style={{ marginRight: '10px', color: 'gray' }}
                   />
                   <Link
                     to={`/app/institutions?id=${data.affiliation.institution.id}`}
@@ -91,13 +91,13 @@ const AuthorsTitleCard = ({ core, data }) => {
                   </Link>
                 </Typography.Paragraph>
               )}
-              {data.affiliation.group.name && (
+              {data.affiliation?.group?.name && (
                 <Typography.Paragraph
-                  style={{ fontSize: 22, marginBottom: "5px" }}
+                  style={{ fontSize: 22, marginBottom: '5px' }}
                   underline
                 >
                   <TeamOutlined
-                    style={{ marginRight: "10px", color: "gray" }}
+                    style={{ marginRight: '10px', color: 'gray' }}
                   />
                   <Link
                     to={`/app/groups?id=${data.affiliation.group.id}`}
@@ -110,7 +110,7 @@ const AuthorsTitleCard = ({ core, data }) => {
                 </Typography.Paragraph>
               )}
               <Space wrap>{renderedButtons(data.external_urls)}</Space>
-              <Row style={{ marginTop: "10px" }}>
+              <Row style={{ marginTop: '10px' }}>
                 {data.policies.ODS && (
                   <PoliciesTag
                     type="ODS"

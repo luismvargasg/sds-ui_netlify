@@ -16,12 +16,12 @@ const { TabPane } = Tabs;
 const Compendium = ({ core }) => {
   /*  const location = useLocation(); */
   /* let URL = location.pathname; */
-  const [state] = APIRequest(core.URL);
+  const [state, setUrl] = APIRequest(core.URL);
 
-  /*  useEffect(() => {
-    setUrl(`${URL}?data=info`);
+  useEffect(() => {
+    setUrl(core.URL);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [core.URL]); */
+  }, [core.URL]);
 
   useEffect(() => {
     document.title = 'Capacidades científicas | SALUDATA';

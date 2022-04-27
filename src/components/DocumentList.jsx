@@ -121,11 +121,17 @@ const DocumentList = ({ data, tools, title = 'Artículos', core }) => {
                   authorsList: item.authors,
                   core: core,
                 })}
-                Temas:{' '}
-                {SubjectsHorizontalList({
-                  subjectsList: item.subjects,
-                  core: core,
-                })}
+                {item.subjects.length ? (
+                  <>
+                    Temas:{' '}
+                    {SubjectsHorizontalList({
+                      subjectsList: item.subjects,
+                      core: core,
+                    })}
+                  </>
+                ) : (
+                  ''
+                )}
               </List.Item>
             )}
           ></List>

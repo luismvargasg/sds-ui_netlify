@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
 
 /* UI Library Components */
-import { DatePicker } from "antd";
+import { DatePicker } from 'antd';
 
 /* Utilities */
-import moment from "moment";
-import { useHistory } from "react-router-dom";
+import moment from 'moment';
+import { useHistory } from 'react-router-dom';
 
 /* UI Library Sub-components */
 const { RangePicker } = DatePicker;
@@ -15,15 +15,15 @@ const YearsRangeFilter = ({ filters, setYears }) => {
   const URL = new URLSearchParams(history.location.search);
 
   const renderedDefaultValue = () => {
-    if (URL.has("start_year") && URL.has("end_year")) {
+    if (URL.has('start_year') && URL.has('end_year')) {
       return [
-        moment(URL.get("start_year"), "YYYY"),
-        moment(URL.get("end_year"), "YYYY"),
+        moment(URL.get('start_year'), 'YYYY'),
+        moment(URL.get('end_year'), 'YYYY'),
       ];
     } else {
       return [
-        moment(filters.start_year, "YYYY"),
-        moment(filters.end_year, "YYYY"),
+        moment(filters.start_year, 'YYYY'),
+        moment(filters.end_year, 'YYYY'),
       ];
     }
   };
@@ -34,14 +34,13 @@ const YearsRangeFilter = ({ filters, setYears }) => {
 
   function disabledDate(current) {
     return (
-      current < moment(filters.start_year, "YYYY") ||
-      current > moment(filters.end_year, "YYYY")
+      current < moment(filters.start_year, 'YYYY') ||
+      current > moment(filters.end_year, 'YYYY')
     );
   }
 
   return (
     <>
-      <p className="filter--title">Filtrar por año:</p>
       <RangePicker
         picker="year"
         showTime

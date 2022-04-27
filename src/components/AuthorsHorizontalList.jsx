@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 /* Components */
-import ShowMoreButton from "./ShowMoreButton";
+import ShowMoreButton from './ShowMoreButton';
 
 /* Utilities */
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 /* UI Library Components */
-import { Button, Divider, Tooltip } from "antd";
+import { Button, Divider, Tooltip } from 'antd';
+
+/* Icons */
+import { BankOutlined, TeamOutlined } from '@ant-design/icons';
 
 const AuthorsHorizontalList = ({ authorsList, core }) => {
   const [authorsQuantity, setAuthorsQuantity] = useState(10);
@@ -15,27 +18,47 @@ const AuthorsHorizontalList = ({ authorsList, core }) => {
 
   const showContent = (author) => {
     return (
-      <>
-        <Link
-          style={{ fontSize: 15, textDecoration: "underline" }}
-          to={`/app/authors?id=${author.id}`}
-          onClick={() => core.setURL(`/app/authors?id=${author.id}`)}
-        >
-          {author.full_name}
-        </Link>
-        <br />
-        <Link
-          style={{ fontSize: 12, textDecoration: "underline" }}
-          to={`/app/institutions?id=${author.affiliation?.institution?.id}`}
-          onClick={() =>
-            core.setURL(
-              `/app/institutions?id=${author.affiliation?.institution?.id}`
-            )
-          }
-        >
-          {author.affiliation?.institution?.name}
-        </Link>
-      </>
+      <div>
+        <div>
+          <Link
+            style={{ fontSize: 15, textDecoration: 'underline' }}
+            to={`/app/authors?id=${author.id}`}
+            onClick={() => core.setURL(`/app/authors?id=${author.id}`)}
+          >
+            {author.full_name}
+          </Link>
+        </div>
+        {author.affiliation?.institution?.name && (
+          <div>
+            <Link
+              style={{ fontSize: 12, textDecoration: 'underline' }}
+              to={`/app/institutions?id=${author.affiliation?.institution?.id}`}
+              onClick={() =>
+                core.setURL(
+                  `/app/institutions?id=${author.affiliation?.institution?.id}`
+                )
+              }
+            >
+              <BankOutlined style={{ marginRight: '10px', color: 'gray' }} />
+              {author.affiliation?.institution?.name}
+            </Link>
+          </div>
+        )}
+        {author.affiliation?.group?.name && (
+          <div>
+            <Link
+              style={{ fontSize: 12, textDecoration: 'underline' }}
+              to={`/app/groups?id=${author.affiliation?.group?.id}`}
+              onClick={() =>
+                core.setURL(`/app/groups?id=${author.affiliation?.group?.id}`)
+              }
+            >
+              <TeamOutlined style={{ marginRight: '10px', color: 'gray' }} />
+              {author.affiliation?.group?.name}
+            </Link>
+          </div>
+        )}
+      </div>
     );
   };
 
