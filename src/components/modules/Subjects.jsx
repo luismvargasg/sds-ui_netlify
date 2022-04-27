@@ -5,7 +5,7 @@ import { APIRequest } from '../../apis/api';
 import { useLocation } from 'react-router';
 
 /* Components */
-import AuthorsTab from '../AuthorsTab';
+import AuthorsTabOnSubjects from '../AuthorsTabOnSubjects';
 import ErrorWarning from '../ErrorWarning';
 import SubjectsTable from '../SubjectsTable';
 import LoadingCard from '../LoadingCard';
@@ -46,7 +46,7 @@ const Subjects = ({ core }) => {
       <Col span={24}>
         <Tabs defaultActiveKey={'authors'} type="card" tabBarGutter={5}>
           <TabPane tab="Autores" key="authors">
-            <AuthorsTab core={core} />
+            <AuthorsTabOnSubjects core={core} />
           </TabPane>
           <TabPane tab="Grupos" key="groups">
             <SubjectsTable core={core} type="groups" />

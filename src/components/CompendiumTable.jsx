@@ -46,6 +46,11 @@ const CompendiumTable = ({ core, type }) => {
     subjects: 'Tema',
   };
 
+  const onPageChange = ({ page, max }) => {
+    setPagination({ page: page, max: max });
+    window.scrollTo(0, 0);
+  };
+
   useEffect(() => {
     setUrl(
       `${location.pathname}?${URL.toString()}&page=${pagination.page}&max=${
@@ -80,7 +85,7 @@ const CompendiumTable = ({ core, type }) => {
             current: pagination.page,
             pageSize: pagination.max,
             pageSizeOptions: [5, 10, 15],
-            onChange: (page, max) => setPagination({ page: page, max: max }),
+            onChange: (page, max) => onPageChange({ page: page, max: max }),
           }}
           rowClassName="compendium__row--height"
           scroll={{ x: 1400 }}
@@ -210,7 +215,7 @@ const CompendiumTable = ({ core, type }) => {
           current: pagination.page,
           pageSize: pagination.max,
           pageSizeOptions: [5, 10, 15],
-          onChange: (page, max) => setPagination({ page: page, max: max }),
+          onChange: (page, max) => onPageChange({ page: page, max: max }),
         }}
         rowClassName="compendium__row--height"
         scroll={{ x: 1400 }}

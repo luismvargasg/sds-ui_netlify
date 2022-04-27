@@ -52,7 +52,7 @@ const AuthorsTab = ({ core }) => {
       <List
         itemLayout="vertical"
         size="large"
-        dataSource={state.data.data.authors}
+        dataSource={state.data.data}
         pagination={{
           size: 'small',
           position: 'bottom',
@@ -71,7 +71,7 @@ const AuthorsTab = ({ core }) => {
             actions={[
               <Space style={{ fontSize: 18 }}>
                 {React.createElement(CalendarOutlined)}
-                Publicaciones: {item.products_count}
+                Publicaciones: {item.papers_count}
               </Space>,
               <Space style={{ fontSize: 18 }}>
                 {React.createElement(CitationsIcon)}
@@ -100,7 +100,10 @@ const AuthorsTab = ({ core }) => {
                     <div>
                       <TeamOutlined />{' '}
                       <Link
-                        style={{ fontSize: 12, textDecoration: 'underline' }}
+                        style={{
+                          fontSize: 12,
+                          textDecoration: 'underline',
+                        }}
                         to={`/app/groups?id=${item.affiliation.group.id}`}
                         onClick={() =>
                           core.setURL(
@@ -118,7 +121,10 @@ const AuthorsTab = ({ core }) => {
                     <div>
                       <BankOutlined />{' '}
                       <Link
-                        style={{ fontSize: 12, textDecoration: 'underline' }}
+                        style={{
+                          fontSize: 12,
+                          textDecoration: 'underline',
+                        }}
                         to={`/app/institutions?id=${item.affiliation.institution.id}`}
                         onClick={() =>
                           core.setURL(
