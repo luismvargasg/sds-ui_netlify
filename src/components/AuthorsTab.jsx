@@ -1,23 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
 /* Components */
-import ErrorWarning from "./ErrorWarning";
-import LoadingCard from "./LoadingCard";
+import ErrorWarning from './ErrorWarning';
+import LoadingCard from './LoadingCard';
 
 /* UI Components Library */
-import { Card, List, Space, Avatar } from "antd";
+import { Card, List, Space, Avatar } from 'antd';
 
 /* Icons */
-import { CitationsIcon } from "../media/icons/citations";
+import { CitationsIcon } from '../media/icons/citations';
 import {
   CalendarOutlined,
   BankOutlined,
   TeamOutlined,
-} from "@ant-design/icons";
+} from '@ant-design/icons';
 
 /* Utilities */
-import { APIRequest } from "../apis/api";
-import { Link } from "react-router-dom";
+import { APIRequest } from '../apis/api';
+import { Link } from 'react-router-dom';
 
 const AuthorsTab = ({ core }) => {
   const [pagination, setPagination] = useState({ max: 10, page: 1 });
@@ -45,17 +45,17 @@ const AuthorsTab = ({ core }) => {
   }
   return (
     <Card
-      headStyle={{ backgroundColor: "#003e65", color: "white" }}
+      headStyle={{ backgroundColor: '#003e65', color: 'white' }}
       size="small"
       title="Autores"
     >
       <List
         itemLayout="vertical"
         size="large"
-        dataSource={state.data.data.authors /* || state.data */}
+        dataSource={state.data.data}
         pagination={{
-          size: "small",
-          position: "bottom",
+          size: 'small',
+          position: 'bottom',
           total: state.data.total,
           onChange: (page, pageSize) =>
             onPageChange({
@@ -87,7 +87,7 @@ const AuthorsTab = ({ core }) => {
               }
               title={
                 <Link
-                  style={{ fontSize: 15, textDecoration: "underline" }}
+                  style={{ fontSize: 15, textDecoration: 'underline' }}
                   to={`/app/authors?id=${item.id}`}
                   onClick={() => core.setURL(`/app/authors?id=${item.id}`)}
                 >
@@ -98,9 +98,12 @@ const AuthorsTab = ({ core }) => {
                 <>
                   {item.affiliation.group.name ? (
                     <div>
-                      <TeamOutlined />{" "}
+                      <TeamOutlined />{' '}
                       <Link
-                        style={{ fontSize: 12, textDecoration: "underline" }}
+                        style={{
+                          fontSize: 12,
+                          textDecoration: 'underline',
+                        }}
                         to={`/app/groups?id=${item.affiliation.group.id}`}
                         onClick={() =>
                           core.setURL(
@@ -112,13 +115,16 @@ const AuthorsTab = ({ core }) => {
                       </Link>
                     </div>
                   ) : (
-                    ""
+                    ''
                   )}
                   {item.affiliation.institution.name ? (
                     <div>
-                      <BankOutlined />{" "}
+                      <BankOutlined />{' '}
                       <Link
-                        style={{ fontSize: 12, textDecoration: "underline" }}
+                        style={{
+                          fontSize: 12,
+                          textDecoration: 'underline',
+                        }}
                         to={`/app/institutions?id=${item.affiliation.institution.id}`}
                         onClick={() =>
                           core.setURL(
@@ -130,7 +136,7 @@ const AuthorsTab = ({ core }) => {
                       </Link>
                     </div>
                   ) : (
-                    ""
+                    ''
                   )}
                 </>
               }

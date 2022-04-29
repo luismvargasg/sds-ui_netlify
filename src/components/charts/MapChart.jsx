@@ -8,20 +8,12 @@ import { Card } from 'antd';
 
 /* Componentes */
 import InfoButton from '../infoButton';
-
-/* geoJSON */
-import mapData from '../../utils/world_map_final.json';
+import MapLegendMaker from '../../utils/MapLegendMaker';
 
 const MapChart = ({ data, title = '', height = 600, type }) => {
-  let tempData = JSON.parse(JSON.stringify(mapData));
-  let processed = { ...tempData };
-  for (let i = 0; i < processed.features.length; i++) {
-    for (let j = 0; j < data.length; j++) {
-      if (processed.features[i].properties.iso_a2 === data[j].country_code) {
-        processed.features[i].properties = { ...data[j] };
-      }
-    }
-  }
+  const max = Math.max(
+    ...data.features.map((item) => item.properties.count)
+  ).toString();
 
   const config = {
     map: {
@@ -29,7 +21,7 @@ const MapChart = ({ data, title = '', height = 600, type }) => {
       style: 'blank',
     },
     source: {
-      data: processed,
+      data: data,
       parser: {
         type: 'geojson',
       },
@@ -48,26 +40,13 @@ const MapChart = ({ data, title = '', height = 600, type }) => {
         '#0868ac',
         '#084081',
       ],
-      scale: { type: 'quantile' },
+      scale: { type: 'quantize' },
     },
     style: {
       opacity: 1,
       stroke: '#ccc',
       lineWidth: 0.6,
       lineOpacity: 1,
-    },
-    label: {
-      visible: true,
-      field: 'country_code',
-      style: {
-        fill: '#000',
-        opacity: 0.8,
-        fontSize: 10,
-        stroke: 'white',
-        strokeWidth: 1,
-        textAllowOverlap: false,
-        padding: [5, 5],
-      },
     },
     state: {
       active: {
@@ -78,12 +57,18 @@ const MapChart = ({ data, title = '', height = 600, type }) => {
     },
     tooltip: {
       items: [
-        { field: 'country', alias: 'País' },
+        { field: 'name', alias: 'País' },
         { field: 'count', alias: 'Cantidad' },
       ],
     },
     zoom: {
       position: 'bottomright',
+    },
+    legend: {
+      position: 'bottomleft',
+      customContent: (title, items) => {
+        return MapLegendMaker(items, max);
+      },
     },
   };
 

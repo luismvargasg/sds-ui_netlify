@@ -4,7 +4,7 @@ import React from 'react';
 import { WordCloud } from '@ant-design/charts';
 
 /* UI Library Components */
-import { Card } from 'antd';
+import { Card, Badge } from 'antd';
 
 /* Componentes */
 import InfoButton from '../infoButton';
@@ -17,17 +17,30 @@ const WordCloudChart = ({ title, data, core }) => {
   let config = {
     data: data,
     wordField: 'name',
-    weightField: 'value',
+    weightField: 'products',
     colorField: 'name',
     wordStyle: {
       fontFamily: 'Verdana',
       fontSize: [20, 100],
       rotation: 0,
     },
+    tooltip: {
+      customContent: (title, datum) => {
+        return (
+          <>
+            <h3 style={{ margin: '10px 0' }}>
+              <Badge color={datum[0]?.color} />
+              {datum[0]?.name}
+            </h3>
+            <h4>Productos: &emsp; {datum[0]?.data?.datum?.products}</h4>
+            <h4>Citaciones: &emsp; {datum[0]?.data?.datum?.citations}</h4>
+          </>
+        );
+      },
+    },
     random: function random() {
       return 0.5;
     },
-    renderer: 'svg',
   };
 
   return (

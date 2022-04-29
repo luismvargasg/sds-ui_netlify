@@ -3,9 +3,8 @@ import React from 'react';
 export const infoText = {
   openAcces: (
     <div>
-      Esta sección muestra la producción científica de acuerdo con el tipo de
-      acceso de cada uno de los productos correspondientes al autor. Para saber
-      más consulte la ficha técnica del indicador.
+      Esta sección muestra el tipo de acceso de cada uno de los productos
+      académicos. Para saber más consulte la ficha técnica del indicador.
     </div>
   ),
   venn: (
@@ -21,33 +20,41 @@ export const infoText = {
       menor frecuencia en la producción académica. El tamaño de la palabra se
       relaciona con la cantidad de productos. Para saber más consulte la ficha
       técnica del indicador.
+      <div>Haz click sobre un tema para ver información detallada</div>
     </div>
   ),
   citations: (
     <div>
-      La gráfica muestra la cantidad de productos académicos del autor o autora,
-      citados por año. Para saber más consulte la ficha técnica del indicador.
+      La gráfica muestra la cantidad de productos académicos citados por año.
+      Para saber más consulte la ficha técnica del indicador.
     </div>
   ),
   citationsMap: (
     <div>
       En el mapa se observan los países donde han sido citados los productos
-      académicos del autor o autora. Para saber más consulte la ficha técnica
-      del indicador.
+      académicos. Para saber más consulte la ficha técnica del indicador.
     </div>
   ),
   coauthorsMap: (
     <div>
-      Esta sección permite visualizar los países con los que el autor o la
-      autora ha realizado de manera colaborativa uno o más productos académicos.
-      Para saber más consulte la ficha técnica del indicador.
+      Esta sección permite visualizar los países con los que se han realizado
+      uno o más productos académicos de manera colaborativa. Para saber más
+      consulte la ficha técnica del indicador.
     </div>
   ),
   graph: (
     <div>
       La red muestra las co-autorías de cada investigador o investigadora con
       otros investigadores. La línea indica la relación entre autores y el
-      tamaño del círculo indica la cantidad de productos en co-autoría.
+      tamaño del círculo indica la cantidad de productos en co-autoría. Para
+      saber más consulte la ficha técnica del indicador.
+    </div>
+  ),
+  columnLine: (
+    <div>
+      En el gráfico, las barras indican la cantidad de productos académicos por
+      año, y las líneas señalan las citaciones durante el mismo periodo. Para
+      saber más consulte la ficha técnica del indicador.
     </div>
   ),
 };
