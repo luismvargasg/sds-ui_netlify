@@ -1,21 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 
 /* Utilities */
-import { APIRequest } from "../../apis/api";
-import { useLocation } from "react-router";
+import { APIRequest } from '../../apis/api';
+import { useLocation } from 'react-router';
 
 /* Components */
-import AuthorsTab from "../AuthorsTab";
-import ErrorWarning from "../ErrorWarning";
-import GroupsTab from "../GroupsTab";
-import InstitutionsTab from "../InstitutionsTab";
-import LoadingCard from "../LoadingCard";
-import ProductionWrapper from "../wrappers/ProductionWrapper";
-import PoliciesTitleCard from "../PoliciesTitleCard";
-import SubjectsWrapper from "../wrappers/SubjectsWrapper";
+import AuthorsTab from '../AuthorsTab';
+import ErrorWarning from '../ErrorWarning';
+import LoadingCard from '../LoadingCard';
+import ProductionWrapper from '../wrappers/ProductionWrapper';
+import PoliciesTitleCard from '../PoliciesTitleCard';
+import SubjectsWrapper from '../wrappers/SubjectsWrapper';
 
 /* UI Library Components */
-import { Col, Row, Tabs } from "antd";
+import { Col, Row, Tabs } from 'antd';
+import CompendiumTable from '../CompendiumTable';
 
 /* UI Library Sub-components */
 const { TabPane } = Tabs;
@@ -26,27 +25,28 @@ const Policies = ({ core }) => {
   const [state, setUrl] = APIRequest(`${URL}&data=info`);
 
   useEffect(() => {
-    document.title = "Políticas | SALUDATA";
+    document.title = 'Políticas | SALUDATA';
   }, []);
 
   useEffect(() => {
     setUrl(`${URL}&data=info`);
-  }, [setUrl, URL]);
+    core.setFilters(state.data.filters);
+    return () => {
+      core.setFilters(null);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [URL, state]);
 
   if (state.isError) {
     return <ErrorWarning />;
   } else if (state.isLoading) {
     return <LoadingCard />;
   }
-  setTimeout(() => {
-    core.setFilters(state.data.filters);
-    core.setHome(false);
-  }, 10);
   return (
     <Row gutter={[15, 15]}>
       <PoliciesTitleCard data={state.data.data} core={core} />
       <Col span={24}>
-        <Tabs defaultActiveKey={"topics"} type="card" tabBarGutter={5}>
+        <Tabs defaultActiveKey={'topics'} type="card" tabBarGutter={5}>
           <TabPane tab="Temas" key="topics">
             <SubjectsWrapper core={core} />
           </TabPane>
@@ -54,10 +54,10 @@ const Policies = ({ core }) => {
             <AuthorsTab core={core} />
           </TabPane>
           <TabPane tab="Grupos" key="groups" forceRender>
-            <GroupsTab core={core} />
+            <CompendiumTable core={core} type="groups" />
           </TabPane>
           <TabPane tab="Instituciones" key="institutions" forceRender>
-            <InstitutionsTab core={core} />
+            <CompendiumTable core={core} type="institutions" />
           </TabPane>
           <TabPane tab="Producción" key="production" forceRender>
             <ProductionWrapper core={core} />

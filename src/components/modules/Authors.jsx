@@ -1,20 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 
 /* Utilities */
-import { APIRequest } from "../../apis/api";
+import { APIRequest } from '../../apis/api';
 //import { useLocation } from "react-router";
 
 /* Components */
-import AuthorsTitleCard from "../AuthorsTitleCard";
-import ErrorWarning from "../ErrorWarning";
-import LoadingCard from "../LoadingCard";
-import ProductionWrapper from "../wrappers/ProductionWrapper";
-import CitationsWrapper from "../wrappers/CitationsWrapper";
-import CoauthorsWrapper from "../wrappers/CoauthorsWrapper";
-import SubjectsWrapper from "../wrappers/SubjectsWrapper";
+import AuthorsTitleCard from '../AuthorsTitleCard';
+import ErrorWarning from '../ErrorWarning';
+import LoadingCard from '../LoadingCard';
+import ProductionWrapper from '../wrappers/ProductionWrapper';
+import CitationsWrapper from '../wrappers/CitationsWrapper';
+import CoauthorsWrapper from '../wrappers/CoauthorsWrapper';
+import SubjectsWrapper from '../wrappers/SubjectsWrapper';
 
 /* UI Library Components */
-import { Col, Row, Tabs } from "antd";
+import { Col, Row, Tabs } from 'antd';
 
 /* UI Library Sub-components */
 const { TabPane } = Tabs;
@@ -25,29 +25,28 @@ const Authors = ({ core }) => {
   const [state, setUrl] = APIRequest(`${core.URL}&data=info`);
 
   useEffect(() => {
-    document.title = "SALUDATA | Autores";
+    document.title = 'SALUDATA | Autores';
   }, []);
 
   useEffect(() => {
     setUrl(`${core.URL}&data=info`);
     core.setFilters(state.data.filters);
+    return () => {
+      core.setFilters(null);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [core.URL]);
+  }, [URL, state]);
 
   if (state.isError) {
     return <ErrorWarning />;
   } else if (state.isLoading) {
     return <LoadingCard />;
   }
-  setTimeout(() => {
-    core.setFilters(state.data.filters);
-    core.setHome(false);
-  }, 10);
   return (
     <Row gutter={[15, 15]}>
       <AuthorsTitleCard core={core} data={state.data.data} />
       <Col span={24}>
-        <Tabs defaultActiveKey={"topics"} type="card" tabBarGutter={5}>
+        <Tabs defaultActiveKey={'topics'} type="card" tabBarGutter={5}>
           <TabPane tab="Temas" key="topics">
             <SubjectsWrapper core={core} />
           </TabPane>

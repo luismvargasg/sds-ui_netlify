@@ -29,17 +29,18 @@ const Subjects = ({ core }) => {
 
   useEffect(() => {
     setUrl(`${URL}&data=info`);
-  }, [setUrl, URL]);
+    core.setFilters(state.data.filters);
+    return () => {
+      core.setFilters(null);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [URL, state]);
 
   if (state.isError) {
     return <ErrorWarning />;
   } else if (state.isLoading) {
     return <LoadingCard />;
   }
-  setTimeout(() => {
-    core.setFilters(state.data.filters);
-    core.setHome(false);
-  }, 10);
   return (
     <Row gutter={[15, 15]}>
       <SubjectsTitleCard data={state.data.data} core={core} />

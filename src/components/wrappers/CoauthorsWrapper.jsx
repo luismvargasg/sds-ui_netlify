@@ -2,6 +2,7 @@ import React from 'react';
 
 /* Utilities */
 import { APIRequest } from '../../apis/api';
+import { useLocation } from 'react-router';
 
 /* Components */
 import ErrorWarning from '../ErrorWarning';
@@ -16,7 +17,10 @@ import GraphChart from '../charts/GraphChart';
 import { Col, Row } from 'antd';
 
 const CoauthorsWrapper = ({ core }) => {
-  const [state] = APIRequest(`${core.URL}&data=coauthors`);
+  const location = useLocation();
+  const [state] = APIRequest(
+    `${location.pathname}${location.search}&data=coauthors`
+  );
 
   if (state.isError) {
     return <ErrorWarning />;

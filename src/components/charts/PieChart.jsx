@@ -9,7 +9,7 @@ import { Card, Empty } from 'antd';
 /* Componentes */
 import InfoButton from '../infoButton';
 
-const PieChart = ({ data, title }) => {
+const PieChart = ({ data, title, type = 'open_access' }) => {
   const bgColor = {
     hybrid: '#6448ff',
     green: '#25ff76',
@@ -26,7 +26,22 @@ const PieChart = ({ data, title }) => {
     bronze: 'Bronce',
   };
 
-  let config = {
+  let config_a = {
+    appendPadding: 20,
+    data: data,
+    angleField: 'value',
+    colorField: 'type',
+    pieStyle: { lineWidth: 3 },
+    radius: 1,
+    innerRadius: 0.4,
+    label: {
+      type: 'spider',
+      content: '{value} / {percentage}',
+    },
+    interactions: [{ type: 'element-active' }],
+  };
+
+  let config_b = {
     appendPadding: 20,
     data: data,
     angleField: 'value',
@@ -56,6 +71,9 @@ const PieChart = ({ data, title }) => {
       },
     },
   };
+
+  let config = type === 'compendium' ? config_a : config_b;
+
   return (
     <Card
       size="small"
@@ -63,7 +81,9 @@ const PieChart = ({ data, title }) => {
       headStyle={{ backgroundColor: '#003e65', color: 'white' }}
       bodyStyle={{ padding: '10px', height: '420px' }}
       hoverable
-      extra={<InfoButton title={title} type={'openAcces'} />}
+      extra={
+        type !== 'compendium' && <InfoButton title={title} type={'openAcces'} />
+      }
     >
       <div className="chart">
         {data.length > 0 ? (

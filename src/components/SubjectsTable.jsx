@@ -26,6 +26,8 @@ const SubjectsTable = ({ core, type }) => {
     `${core.URL}&data=${type}&max=${pagination.max}&page=${pagination.page}&sort=${sort}`
   );
 
+  const title = { institutions: 'Institución', groups: 'Grupo' };
+
   useEffect(() => {
     setUrl(
       `${core.URL}&data=${type}&max=${pagination.max}&page=${pagination.page}&sort=${sort}`
@@ -63,7 +65,7 @@ const SubjectsTable = ({ core, type }) => {
         scroll={{ x: 1400 }}
       >
         <Column
-          title="Institución"
+          title={title[type]}
           render={(item) => (
             <Link
               to={`/app/${type}?id=${item.id}`}
@@ -74,6 +76,20 @@ const SubjectsTable = ({ core, type }) => {
           )}
         />
         <Column title="Citas del tema" dataIndex={'citations'} align="center" />
+        {type === 'groups' && (
+          <Column
+            title="Afiliación"
+            dataIndex={'institution'}
+            render={(item) => (
+              <Link
+                to={`/app/institutions?id=${item.id}`}
+                onClick={() => core.setURL(`/app/institutions?id=${item.id}`)}
+              >
+                {item.name}
+              </Link>
+            )}
+          />
+        )}
         <Column
           title="Productos del tema"
           dataIndex={'products'}

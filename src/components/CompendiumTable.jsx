@@ -25,11 +25,10 @@ const CompendiumTable = ({ core, type }) => {
   const [pagination, setPagination] = useState({ page: 1, max: 5 });
   const [sort, setSort] = useState('citations');
   const location = useLocation();
+  let policies_flag = location.pathname === '/app/policies';
   let URL = new URLSearchParams(location.search);
   URL.delete('data');
   URL.set('data', type);
-
-  /* let URL = location.pathname; */
 
   const [state, setUrl] = APIRequest(
     `${location.pathname}?${URL.toString()}&page=${pagination.page}&max=${
@@ -37,9 +36,6 @@ const CompendiumTable = ({ core, type }) => {
     }&sort=${sort}`
   );
 
-  /* const [state, setUrl] = APIRequest(
-    `${core.URL}?data=${type}&page=${pagination.page}&max=${pagination.max}&sort=${sort}`
-  ); */
   const title = {
     groups: 'Grupo de investigación',
     institutions: 'Institución',
@@ -90,12 +86,14 @@ const CompendiumTable = ({ core, type }) => {
           rowClassName="compendium__row--height"
           scroll={{ x: 1400 }}
         >
-          <Column
-            align="center"
-            title="Puesto"
-            dataIndex="index"
-            render={(index) => <b>{index}</b>}
-          />
+          {!policies_flag && (
+            <Column
+              align="center"
+              title="Puesto"
+              dataIndex="index"
+              render={(index) => <b>{index}</b>}
+            />
+          )}
           <Column
             title={title[type]}
             render={(item) => (
@@ -220,12 +218,14 @@ const CompendiumTable = ({ core, type }) => {
         rowClassName="compendium__row--height"
         scroll={{ x: 1400 }}
       >
-        <Column
-          align="center"
-          title="Puesto"
-          dataIndex="index"
-          render={(index) => <b>{index}</b>}
-        />
+        {!policies_flag && (
+          <Column
+            align="center"
+            title="Puesto"
+            dataIndex="index"
+            render={(index) => <b>{index}</b>}
+          />
+        )}
         <Column
           title={title[type]}
           render={(item) => (
@@ -243,7 +243,7 @@ const CompendiumTable = ({ core, type }) => {
             dataIndex={'affiliations'}
             render={(item) => (
               <Link
-                to={`/app/institutions?id=${item.institution.id}`}
+                to={`/app/institutions?id=${item.institution?.id}`}
                 onClick={() =>
                   core.setURL(`/app/institutions?id=${item.institution.id}`)
                 }

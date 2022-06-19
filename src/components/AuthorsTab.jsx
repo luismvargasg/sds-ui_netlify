@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 /* Components */
 import ErrorWarning from './ErrorWarning';
 import LoadingCard from './LoadingCard';
+import SortPolicies from './SortPolicies';
 
 /* UI Components Library */
 import { Card, List, Space, Avatar } from 'antd';
@@ -21,8 +22,9 @@ import { Link } from 'react-router-dom';
 
 const AuthorsTab = ({ core }) => {
   const [pagination, setPagination] = useState({ max: 10, page: 1 });
+  const [sort, setSort] = useState('citations');
   const [state, setUrl] = APIRequest(
-    `${core.URL}&data=authors&max=${pagination.max}&page=${pagination.page}`
+    `${core.URL}&data=authors&max=${pagination.max}&page=${pagination.page}&sort=${sort}`
   );
 
   const onPageChange = ({ page, pageSize }) => {
@@ -32,10 +34,10 @@ const AuthorsTab = ({ core }) => {
 
   useEffect(() => {
     setUrl(
-      `${core.URL}&data=authors&max=${pagination.max}&page=${pagination.page}`
+      `${core.URL}&data=authors&max=${pagination.max}&page=${pagination.page}&sort=${sort}`
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pagination]);
+  }, [pagination, sort]);
 
   if (state.isError) {
     return <ErrorWarning />;
@@ -48,6 +50,17 @@ const AuthorsTab = ({ core }) => {
       headStyle={{ backgroundColor: '#003e65', color: 'white' }}
       size="small"
       title="Autores"
+      extra={
+        <div>
+          <p className="white-text">
+            {state.data.total || state.data.total_results}{' '}
+            {state.data.total > 1 || state.data.total_results > 1
+              ? 'resultados'
+              : 'resultado'}
+          </p>
+          <SortPolicies sort={sort} setSort={setSort} />
+        </div>
+      }
     >
       <List
         itemLayout="vertical"
@@ -71,7 +84,7 @@ const AuthorsTab = ({ core }) => {
             actions={[
               <Space style={{ fontSize: 18 }}>
                 {React.createElement(CalendarOutlined)}
-                Publicaciones: {item.papers_count}
+                Publicaciones: {item.products_count}
               </Space>,
               <Space style={{ fontSize: 18 }}>
                 {React.createElement(CitationsIcon)}
@@ -87,7 +100,7 @@ const AuthorsTab = ({ core }) => {
               }
               title={
                 <Link
-                  style={{ fontSize: 15, textDecoration: 'underline' }}
+                  style={{ fontSize: 18, textDecoration: 'underline' }}
                   to={`/app/authors?id=${item.id}`}
                   onClick={() => core.setURL(`/app/authors?id=${item.id}`)}
                 >

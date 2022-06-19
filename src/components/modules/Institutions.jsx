@@ -1,22 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 
 /* Utilities */
-import { APIRequest } from "../../apis/api";
-import { useLocation } from "react-router";
+import { APIRequest } from '../../apis/api';
+import { useLocation } from 'react-router';
 
 /* Components */
-import AuthorsTab from "../AuthorsTab";
-import CommonTitleCard from "../CommonTitleCard";
-import ErrorWarning from "../ErrorWarning";
-import GroupsTab from "../GroupsTab";
-import LoadingCard from "../LoadingCard";
-import ProductionWrapper from "../wrappers/ProductionWrapper";
-import CitationsWrapper from "../wrappers/CitationsWrapper";
-import CoauthorsWrapper from "../wrappers/CoauthorsWrapper";
-import SubjectsWrapper from "../wrappers/SubjectsWrapper";
+import AuthorsTab from '../AuthorsTab';
+import CommonTitleCard from '../CommonTitleCard';
+import ErrorWarning from '../ErrorWarning';
+import GroupsTab from '../GroupsTab';
+import LoadingCard from '../LoadingCard';
+import ProductionWrapper from '../wrappers/ProductionWrapper';
+import CitationsWrapper from '../wrappers/CitationsWrapper';
+import CoauthorsWrapper from '../wrappers/CoauthorsWrapper';
+import SubjectsWrapper from '../wrappers/SubjectsWrapper';
 
 /* UI Library Components */
-import { Col, Row, Tabs } from "antd";
+import { Col, Row, Tabs } from 'antd';
 
 /* UI Library Sub-components */
 const { TabPane } = Tabs;
@@ -27,27 +27,28 @@ const Institutions = ({ core }) => {
   const [state, setUrl] = APIRequest(`${URL}&data=info`);
 
   useEffect(() => {
-    document.title = "Instituciones | SALUDATA";
+    document.title = 'Instituciones | SALUDATA';
   }, []);
 
   useEffect(() => {
     setUrl(`${URL}&data=info`);
-  }, [setUrl, URL]);
+    core.setFilters(state.data.filters);
+    return () => {
+      core.setFilters(null);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [URL, state]);
 
   if (state.isError) {
     return <ErrorWarning />;
   } else if (state.isLoading) {
     return <LoadingCard />;
   }
-  setTimeout(() => {
-    core.setFilters(state.data.filters);
-    core.setHome(false);
-  }, 10);
   return (
     <Row gutter={[15, 15]}>
       <CommonTitleCard data={state.data.data} type="institutions" core={core} />
       <Col span={24}>
-        <Tabs defaultActiveKey={"topics"} type="card" tabBarGutter={5}>
+        <Tabs defaultActiveKey={'topics'} type="card" tabBarGutter={5}>
           <TabPane tab="Temas" key="topics">
             <SubjectsWrapper core={core} />
           </TabPane>

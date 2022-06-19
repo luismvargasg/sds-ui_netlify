@@ -7,10 +7,6 @@ import { Col, Divider, Row } from 'antd';
 import MetricsTable from '../MetricsTable';
 
 const Metrics = ({ core }) => {
-  setTimeout(() => {
-    core.setHome(false);
-  }, 10);
-
   return (
     <Row justify="center" style={{ marginTop: '30px' }}>
       <Col xs={20} lg={14}>

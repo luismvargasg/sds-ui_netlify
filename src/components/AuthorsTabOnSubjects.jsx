@@ -44,6 +44,9 @@ const AuthorsTab = ({ core }) => {
   if (state.isLoading) {
     return <LoadingCard />;
   }
+  if (state.data.data.length === 0) {
+    return <ErrorWarning />;
+  }
   return (
     <Row gutter={(15, 15)}>
       <Col xs={24} lg={8}>
@@ -175,7 +178,7 @@ const AuthorsTab = ({ core }) => {
           data={state.data.data.authors_production_count}
           title="Autores con mayor producción"
           height={560}
-          type="production'"
+          type="production"
         />
       </Col>
     </Row>

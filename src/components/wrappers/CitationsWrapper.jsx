@@ -2,6 +2,7 @@ import React from 'react';
 
 /* Utilities */
 import { APIRequest } from '../../apis/api';
+import { useLocation } from 'react-router';
 
 /* Components */
 import ErrorWarning from '../ErrorWarning';
@@ -15,9 +16,12 @@ import ColumnChart from '../charts/ColumnChart';
 import MapChart from '../charts/MapChart';
 
 const CitationsWrapper = ({ core }) => {
-  const [state] = APIRequest(`${core.URL}&data=citations`);
+  const location = useLocation();
+  const [state] = APIRequest(
+    `${location.pathname}${location.search}&data=citations`
+  );
 
-  if (state.isError) {
+  if (state.isError || state.data.error) {
     return <ErrorWarning />;
   }
   if (state.isLoading) {

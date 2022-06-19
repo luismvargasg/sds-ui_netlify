@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react';
 
 /* Components */
-import AuthorsListOnModal from "./AuthorsListOnModal";
+import AuthorsListOnModal from './AuthorsListOnModal';
 
 /* Utilities */
-import { APIRequest } from "../apis/api";
+import { APIRequest } from '../apis/api';
 
 /* UI Library Components */
-import { Divider, Descriptions, Spin, Typography } from "antd";
+import { Divider, Descriptions, Spin, Typography } from 'antd';
 
 /* UI Library Sub-components */
 const { Text, Paragraph, Link } = Typography;
@@ -19,11 +19,15 @@ const DocumentModal = ({ documentID }) => {
   const renderedExternalIDs = () => {
     return state.data.data.external_ids.map((item) => (
       <Descriptions.Item key={item.source} label={`${item.source}:`}>
-        URL:{" "}
-        <a href={item.url} target="_blank" rel="noreferrer">
-          Abrir en nueva pestaña
-        </a>
-        <br />
+        {item.url && (
+          <>
+            URL:{' '}
+            <a href={item.url} target="_blank" rel="noreferrer">
+              Abrir en nueva pestaña
+            </a>
+            <br />
+          </>
+        )}
         ID: <Text copyable>{item.id}</Text>
       </Descriptions.Item>
     ));
@@ -46,25 +50,31 @@ const DocumentModal = ({ documentID }) => {
       <div>
         <Text strong>Autores: </Text>
         <AuthorsListOnModal authors={state.data.data.authors} />
-        <Divider style={{ margin: "15px 0" }} />
+        <Divider style={{ margin: '15px 0' }} />
         <Text strong>Abstract</Text>
         <Paragraph
           ellipsis={
-            ellipsis ? { rows: 3, expandable: true, symbol: "Más" } : false
+            ellipsis ? { rows: 3, expandable: true, symbol: 'Más' } : false
           }
         >
           {state.data.data.abstract}
         </Paragraph>
-        <Divider style={{ margin: "15px 0" }} />
+        <Divider style={{ margin: '15px 0' }} />
         <Descriptions bordered column={{ lg: 3, md: 2, sm: 2, xs: 1 }}>
           <Descriptions.Item label="Revista:">
             {state.data.data.source.name}
           </Descriptions.Item>
           <Descriptions.Item label="pISSN:">
-            <Text copyable>{state.data.data.source.serials.pissn}</Text>
+            {state.data.data.source?.serials?.pissn && (
+              <Text copyable>
+                {state.data.data.source?.serials?.pissn || 'No disponible'}
+              </Text>
+            )}
           </Descriptions.Item>
           <Descriptions.Item label="eISSN:">
-            <Text copyable>{state.data.data.source.serials.eissn}</Text>
+            {state.data.data.source?.serials?.eissn && (
+              <Text copyable>{state.data.data.source?.serials?.eissn}</Text>
+            )}
           </Descriptions.Item>
           <Descriptions.Item label="Publicado:">
             {state.data.data.year_published}

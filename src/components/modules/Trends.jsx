@@ -9,6 +9,7 @@ import title_ODS from '../../media/title_ODS.svg';
 
 /* Charts */
 import Infographic from '../charts/Infographic';
+import ODSInfographic from '../charts/ODSInfographic';
 
 /* Utilities */
 import { APIRequest } from '../../apis/api';
@@ -17,16 +18,12 @@ import { APIRequest } from '../../apis/api';
 import ErrorWarning from '../ErrorWarning';
 import LoadingCard from '../LoadingCard';
 import CallToActionTrends from '../CallToActionTrends';
-import ODSInfographic from '../ODSInfographic';
 
 /* UI Library Sub-components */
 const { Title } = Typography;
 
 const Trends = ({ core }) => {
   const [state] = APIRequest('/app/trends');
-  setTimeout(() => {
-    core.setHome(false);
-  }, 10);
 
   useEffect(() => {
     document.title = 'SALUDATA | Tendencias';
@@ -51,7 +48,7 @@ const Trends = ({ core }) => {
         <Col xs={24} lg={7}>
           <Infographic
             title="COVID-19"
-            documentsValue={state.data.covid.documents}
+            productsValue={state.data.covid.products}
             authorsValue={state.data.covid.authors}
             groupsValue={state.data.covid.groups}
             institutionsValue={state.data.covid.institutions}
@@ -65,7 +62,7 @@ const Trends = ({ core }) => {
         <Col xs={24} lg={7}>
           <Infographic
             title="PDD"
-            documentsValue={state.data.PDD.documents}
+            productsValue={state.data.PDD.products}
             authorsValue={state.data.PDD.authors}
             groupsValue={state.data.PDD.groups}
             institutionsValue={state.data.PDD.institutions}
@@ -75,7 +72,7 @@ const Trends = ({ core }) => {
         <Col xs={24} lg={7}>
           <Infographic
             title="PTS"
-            documentsValue={state.data.PTS.documents}
+            productsValue={state.data.PTS.products}
             authorsValue={state.data.PTS.authors}
             groupsValue={state.data.PTS.groups}
             institutionsValue={state.data.PTS.institutions}

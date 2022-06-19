@@ -2,12 +2,12 @@ import React from 'react';
 
 const Infographic = ({
   title,
-  documentsValue = 0,
+  productsValue = 0,
   authorsValue = 0,
   groupsValue = 0,
   institutionsValue = 0,
 }) => {
-  const fixMatrix = { 1: 18, 2: 14, 3: 7, 4: 0 };
+  const fixMatrix = { 1: 18, 2: 14, 3: 7, 4: 0, 5: -8, 6: -15 };
   return (
     <>
       <svg viewBox="-5 -5 585 585">
@@ -297,11 +297,11 @@ const Infographic = ({
         <g>
           <text
             transform={`matrix(1 0 0 1 ${
-              fixMatrix[documentsValue.toString().length] + 94
+              fixMatrix[productsValue.toString().length] + 94
             } 104)`}
             className="st11 st12"
           >
-            {documentsValue}
+            {productsValue}
           </text>
           <text transform="matrix(1 0 0 1 65 135)" className="st11 st12">
             Productos
