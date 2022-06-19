@@ -1,11 +1,11 @@
-import { LinkOutlined } from "@ant-design/icons";
+import { LinkOutlined } from '@ant-design/icons';
 
 const title = {
-  website: "Sitio Web",
-  gruplac: "GrupLAC",
-  scholar: "Google Académico",
-  wikipedia: "Wikipedia",
-  site: "Sitio Web",
+  website: 'Sitio Web',
+  gruplac: 'GrupLAC',
+  scholar: 'Google Académico',
+  wikipedia: 'Wikipedia',
+  site: 'Sitio Web',
 };
 
 export const externalUrls = (external_urls) => {
@@ -16,12 +16,12 @@ export const externalUrls = (external_urls) => {
         <a href={external_urls[i].url} key={i} target="_blank" rel="noreferrer">
           {title[external_urls[i].source]
             ? title[external_urls[i].source]
-            : external_urls[i].source}{" "}
+            : external_urls[i].source}{' '}
           <LinkOutlined />
         </a>,
       ]);
     }
     return actionsList;
   }
-  return "";
+  return '';
 };

@@ -1,17 +1,21 @@
-import React from "react";
+import React from 'react';
 
 /* Utilities */
-import { APIRequest } from "../../apis/api";
+import { APIRequest } from '../../apis/api';
+import { useLocation } from 'react-router';
 
 /* Components */
-import ErrorWarning from "../ErrorWarning";
-import LoadingCard from "../LoadingCard";
+import ErrorWarning from '../ErrorWarning';
+import LoadingCard from '../LoadingCard';
 
 /* Charts */
-import WordCloudChart from "../charts/WordCloudChart";
+import WordCloudChart from '../charts/WordCloudChart';
 
 const SubjectsWrapper = ({ core }) => {
-  const [state] = APIRequest(`${core.URL}&data=subjects&limit=20`);
+  const location = useLocation();
+  const [state] = APIRequest(
+    `${location.pathname}${location.search}&data=subjects&limit=20`
+  );
 
   if (state.isError) {
     return <ErrorWarning />;

@@ -19,13 +19,13 @@ import { Link } from 'react-router-dom';
 const { Title } = Typography;
 
 const Home = ({ core }) => {
-  setTimeout(() => {
-    core.setHome(true);
-    core.setFilters(null);
-  }, 10);
-
   useEffect(() => {
     document.title = 'SALUDATA';
+    core.setHome(true);
+    return () => {
+      core.setHome(false);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

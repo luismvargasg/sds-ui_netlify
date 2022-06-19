@@ -1,19 +1,15 @@
-import React from "react";
+import React from 'react';
 
 /* Icons */
-import { WarningOutlined } from "@ant-design/icons";
+import { WarningOutlined } from '@ant-design/icons';
 
 /* UI Library */
-import { Button, Col, Row, Typography } from "antd";
+import { Button, Col, Row, Typography } from 'antd';
 
 /* Utilities */
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const NotFound = ({ core }) => {
-  setTimeout(() => {
-    core.setHome(false);
-  }, 10);
-
   return (
     <Row justify="center" className="align__center">
       <Col span={24}>
@@ -30,7 +26,7 @@ const NotFound = ({ core }) => {
           servidor.
         </Typography.Title>
       </Col>
-      <Col span={24} style={{ marginTop: "30px" }}>
+      <Col span={24} style={{ marginTop: '30px' }}>
         <Link to="/app">
           <Button type="primary">Llévame al inicio</Button>
         </Link>

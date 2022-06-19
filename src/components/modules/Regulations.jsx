@@ -1,17 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 
 /* Components */
-import ErrorWarning from "../ErrorWarning";
-import LoadingCard from "../LoadingCard";
+import ErrorWarning from '../ErrorWarning';
+import LoadingCard from '../LoadingCard';
 
 /* UI Library Components */
-import { Col, Divider, Row, Table, Typography } from "antd";
+import { Col, Divider, Row, Table, Typography } from 'antd';
 
 /* Utilities */
-import { APIRequest } from "../../apis/api";
+import { APIRequest } from '../../apis/api';
 
 /* Icons */
-import { FilePdfOutlined } from "@ant-design/icons";
+import { FilePdfOutlined } from '@ant-design/icons';
 
 /* UI Library Sub-components */
 const { Column } = Table;
@@ -21,12 +21,8 @@ const Regulations = ({ core }) => {
   const [state] = APIRequest(`${core.URL}?data=info`);
 
   useEffect(() => {
-    document.title = "SALUDATA | Autores";
+    document.title = 'SALUDATA | Autores';
   }, []);
-
-  setTimeout(() => {
-    core.setHome(false);
-  }, 10);
 
   if (state.isError) {
     return <ErrorWarning />;
@@ -34,7 +30,7 @@ const Regulations = ({ core }) => {
     return <LoadingCard />;
   }
   return (
-    <Row justify="center" style={{ marginTop: "50px", marginBottom: "30px" }}>
+    <Row justify="center" style={{ marginTop: '50px', marginBottom: '30px' }}>
       <Col xxl={18} md={22} xs={24}>
         <Title level={2}>
           Normatividad del sistema de investigación en salud.
@@ -48,14 +44,14 @@ const Regulations = ({ core }) => {
           internacionales.
         </Title>
         <Table
-          style={{ marginTop: "30px" }}
+          style={{ marginTop: '30px' }}
           dataSource={state.data.data}
           pagination={false}
           rowKey={(record) => state.data.data.indexOf(record)}
         >
           <Column
             align="center"
-            responsive={["sm"]}
+            responsive={['sm']}
             render={() => <FilePdfOutlined />}
           />
           <Column

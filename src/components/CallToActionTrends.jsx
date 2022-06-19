@@ -28,7 +28,11 @@ const CallToActionTrends = ({ core, id, type }) => {
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <Link
           to={`/app/${type === 'covid' ? 'subjects' : 'policies'}?id=${id}`}
-          onClick={() => core.setURL(`/app/policies?id=${id}`)}
+          onClick={() =>
+            core.setURL(
+              `/app/${type === 'covid' ? 'subjects' : 'policies'}?id=${id}`
+            )
+          }
         >
           <Button type="primary">Haz click aquí</Button>
         </Link>

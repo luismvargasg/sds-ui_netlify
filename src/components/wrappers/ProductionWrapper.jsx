@@ -1,26 +1,30 @@
-import React from "react";
+import React from 'react';
 
 /* Components */
-import DocumentList from "../DocumentList";
-import ErrorWarning from "../ErrorWarning";
-import LoadingCard from "../LoadingCard";
-import DocumentByType from "../DocumentByType";
+import DocumentList from '../DocumentList';
+import ErrorWarning from '../ErrorWarning';
+import LoadingCard from '../LoadingCard';
+import DocumentByType from '../DocumentByType';
 
 /* Charts */
-import PieChart from "../charts/PieChart";
-import VennChart from "../charts/VennChart";
+import PieChart from '../charts/PieChart';
+import VennChart from '../charts/VennChart';
 
 /* Utilities */
-import { APIRequest } from "../../apis/api";
+import { APIRequest } from '../../apis/api';
+import { useLocation } from 'react-router';
 
 /* UI Library Components */
-import { Col, Row, Tabs } from "antd";
+import { Col, Row, Tabs } from 'antd';
 
 /* UI Library Sub-components */
 const { TabPane } = Tabs;
 
 const ProductionWrapper = ({ core }) => {
-  const [state] = APIRequest(`${core.URL}&data=production`);
+  const location = useLocation();
+  const [state] = APIRequest(
+    `${location.pathname}${location.search}&data=production`
+  );
 
   const tabMaker = (tabList) => {
     return (

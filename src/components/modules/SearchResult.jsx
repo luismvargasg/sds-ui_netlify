@@ -1,50 +1,59 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
 //import { useHistory } from "react-router";
 
 /* Components */
-import ErrorWarning from "../ErrorWarning";
-import LoadingCard from "../LoadingCard";
-import ProductionResult from "../ProductionResult";
-import SortSearchResults from "../SortSearchResults";
+import ErrorWarning from '../ErrorWarning';
+import LoadingCard from '../LoadingCard';
+import ProductionResult from '../ProductionResult';
+import SortSearchResults from '../SortSearchResults';
 
 /* UI Library Components */
-import { Avatar, Card, Col, List, Row, Space } from "antd";
+import { Avatar, Card, Col, List, Row, Space } from 'antd';
 
 /* Icons */
 import {
   BankOutlined,
   TeamOutlined,
   CalendarOutlined,
-} from "@ant-design/icons";
-import { CitationsIcon } from "../../media/icons/citations";
+} from '@ant-design/icons';
+import { CitationsIcon } from '../../media/icons/citations';
 
 /* Utilities */
-import { APIRequest } from "../../apis/api";
-import { titles } from "../../utils/texts";
-import { Link } from "react-router-dom";
-const queryString = require("query-string");
+import { APIRequest } from '../../apis/api';
+import { titles } from '../../utils/texts';
+import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router';
+const queryString = require('query-string');
 
 const SearchResult = ({ core }) => {
-  //const history = useHistory();
-  //const URL = history.location.pathname + history.location.search;
+  const location = useLocation();
   const parsed = queryString.parse(core.URL);
-  const type = parsed["/app/search?data"];
+  const type = parsed['/app/search?data'];
   const [pagination, setPagination] = useState({ max: 10, page: 1 });
-  const [sort, setSort] = useState("citations");
+  const [sort, setSort] = useState('citations');
   const [state, setUrl] = APIRequest(
-    `${core.URL}&max=${pagination.max}&page=${pagination.page}&sort=${sort}`
+    `${location.pathname}${location.search}&max=${pagination.max}&page=${pagination.page}&sort=${sort}`
   );
   const tools = { sort, setSort };
 
   useEffect(() => {
-    document.title = "Resultados de Búsqueda | SALUDATA";
+    document.title = 'Resultados de Búsqueda | SALUDATA';
   }, []);
 
   useEffect(() => {
     setPagination({ max: 10, page: 1 });
-    setSort("citations");
+    setSort('citations');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [core.URL]);
+
+  useEffect(() => {
+    core.setFilters(state.data.filters);
+    return () => {
+      core.setFilters(null);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state]);
 
   useEffect(() => {
     setPagination({ max: 10, page: 1 });
@@ -52,7 +61,7 @@ const SearchResult = ({ core }) => {
 
   useEffect(() => {
     setUrl(
-      `${core.URL}&max=${pagination.max}&page=${pagination.page}&sort=${sort}`
+      `${location.pathname}${location.search}&max=${pagination.max}&page=${pagination.page}&sort=${sort}`
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pagination]);
@@ -67,25 +76,21 @@ const SearchResult = ({ core }) => {
   } else if (state.isLoading) {
     return <LoadingCard />;
   }
-  setTimeout(() => {
-    core.setFilters(state.data.filters);
-    core.setHome(false);
-  }, 10);
-  return type === "literature" ? (
+  return type === 'literature' ? (
     <ProductionResult data={state.data} core={core} />
   ) : (
     <Row align="center">
       <Col span={24}>
         <Card
-          headStyle={{ backgroundColor: "#003e65", color: "white" }}
+          headStyle={{ backgroundColor: '#003e65', color: 'white' }}
           size="small"
-          bodyStyle={{ padding: "10px 0 10px 10px" }}
-          title={titles[parsed["/app/search?data"]]}
+          bodyStyle={{ padding: '10px 0 10px 10px' }}
+          title={titles[parsed['/app/search?data']]}
           extra={
             <div>
               <p className="white-text">
-                {state.data.total_results}{" "}
-                {state.data.total_results === 1 ? "resultado" : "resultados"}
+                {state.data.total_results}{' '}
+                {state.data.total_results === 1 ? 'resultado' : 'resultados'}
               </p>
               <SortSearchResults tools={tools} key="1" />
             </div>
@@ -96,8 +101,8 @@ const SearchResult = ({ core }) => {
             size="large"
             dataSource={state.data.data}
             pagination={{
-              size: "small",
-              position: "bottom",
+              size: 'small',
+              position: 'bottom',
               total: state.data.total_results,
               onChange: (page, pageSize) =>
                 onPageChange({
@@ -115,19 +120,15 @@ const SearchResult = ({ core }) => {
                     {React.createElement(CalendarOutlined)}
                     Publicaciones: {item.papers_count || item.products_count}
                   </Space>,
-                  item.citations_count ? (
-                    <Space style={{ fontSize: 18 }}>
-                      {React.createElement(CitationsIcon)}
-                      Citado: {item.citations_count}
-                    </Space>
-                  ) : (
-                    ""
-                  ),
+                  <Space style={{ fontSize: 18 }}>
+                    {React.createElement(CitationsIcon)}
+                    Citado: {item.citations_count}
+                  </Space>,
                 ]}
               >
                 <List.Item.Meta
                   avatar={
-                    type === "institutions" ? (
+                    type === 'institutions' ? (
                       item.logo ? (
                         <Avatar size={48} src={item.logo} />
                       ) : (
@@ -154,10 +155,10 @@ const SearchResult = ({ core }) => {
                   title={
                     <Link
                       className="searchResult--link"
-                      to={`/app/${parsed["/app/search?data"]}?id=${item.id}`}
+                      to={`/app/${parsed['/app/search?data']}?id=${item.id}`}
                       onClick={() =>
                         core.setURL(
-                          `/app/${parsed["/app/search?data"]}?id=${item.id}`
+                          `/app/${parsed['/app/search?data']}?id=${item.id}`
                         )
                       }
                     >
@@ -165,11 +166,11 @@ const SearchResult = ({ core }) => {
                     </Link>
                   }
                   description={
-                    type !== "institutions" ? (
+                    type !== 'institutions' ? (
                       <>
-                        {type === "authors" && item.affiliation?.group?.name ? (
+                        {type === 'authors' && item.affiliation?.group?.name ? (
                           <div>
-                            <TeamOutlined />{" "}
+                            <TeamOutlined />{' '}
                             <Link
                               className="affiliation--link"
                               to={`/app/groups?id=${item.affiliation?.group?.id}`}
@@ -183,11 +184,11 @@ const SearchResult = ({ core }) => {
                             </Link>
                           </div>
                         ) : (
-                          ""
+                          ''
                         )}
                         {item.affiliation?.institution?.name && (
                           <div>
-                            <BankOutlined />{" "}
+                            <BankOutlined />{' '}
                             <Link
                               className="affiliation--link"
                               to={`/app/institutions?id=${item.affiliation?.institution?.id}`}
@@ -203,7 +204,7 @@ const SearchResult = ({ core }) => {
                         )}
                       </>
                     ) : (
-                      ""
+                      ''
                     )
                   }
                 />

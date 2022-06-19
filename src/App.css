@@ -135,6 +135,11 @@
   text-align: center;
 }
 
+.policies--tinyChart {
+  border: 1px solid #dddddd;
+  margin: 0 15px;
+}
+
 /* ----- SIDEBAR ----- */
 
 .drawer--clean-button {
@@ -291,6 +296,10 @@
 }
 
 /* ----- UI LIBRARY OVERWRITE ----- */
+
+.ant-list-vertical .ant-list-item {
+  align-items: center;
+}
 
 .title--margin0 {
   margin-top: 0 !important;

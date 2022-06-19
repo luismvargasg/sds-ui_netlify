@@ -22,7 +22,6 @@ const FilterMultipleSelect = ({ list, setFilter }) => {
           optionFilterProp="label"
           className="filter--container"
           onChange={onChange}
-          autoClearSearchValue
         />
       </>
     );

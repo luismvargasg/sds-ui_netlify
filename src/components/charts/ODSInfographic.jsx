@@ -40,7 +40,7 @@ const ODSInfographic = ({ core, data }) => {
           <Card.Meta
             description={
               <div style={{ fontWeight: 600 }}>
-                <p>Documentos: {item.documents}</p>
+                <p>Documentos: {item.products}</p>
                 <p>Autores: {item.authors}</p>
                 <p>Grupos: {item.groups}</p>
                 <p>Instituciones: {item.institutions}</p>

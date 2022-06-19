@@ -14,6 +14,8 @@ import orcid from '../media/icons/orcid';
 import researcherid from '../media/icons/researcherid';
 import scholar from '../media/icons/scholar';
 import scopus from '../media/icons/scopus';
+import linkedin from '../media/icons/linkedin';
+import cvlac from '../media/icons/cvlac';
 import { BankOutlined, TeamOutlined, ReadOutlined } from '@ant-design/icons';
 
 /* UI Library Sub-components */
@@ -25,6 +27,8 @@ const AuthorsTitleCard = ({ core, data }) => {
     scholar: scholar(),
     scopus: scopus(),
     researcherid: researcherid(),
+    linkedin: linkedin(),
+    minciencias: cvlac(),
   };
 
   const renderedButtons = (URLList) => {

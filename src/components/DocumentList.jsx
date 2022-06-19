@@ -111,9 +111,11 @@ const DocumentList = ({ data, tools, title = 'Artículos', core }) => {
                     ),
                   ]}
                   description={
-                    <div>
-                      <ReadOutlined /> {item.source.name}
-                    </div>
+                    item.source && (
+                      <div>
+                        <ReadOutlined /> {item.source.name}
+                      </div>
+                    )
                   }
                 />
                 Autores:{' '}

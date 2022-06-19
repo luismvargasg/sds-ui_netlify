@@ -49,11 +49,11 @@ const FilterMenu = ({ core, onClose }) => {
       : '';
     if (type !== 'institutions') {
       filteredURL += URL.has('institution')
-        ? `&institution=${URL.get('institution')}`
+        ? `&institutions=${URL.get('institutions')}`
         : '';
     }
     if (type !== 'groups') {
-      filteredURL += URL.has('group') ? `&group=${URL.get('group')}` : '';
+      filteredURL += URL.has('groups') ? `&groups=${URL.get('group')}` : '';
     }
     if (type !== 'years') {
       filteredURL += URL.has('start_year')
@@ -65,12 +65,12 @@ const FilterMenu = ({ core, onClose }) => {
     }
 
     if (type === 'institutions' && core.filters.institutions && institutions) {
-      filteredURL += `&institution=${institutions}`;
+      filteredURL += `&institutions=${institutions}`;
     }
     if (type === 'groups' && core.filters.groups && groups) {
-      filteredURL += `&group=${groups}`;
+      filteredURL += `&groups=${groups}`;
     }
-    if (type === 'years' && core.filters.start_year && years) {
+    if (type === 'years' && core.filters.years.start_year && years) {
       filteredURL += `&start_year=${years.start_year}&end_year=${years.end_year}`;
     }
     core.setURL(filteredURL);
@@ -151,11 +151,14 @@ const FilterMenu = ({ core, onClose }) => {
           disabled={true}
         />
       )}
-      {core.filters?.start_year ? (
+      {core.filters?.years?.start_year ? (
         <SubMenu key="years" title="Rango de años" icon={<CalendarOutlined />}>
           <Menu.Item key="3" style={{ height: 'auto' }}>
-            {core.filters?.start_year && (
-              <YearsRangeFilter filters={core.filters} setYears={setYears} />
+            {core.filters?.years?.start_year && (
+              <YearsRangeFilter
+                filters={core.filters.years}
+                setYears={setYears}
+              />
             )}
             <div className="filter__button">
               <Button
