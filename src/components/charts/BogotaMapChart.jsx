@@ -11,7 +11,6 @@ import { APIRequest } from '../../apis/api';
 
 /* UI Library Components */
 import { Modal, Spin } from 'antd';
-//import RelationGraph from "./RelationGraph";
 
 const BogotaMapChart = ({ height = 600 }) => {
   const [state] = APIRequest('/app/home');
@@ -61,8 +60,6 @@ const BogotaMapChart = ({ height = 600 }) => {
     map: {
       type: 'mapbox',
       style: 'blank',
-      //minZoom: 10,
-      //maxZoom: 10,
     },
     source: {
       data: state.data.data,
@@ -71,7 +68,7 @@ const BogotaMapChart = ({ height = 600 }) => {
       },
     },
     autoFit: true,
-    color: '#90cedc', //#d7d8d4
+    color: '#90cedc',
     style: {
       opacity: 1,
       stroke: '#f0f2f5',
@@ -111,24 +108,16 @@ const BogotaMapChart = ({ height = 600 }) => {
   };
 
   return (
-    <>
-      {/* <div>
-        <RelationGraph data={state.data.subject_tree.Medicine} />
+    <div className="map--chart">
+      <div style={{ height: height, margin: '5px' }}>
+        <AreaMap
+          {...config}
+          onReady={(plot) => {
+            plotEvents(plot);
+          }}
+        />
       </div>
-      <div>
-        <RelationGraph data={state.data.subject_tree.Psychology} />
-      </div> */}
-      <div className="map--chart" /* style={{ marginTop: "20px" }} */>
-        <div style={{ height: height, margin: '5px' }}>
-          <AreaMap
-            {...config}
-            onReady={(plot) => {
-              plotEvents(plot);
-            }}
-          />
-        </div>
-      </div>
-    </>
+    </div>
   );
 };
 
