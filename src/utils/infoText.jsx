@@ -53,8 +53,7 @@ export const infoText = {
   columnLine: (
     <div>
       En el gráfico, las barras indican la cantidad de productos académicos por
-      año, y las líneas señalan las citaciones durante el mismo periodo. Para
-      saber más consulte la ficha técnica del indicador.
+      año. Para saber más consulte la ficha técnica del indicador.
     </div>
   ),
   compendiumSex: (

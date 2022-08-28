@@ -21,7 +21,7 @@ const WordCloudChart = ({ title, data, core }) => {
     colorField: 'name',
     wordStyle: {
       fontFamily: 'Verdana',
-      fontSize: [20, 100],
+      fontSize: [20, 150],
       rotation: 0,
     },
     tooltip: {
@@ -33,7 +33,11 @@ const WordCloudChart = ({ title, data, core }) => {
               {datum[0]?.name}
             </h3>
             <h4>Productos: &emsp; {datum[0]?.data?.datum?.products}</h4>
-            <h4>Citaciones: &emsp; {datum[0]?.data?.datum?.citations}</h4>
+            {datum[0]?.data?.datum?.citations ? (
+              <h4>Citaciones: &emsp; {datum[0]?.data?.datum?.citations}</h4>
+            ) : (
+              ''
+            )}
           </>
         );
       },

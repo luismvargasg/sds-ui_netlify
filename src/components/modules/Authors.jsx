@@ -9,7 +9,6 @@ import AuthorsTitleCard from '../AuthorsTitleCard';
 import ErrorWarning from '../ErrorWarning';
 import LoadingCard from '../LoadingCard';
 import ProductionWrapper from '../wrappers/ProductionWrapper';
-import CitationsWrapper from '../wrappers/CitationsWrapper';
 import CoauthorsWrapper from '../wrappers/CoauthorsWrapper';
 import SubjectsWrapper from '../wrappers/SubjectsWrapper';
 
@@ -52,9 +51,6 @@ const Authors = ({ core }) => {
           </TabPane>
           <TabPane tab="Producción" key="production" forceRender>
             <ProductionWrapper core={core} />
-          </TabPane>
-          <TabPane tab="Citaciones" key="citations">
-            <CitationsWrapper core={core} />
           </TabPane>
           <TabPane tab="Coautorías" key="coauthors">
             <CoauthorsWrapper core={core} />

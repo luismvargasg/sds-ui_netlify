@@ -3,6 +3,8 @@ import React, { useEffect } from 'react';
 /* Components */
 import CallsTableMin from '../CallsTableMin';
 import CallsTableNih from '../CallsTableNih';
+import CallsTablePfizer from '../CallsTablePfizer';
+import CallsTableUkri from '../CallsTableUkri';
 
 /* UI Library Components */
 import { Col, Divider, Row, Typography } from 'antd';
@@ -17,7 +19,7 @@ const Calls = ({ core }) => {
 
   return (
     <Row justify="center" style={{ marginTop: '50px' }}>
-      <Col xxl={18} md={22} xs={24}>
+      <Col xxl={20} md={24}>
         <Title level={2}>Directorio de convocatorias Públicas</Title>
         <Title level={3} style={{ color: '#515152' }}>
           Consulte aquí las convocatorias locales, nacionales e internacionales
@@ -36,6 +38,12 @@ const Calls = ({ core }) => {
         <Divider />
         <Title level={4}>NIH Grants & Funding</Title>
         <CallsTableNih />
+        <Divider />
+        <Title level={4}>Pfizer</Title>
+        <CallsTablePfizer />
+        <Divider />
+        <Title level={4}>UK Research and Innovation - UKRI</Title>
+        <CallsTableUkri />
         <Divider />
         <Title level={4}>Minciencias</Title>
         <CallsTableMin />

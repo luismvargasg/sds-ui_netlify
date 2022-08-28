@@ -15,7 +15,7 @@ import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
 
 /* Charts */
-import TinyColumnLineChart from './charts/TinyColumnLineChart';
+import TinyColumnChart from './charts/TinyColumnChart';
 import TinyWordCloudChart from './charts/TinyWordCloudChart';
 
 /* UI Library Sub-components */
@@ -176,7 +176,7 @@ const CompendiumTable = ({ core, type }) => {
             title={() => {
               return (
                 <Row justify="space-between" align="middle">
-                  Productos y Citas por años
+                  Productos por años
                   <div id="table__infoButton">
                     <InfoButton
                       title="Productos y citas por año"
@@ -187,7 +187,7 @@ const CompendiumTable = ({ core, type }) => {
               );
             }}
             dataIndex={'plot'}
-            render={(item) => <TinyColumnLineChart data={item} />}
+            render={(item) => <TinyColumnChart data={item} />}
             width={'30%'}
           />
         </Table>
@@ -261,23 +261,20 @@ const CompendiumTable = ({ core, type }) => {
           title={() => {
             return (
               <Row justify="space-between" align="middle">
-                Productos y Citas por años
+                Productos por años
                 <div id="table__infoButton">
-                  <InfoButton
-                    title="Productos y citas por año"
-                    type={'columnLine'}
-                  />
+                  <InfoButton title="Productos por año" type={'columnLine'} />
                 </div>
               </Row>
             );
           }}
           dataIndex={'plot'}
-          render={(item) => <TinyColumnLineChart data={item} />}
+          render={(item) => <TinyColumnChart Chart data={item} />}
           width={'30%'}
         />
         <Column
           title="Temas"
-          dataIndex={'subjects'}
+          dataIndex={'word_cloud'}
           width={'30%'}
           render={(item) => <TinyWordCloudChart data={item} core={core} />}
         />

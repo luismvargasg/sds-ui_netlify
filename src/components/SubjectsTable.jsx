@@ -13,7 +13,7 @@ import { APIRequest } from '../apis/api';
 import { Link } from 'react-router-dom';
 
 /* Charts */
-import TinyColumnLineChart from './charts/TinyColumnLineChart';
+import TinyColumnChart from './charts/TinyColumnChart';
 import TinyWordCloudChart from './charts/TinyWordCloudChart';
 
 /* UI Library Sub-components */
@@ -99,7 +99,7 @@ const SubjectsTable = ({ core, type }) => {
         <Column
           title="Productos y Citas por año"
           dataIndex={'plot'}
-          render={(item) => <TinyColumnLineChart data={item} />}
+          render={(item) => <TinyColumnChart data={item} />}
           width={'30%'}
         />
         <Column

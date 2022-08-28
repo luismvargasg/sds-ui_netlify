@@ -18,12 +18,13 @@ import { APIRequest } from '../../apis/api';
 import ErrorWarning from '../ErrorWarning';
 import LoadingCard from '../LoadingCard';
 import CallToActionTrends from '../CallToActionTrends';
+import TrendsTreeSelect from '../TrendsTreeSelect';
 
 /* UI Library Sub-components */
 const { Title } = Typography;
 
 const Trends = ({ core }) => {
-  const [state] = APIRequest('/app/trends');
+  const [state] = APIRequest('/app/trends?data=info');
 
   useEffect(() => {
     document.title = 'SALUDATA | Tendencias';
@@ -36,14 +37,11 @@ const Trends = ({ core }) => {
   }
   return (
     <>
-      <Divider style={{ fontSize: '40px', marginBottom: '30px' }}>
-        Nuestros Datos
-      </Divider>
       <Row
-        justify="center"
+        justify="space-around"
         align="middle"
         gutter={[70, 30]}
-        style={{ width: '100%', marginLeft: 0, marginRight: 0 }}
+        style={{ width: '100%', marginTop: '50px' }}
       >
         <Col xs={24} lg={7}>
           <Infographic
@@ -53,13 +51,63 @@ const Trends = ({ core }) => {
             groupsValue={state.data.covid.groups}
             institutionsValue={state.data.covid.institutions}
           />
+        </Col>
+        <Col xs={24} lg={10}>
+          <Title>
+            Indicadores sobre producción generada en Bogotá sobre Covid 19.
+          </Title>
           <CallToActionTrends
             core={core}
             id={state.data.covid.id}
             type="covid"
           />
         </Col>
-        <Col xs={24} lg={7}>
+      </Row>
+      <Divider
+        style={{
+          fontSize: '40px',
+          textAlign: 'center',
+          whiteSpace: 'break-spaces',
+          marginTop: '50px',
+        }}
+      >
+        Plan Territorial de Salud
+      </Divider>
+      <Row
+        align="top"
+        gutter={[20, 20]}
+        style={{ width: '100%', marginLeft: 0, marginRight: 0 }}
+      >
+        <Col xs={24} lg={8}>
+          <Infographic
+            title="PTS"
+            productsValue={state.data.PTS.products}
+            authorsValue={state.data.PTS.authors}
+            groupsValue={state.data.PTS.groups}
+            institutionsValue={state.data.PTS.institutions}
+          />
+          <CallToActionTrends core={core} id={state.data.PTS.id} type="pts" />
+        </Col>
+        <Col xs={24} lg={16}>
+          <TrendsTreeSelect data={state.data.PTS.tree} core={core} />
+        </Col>
+      </Row>
+      <Divider
+        style={{
+          fontSize: '40px',
+          textAlign: 'center',
+          whiteSpace: 'break-spaces',
+          marginTop: '50px',
+        }}
+      >
+        Plan Distrital de Desarrollo
+      </Divider>
+      <Row
+        align="top"
+        gutter={[20, 20]}
+        style={{ width: '100%', marginLeft: 0, marginRight: 0 }}
+      >
+        <Col xs={24} lg={8}>
           <Infographic
             title="PDD"
             productsValue={state.data.PDD.products}
@@ -69,15 +117,8 @@ const Trends = ({ core }) => {
           />
           <CallToActionTrends core={core} id={state.data.PDD.id} type="pdd" />
         </Col>
-        <Col xs={24} lg={7}>
-          <Infographic
-            title="PTS"
-            productsValue={state.data.PTS.products}
-            authorsValue={state.data.PTS.authors}
-            groupsValue={state.data.PTS.groups}
-            institutionsValue={state.data.PTS.institutions}
-          />
-          <CallToActionTrends core={core} id={state.data.PTS.id} type="pts" />
+        <Col xs={24} lg={16}>
+          <TrendsTreeSelect data={state.data.PDD.tree} core={core} />
         </Col>
       </Row>
       <Divider
