@@ -75,7 +75,6 @@ const SubjectsTable = ({ core, type }) => {
             </Link>
           )}
         />
-        <Column title="Citas del tema" dataIndex={'citations'} align="center" />
         {type === 'groups' && (
           <Column
             title="Afiliación"
@@ -91,20 +90,25 @@ const SubjectsTable = ({ core, type }) => {
           />
         )}
         <Column
+          title="Citas del tema"
+          dataIndex={'citations_count'}
+          align="center"
+        />
+        <Column
           title="Productos del tema"
-          dataIndex={'products'}
+          dataIndex={'products_count'}
           align="center"
           style={{ fontSize: '24px' }}
         />
         <Column
-          title="Productos y Citas por año"
+          title="Productos por año"
           dataIndex={'plot'}
           render={(item) => <TinyColumnChart data={item} />}
           width={'30%'}
         />
         <Column
           title="Temas"
-          dataIndex={'subjects'}
+          dataIndex={'word_cloud'}
           width={'30%'}
           render={(item) => <TinyWordCloudChart data={item} core={core} />}
         />

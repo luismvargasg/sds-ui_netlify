@@ -105,6 +105,8 @@ const CompendiumTable = ({ core, type }) => {
               </Link>
             )}
           />
+          <Column title="Productos totales" dataIndex={'products_count'} />
+          <Column title="Citas totales" dataIndex={'citations_count'} />
           <Column
             width={'18%'}
             title="Instituciones"
@@ -178,10 +180,7 @@ const CompendiumTable = ({ core, type }) => {
                 <Row justify="space-between" align="middle">
                   Productos por años
                   <div id="table__infoButton">
-                    <InfoButton
-                      title="Productos y citas por año"
-                      type={'columnLine'}
-                    />
+                    <InfoButton title="Productos por año" type={'columnLine'} />
                   </div>
                 </Row>
               );
@@ -274,7 +273,7 @@ const CompendiumTable = ({ core, type }) => {
         />
         <Column
           title="Temas"
-          dataIndex={'word_cloud'}
+          dataIndex={'subjects'}
           width={'30%'}
           render={(item) => <TinyWordCloudChart data={item} core={core} />}
         />
