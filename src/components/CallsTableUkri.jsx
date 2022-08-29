@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 /* UI Library Components */
 import { Table } from 'antd';
@@ -10,17 +10,16 @@ import { useLocation } from 'react-router';
 /* UI Library Sub-components */
 const { Column } = Table;
 
-const CallsTableNih = () => {
-  const windowWidth = window.screen.width;
+const CallsTableUkri = () => {
   const location = useLocation();
   const [pagination, setPagination] = useState({ page: 1, max: 10 });
   let URL = location.pathname;
   const [state, setUrl] = APIRequest(
-    `${URL}?data=nih&page=${pagination.page}&max=${pagination.max}`
+    `${URL}?data=ukri&page=${pagination.page}&max=${pagination.max}`
   );
 
   useEffect(() => {
-    setUrl(`${URL}?data=nih&page=${pagination.page}&max=${pagination.max}`);
+    setUrl(`${URL}?data=ukri&page=${pagination.page}&max=${pagination.max}`);
   }, [setUrl, URL, pagination]);
 
   const onPageChange = (paginate) => {
@@ -54,7 +53,7 @@ const CallsTableNih = () => {
           title="Nombre"
           dataIndex="title"
           key="title"
-          width={windowWidth < 800 ? '50%' : '65%'}
+          width={'15%'}
           render={(item, datum) => (
             <a href={datum.url} target="_blank" rel="noreferrer">
               {item}
@@ -62,23 +61,51 @@ const CallsTableNih = () => {
           )}
         />
         <Column
-          title="Organización"
-          dataIndex="organization"
-          key="organization"
+          title="Descripción"
+          width={'30%'}
+          dataIndex="description"
+          key="description"
         />
         <Column
+          title="Fecha de publicación"
+          dataIndex="publication_date"
+          key="publication_date"
+        />
+        <Column title="Tipo" dataIndex="type" key="type" />
+        <Column
           title="Fecha de apertura"
-          dataIndex="release_date"
-          key="release_date"
+          dataIndex="opening_date"
+          key="opening_date"
         />
         <Column
           title="Fecha de cierre"
-          dataIndex="expiration_date"
-          key="expiration_date"
+          dataIndex="closing_date"
+          key="closing_date"
+        />
+        <Column
+          title="Fondos totales"
+          dataIndex="total_fund"
+          key="total_fund"
+        />
+        <Column
+          title="Finaciadores"
+          dataIndex="funders"
+          key="funders"
+          render={(item, datum) => (
+            <a href={datum.funders_url} target="_blank" rel="noreferrer">
+              {item}
+            </a>
+          )}
+        />
+        <Column
+          title="Estado"
+          dataIndex="status"
+          key="status"
+          render={(item) => (item === 'Open' ? 'Abierta' : item)}
         />
       </Table>
     </div>
   );
 };
 
-export default CallsTableNih;
+export default CallsTableUkri;

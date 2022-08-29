@@ -12,17 +12,45 @@ const CallToActionTrends = ({ core, id, type }) => {
     pdd: 'el Plan Distrital de Desarrollo',
     pts: 'el Plan Territorial de Salud',
   };
-  return (
+  return type === 'covid' ? (
+    <>
+      <div
+        style={{
+          fontSize: '20px',
+          marginTop: '20px',
+        }}
+      >
+        <p>
+          <b>{`¿Quieres ver la información detallada sobre ${title[type]}?`}</b>
+        </p>
+      </div>
+      <div>
+        <Link
+          to={`/app/${type === 'covid' ? 'subjects' : 'policies'}?id=${id}`}
+          onClick={() =>
+            core.setURL(
+              `/app/${type === 'covid' ? 'subjects' : 'policies'}?id=${id}`
+            )
+          }
+        >
+          <Button size="large" type="primary">
+            Haz click aquí
+          </Button>
+        </Link>
+      </div>
+    </>
+  ) : (
     <>
       <div
         style={{
           display: 'flex',
           justifyContent: 'center',
           marginTop: '20px',
+          marginBottom: '7px',
         }}
       >
         <p>
-          <b>{`¿Quieres ver más información sobre ${title[type]}?`}</b>
+          <b>{`¿Quieres ver la información general sobre ${title[type]}?`}</b>
         </p>
       </div>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -34,7 +62,9 @@ const CallToActionTrends = ({ core, id, type }) => {
             )
           }
         >
-          <Button type="primary">Haz click aquí</Button>
+          <Button type="primary" size="large">
+            Haz click aquí
+          </Button>
         </Link>
       </div>
     </>
