@@ -47,6 +47,12 @@ const CommonTitleCard = ({ core, data, type }) => {
                 {data.name}{' '}
                 {data.abbreviations ? `(${data.abbreviations})` : ''}
               </Typography.Title>
+              <Typography.Title
+                level={3}
+                style={{ marginTop: 0, color: 'gray', marginBottom: 0 }}
+              >
+                {data.citations ? `Citaciones: ${data.citations}` : ''}
+              </Typography.Title>
               <Typography.Paragraph
                 style={{ fontSize: 22, margin: 0 }}
                 underline

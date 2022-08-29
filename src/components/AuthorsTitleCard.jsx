@@ -75,6 +75,12 @@ const AuthorsTitleCard = ({ core, data }) => {
                   ''
                 )}
               </Typography.Title>
+              <Typography.Title
+                level={3}
+                style={{ marginTop: 0, color: 'gray', marginBottom: 0 }}
+              >
+                {data.citations ? `Citaciones: ${data.citations}` : ''}
+              </Typography.Title>
               {data.affiliation?.institution?.name && (
                 <Typography.Paragraph
                   style={{ fontSize: 22, margin: 0 }}

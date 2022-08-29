@@ -36,8 +36,8 @@ const Footer = ({ core }) => {
             <br />
             <p>E-mail: cdeis@saludcapital.gov.co </p>
             <p>Teléfono: (601) 3649090 extensión 9005</p>
-            <p>Versión: 1.0.1</p>
-            <p>Última actualización: 16/08/2022</p>
+            <p>Versión: 1.0.2</p>
+            <p>Última actualización: 28/08/2022</p>
           </div>
         </Col>
         <Col xs={24} md={12} xxl={6}>
