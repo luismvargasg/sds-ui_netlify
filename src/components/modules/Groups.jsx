@@ -6,7 +6,6 @@ import { APIRequest } from '../../apis/api';
 
 /* Components */
 import AuthorsTab from '../AuthorsTab';
-import CitationsWrapper from '../wrappers/CitationsWrapper';
 import CoauthorsWrapper from '../wrappers/CoauthorsWrapper';
 import CommonTitleCard from '../CommonTitleCard';
 import ErrorWarning from '../ErrorWarning';
@@ -56,9 +55,6 @@ const Groups = ({ core }) => {
           </TabPane>
           <TabPane tab="Autores" key="authors" forceRender>
             <AuthorsTab core={core} />
-          </TabPane>
-          <TabPane tab="Citaciones" key="citations">
-            <CitationsWrapper core={core} />
           </TabPane>
           <TabPane tab="Coautorías" key="coauthors">
             <CoauthorsWrapper core={core} />
