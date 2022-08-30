@@ -152,7 +152,7 @@ const AuthorsTab = ({ core }) => {
                   ) : (
                     ''
                   )}
-                  {item.subjects.length ? (
+                  {item.subjects?.length ? (
                     <>
                       <p className="subjects__list--title">Temas: </p>
                       {SubjectsHorizontalList({
