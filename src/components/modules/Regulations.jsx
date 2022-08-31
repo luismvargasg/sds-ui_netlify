@@ -60,7 +60,7 @@ const Regulations = ({ core }) => {
             render={(item) => (
               <a
                 id="regulations__table--link"
-                href={`http://clustercien.udea.edu.co:8989/app/regulations?file=${item}`}
+                href={`/app/regulations?file=${item}`}
               >
                 {item}
               </a>
